@@ -1,5 +1,7 @@
+import { Sidebar } from '../../layouts';
+
 function Dashboard() {
-  return <h1>Dashboard</h1>;
+  return <Sidebar component={null} />;
 }
 
 export default Dashboard;
