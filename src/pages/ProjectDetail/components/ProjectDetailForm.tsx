@@ -2,7 +2,7 @@ import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid';
 
 function ProjectDetailForm() {
   return (
-    <form>
+    <form className="mt-10 rounded-2xl p-4 bg-slate-100 sm:mt-0 sm:col-span-3">
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
