@@ -12,8 +12,8 @@ import {
 const routes = [
   { path: '/', element: <Home />, auth: false },
   { path: '/dashboard', element: <Dashboard />, auth: true },
-  { path: '/project', element: <Project />, auth: true },
-  { path: '/projects/:id', element: <ProjectDetail />, auth: true },
+  { path: '/projects', element: <Project />, auth: true },
+  { path: '/project/:id', element: <ProjectDetail />, auth: true },
   { path: '*', element: <Error />, auth: false },
 ];
 
