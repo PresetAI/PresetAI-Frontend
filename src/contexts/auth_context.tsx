@@ -1,4 +1,5 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
+import { getCurrentUserUsingGet } from '../services/UserController';
 
 type AuthContextProviderProps = {
   children: React.ReactNode;
@@ -16,6 +17,15 @@ const AuthContext = createContext<AuthContextType>({
 
 function AuthProvider({ children }: AuthContextProviderProps) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(true);
+
+  const getCurrentUser = async () => {
+    const res = await getCurrentUserUsingGet();
+    console.log(res.data);
+  };
+
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
