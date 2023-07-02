@@ -13,6 +13,11 @@ const navigation = [
 function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // const redirectToGoggleSSO = async () => {
+  //   const googleLoginURL = `${BASE_URL}/users/login`;
+  //   const newWindow = window.open(googleLoginURL, '', 'width=500,height=600');
+  // };
+
   return (
     <header className="bg-gray-900">
       <nav
