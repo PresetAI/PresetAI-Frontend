@@ -24,7 +24,7 @@ module.exports = {
         skin: {
           dark: 'var(--color-background-dark)',
           light: 'var(--color-background-light)',
-          main: 'var(--color-main)',
+          main: 'var(--color-background-main)',
           black: 'var(--color-background-black)',
           white: 'var(--color-background-white)',
           button: 'var(--color-button)',

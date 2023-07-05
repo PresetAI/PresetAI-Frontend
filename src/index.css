@@ -16,6 +16,7 @@
     --color-text-black: #1d1d1f;
     --color-text-red: #EF4444;
     --color-text-green: #61B881;
+    --color-background-main: #f1f0eb;
     --color-background-white: #FFFFFF;
     --color-background-gray: #39394d;
     --color-background-infobox: rgba(171, 165, 234, 0.4);
@@ -101,8 +102,8 @@ body {
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /*background-color: rgba(34, 34, 44, 0.97);*/
-  /*color: var(--color-white);*/
+  background-color: #f1f0eb;
+  color: var(--color-white);
   width: calc(100vw - (var(--scrollbar-width, 0px)));
 }
 
@@ -146,6 +147,14 @@ a {
 
 .__sidebar_border {
   border-right: 2px dashed var(--color-background-purple-dark);
+}
+
+.line-clamp{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
 }
 
 /*==================== MEDIA QUERIES ====================*/
