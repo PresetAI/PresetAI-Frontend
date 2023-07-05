@@ -1,38 +1,28 @@
-import {
-  ArrowPathIcon,
-  ChevronRightIcon,
-  CloudArrowUpIcon,
-  Cog6ToothIcon,
-  FingerPrintIcon,
-  LockClosedIcon,
-  ServerIcon,
-} from '@heroicons/react/20/solid';
-import {
-  BoltIcon,
-  CalendarDaysIcon,
-  UsersIcon,
-} from '@heroicons/react/24/outline';
 import React from 'react';
-import Header from './components/Header';
 import Hero from './components/Hero';
-import LogoCloud from './components/LogoCloud';
 import Feature from './components/Feature';
-import Stats from './components/Stats';
+import Testimonial from './components/Testimonial';
+import Pricing from './components/Pricing';
+import FAQ from './components/FAQ';
 import CTA from './components/CTA';
-import { Footer } from '../../layouts';
+import HeaderLight from '../../layouts/Header/HeaderLight';
+import Blog from './components/Blog';
+import Footer from '../../layouts/Footer';
 
 function Home() {
   return (
-    <main className="bg-gray-900 block">
-      <Header />
-      <Hero />
-      <LogoCloud />
-      <Feature />
-      <Stats />
-      <CTA />
+    <div className="bg-skin-main block">
+      <HeaderLight />
+      <main className="isolate block">
+        <Hero />
+        <Feature />
+        <Testimonial />
+        <FAQ />
+        <CTA />
+        {/*<Blog />*/}
+      </main>
       <Footer />
-    </main>
+    </div>
   );
 }
-
 export default Home;

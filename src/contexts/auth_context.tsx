@@ -23,9 +23,9 @@ function AuthProvider({ children }: AuthContextProviderProps) {
     console.log(res.data);
   };
 
-  useEffect(() => {
-    getCurrentUser();
-  }, []);
+  // useEffect(() => {
+  //   getCurrentUser();
+  // }, []);
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
