@@ -13,162 +13,70 @@ import {
   ServerIcon,
 } from '@heroicons/react/20/solid';
 
-const primaryFeatures = [
+const features = [
   {
-    name: 'Server monitoring',
+    name: 'Push to deploy',
     description:
-      'Non quo aperiam repellendus quas est est. Eos aut dolore aut ut sit nesciunt. Ex tempora quia. Sit nobis consequatur dolores incidunt.',
-    href: '#',
-    icon: BoltIcon,
-  },
-  {
-    name: 'Collaborate',
-    description:
-      'Vero eum voluptatem aliquid nostrum voluptatem. Vitae esse natus. Earum nihil deserunt eos quasi cupiditate. A inventore et molestiae natus.',
-    href: '#',
-    icon: UsersIcon,
-  },
-  {
-    name: 'Task scheduling',
-    description:
-      'Et quod quaerat dolorem quaerat architecto aliquam accusantium. Ex adipisci et doloremque autem quia quam. Quis eos molestiae at iure impedit.',
-    href: '#',
-    icon: CalendarDaysIcon,
-  },
-];
-
-const secondaryFeatures = [
-  {
-    name: 'Push to deploy.',
-    description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit aute id magna.',
+      'Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.',
     icon: CloudArrowUpIcon,
   },
   {
-    name: 'SSL certificates.',
+    name: 'SSL certificates',
     description:
-      'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
+      'Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.',
     icon: LockClosedIcon,
   },
   {
-    name: 'Simple queues.',
+    name: 'Simple queues',
     description:
-      'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus.',
+      'Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.',
     icon: ArrowPathIcon,
   },
   {
-    name: 'Advanced security.',
+    name: 'Advanced security',
     description:
-      'Lorem ipsum, dolor sit amet consectetur adipisicing elit aute id magna.',
+      'Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.',
     icon: FingerPrintIcon,
-  },
-  {
-    name: 'Powerful API.',
-    description:
-      'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.',
-    icon: Cog6ToothIcon,
-  },
-  {
-    name: 'Database backups.',
-    description:
-      'Ac tincidunt sapien vehicula erat auctor pellentesque rhoncus. ',
-    icon: ServerIcon,
   },
 ];
 
 function Feature() {
   return (
-    <main className="block">
-      <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-base font-semibold leading-7 text-indigo-400">
-            Deploy faster
-          </h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Everything you need to deploy your app
-          </p>
-          <p className="mt-6 text-lg leading-8 text-gray-300">
-            Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam
-            voluptatum cupiditate veritatis in accusamus quisquam.
-          </p>
-        </div>
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
-            {primaryFeatures.map((feature) => (
-              <div key={feature.name} className="flex flex-col">
-                <dt className="text-base font-semibold leading-7 text-white">
-                  <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-500">
-                    <feature.icon
-                      className="h-6 w-6 text-white"
-                      aria-hidden="true"
-                    />
-                  </div>
-                  {feature.name}
-                </dt>
-                <dd className="mt-1 flex flex-auto flex-col text-base leading-7 text-gray-300">
-                  <p className="flex-auto">{feature.description}</p>
-                  <p className="mt-6">
-                    <a
-                      href={feature.href}
-                      className="text-sm font-semibold leading-6 text-indigo-400"
-                    >
-                      Learn more <span aria-hidden="true">→</span>
-                    </a>
-                  </p>
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+    <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8">
+      <div className="mx-auto max-w-2xl lg:text-center">
+        <h2 className="text-base font-semibold leading-7 text-indigo-600">
+          Deploy faster
+        </h2>
+        <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          Everything you need to deploy your app
+        </p>
+        <p className="mt-6 text-lg leading-8 text-gray-600">
+          Quis tellus eget adipiscing convallis sit sit eget aliquet quis.
+          Suspendisse eget egestas a elementum pulvinar et feugiat blandit at.
+          In mi viverra elit nunc.
+        </p>
       </div>
-      <div className="mt-32 sm:mt-56">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl sm:text-center">
-            <h2 className="text-base font-semibold leading-7 text-indigo-400">
-              Everything you need
-            </h2>
-            <p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              No server? No problem.
-            </p>
-            <p className="mt-6 text-lg leading-8 text-gray-300">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores
-              impedit perferendis suscipit eaque, iste dolor cupiditate
-              blanditiis.
-            </p>
-          </div>
-        </div>
-        <div className="relative overflow-hidden pt-16">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <img
-              src="https://tailwindui.com/img/component-images/dark-project-app-screenshot.png"
-              alt="App screenshot"
-              className="mb-[-12%] rounded-xl shadow-2xl ring-1 ring-white/10"
-              width={2432}
-              height={1442}
-            />
-            <div className="relative" aria-hidden="true">
-              <div className="absolute -inset-x-20 bottom-0 bg-gradient-to-t from-gray-900 pt-[7%]" />
-            </div>
-          </div>
-        </div>
-        <div className="mx-auto mt-16 max-w-7xl px-6 sm:mt-20 md:mt-24 lg:px-8">
-          <dl className="mx-auto grid max-w-2xl grid-cols-1 gap-x-6 gap-y-10 text-base leading-7 text-gray-300 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16">
-            {secondaryFeatures.map((feature) => (
-              <div key={feature.name} className="relative pl-9">
-                <dt className="inline font-semibold text-white">
+      <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
+        <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
+          {features.map((feature) => (
+            <div key={feature.name} className="relative pl-16">
+              <dt className="text-base font-semibold leading-7 text-gray-900">
+                <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
                   <feature.icon
-                    className="absolute left-1 top-1 h-5 w-5 text-indigo-500"
+                    className="h-6 w-6 text-white"
                     aria-hidden="true"
                   />
-                  {feature.name}
-                </dt>{' '}
-                <dd className="inline">{feature.description}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+                </div>
+                {feature.name}
+              </dt>
+              <dd className="mt-2 text-base leading-7 text-gray-600">
+                {feature.description}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
-    </main>
+    </div>
   );
 }
 export default Feature;

@@ -1,29 +1,4 @@
-import React from 'react';
-const footerNavigation = {
-  solutions: [
-    { name: 'Hosting', href: '#' },
-    { name: 'Data Services', href: '#' },
-    { name: 'Uptime Monitoring', href: '#' },
-    { name: 'Enterprise Services', href: '#' },
-  ],
-  support: [
-    { name: 'Pricing', href: '#' },
-    { name: 'Documentation', href: '#' },
-    { name: 'Guides', href: '#' },
-    { name: 'API Reference', href: '#' },
-  ],
-  company: [
-    { name: 'About', href: '#' },
-    { name: 'Blog', href: '#' },
-    { name: 'Jobs', href: '#' },
-    { name: 'Press', href: '#' },
-    { name: 'Partners', href: '#' },
-  ],
-  legal: [
-    { name: 'Claim', href: '#' },
-    { name: 'Privacy', href: '#' },
-    { name: 'Terms', href: '#' },
-  ],
+const navigation = {
   social: [
     {
       name: 'Facebook',
@@ -88,27 +63,28 @@ const footerNavigation = {
     },
   ],
 };
+
 function Footer() {
   return (
-    <footer aria-labelledby="footer-heading" className="relative">
+    <footer aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
-      <div className="mx-auto max-w-7xl px-6 pb-8 pt-4 lg:px-8">
-        <div className="border-t border-white/10 pt-8 md:flex md:items-center md:justify-between">
+      <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
+        <div className="mt-8 border-t border-gray-900/10 pt-8 md:flex md:items-center md:justify-between">
           <div className="flex space-x-6 md:order-2">
-            {footerNavigation.social.map((item) => (
+            {navigation.social.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className="text-gray-500 hover:text-gray-400"
+                className="text-gray-400 hover:text-gray-500"
               >
                 <span className="sr-only">{item.name}</span>
                 <item.icon className="h-6 w-6" aria-hidden="true" />
               </a>
             ))}
           </div>
-          <p className="mt-8 text-xs leading-5 text-gray-400 md:order-1 md:mt-0">
+          <p className="mt-8 text-xs leading-5 text-gray-500 md:order-1 md:mt-0">
             &copy; 2020 Your Company, Inc. All rights reserved.
           </p>
         </div>
@@ -116,4 +92,5 @@ function Footer() {
     </footer>
   );
 }
+
 export default Footer;

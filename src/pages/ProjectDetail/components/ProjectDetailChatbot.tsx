@@ -1,38 +1,67 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import avatar from '../../../assets/avatar.png';
 import avatar_right from '../../../assets/avatar_right.jpg';
 import UseAnimations from 'react-useanimations';
 import loading from 'react-useanimations/lib/loading';
+import { productsSearchUsingPost } from '../../../services/ProductController';
+import SuggestItem from './SuggestItem';
 
 type Message = {
   message: string;
-  sentTime: string;
   sender: string;
   suggestion: string[] | null;
 };
 
 function ProjectDetailChatbot() {
   const [userMessage, setUserMessage] = useState<string>(''); // user input
-  const [suggestions, setSuggestions] = useState<string[]>([]); // suggestions items get from backend
-  const [isTyping, setIsTyping] = useState<boolean>(false);
-  const [messages, setMessages] = useState<Message[]>([
+  const [suggestions, setSuggestions] = useState<any[]>([]); // suggestions items get from backend
+  const [isTyping, setIsTyping] = useState<boolean>(false); // is typing
+  const [messages, setMessages] = useState<any[]>([
     {
       message:
         "👋Hello, I'll be your personal assistant for your visit today! What are you looking for?",
-      sentTime: 'just now',
       sender: 'ChatGPT',
       suggestion: null,
     },
   ]);
 
-  const handleSendOnChange = (message: any) => {
+  const handleSendOnChange = (message: string) => {
     setUserMessage(message);
+  };
+
+  const processMessage = async (chatMessages: any) => {
+    setUserMessage('');
+    const response = await productsSearchUsingPost(chatMessages);
+
+    if (response.data.code === 200) {
+      const newMessage = {
+        message: '',
+        sender: 'ChatGPT',
+        suggestion: response.data.data,
+      };
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
+      setSuggestions((prevSuggestions) => [
+        ...prevSuggestions,
+        [...response.data.data],
+      ]);
+    }
+
+    setIsTyping(false);
   };
 
   const handleSend = async (e: any) => {
     setIsTyping(true);
     e.preventDefault();
+    const newMessage = {
+      message: userMessage,
+      sender: 'user',
+      suggestion: null,
+    };
+
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
+    // Initial system message
+    await processMessage({ phrase: userMessage, namespace: 'amazon1' });
   };
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -43,7 +72,7 @@ function ProjectDetailChatbot() {
 
   return (
     <div className="w-full sm:w-[80%] sm:col-span-6 self-start rounded-2xl p-4 bg-slate-100">
-      <div className="flex flex-col h-[30em] overflow-auto">
+      <div className="flex flex-col h-[40em] overflow-auto">
         <div>
           {messages.map((message) => {
             return (
@@ -64,10 +93,10 @@ function ProjectDetailChatbot() {
                         {message.message}
                       </div>
                       <div className="grid grid-cols-3 gap-4 mb-2 mt-2 animate__animated animate__fadeInDown">
-                        {/*{message.suggestion &&*/}
-                        {/*    message.suggestion.map((item: any) => (*/}
-                        {/*        <SuggestItem key={item} item={item} />*/}
-                        {/*    ))}*/}
+                        {message.suggestion &&
+                          message.suggestion.map((item: any, index: number) => (
+                            <SuggestItem key={index} item={item} />
+                          ))}
                       </div>
                     </div>
                   </div>
@@ -77,7 +106,7 @@ function ProjectDetailChatbot() {
                       <p className="text-gray-900 font-semibold tracking-wide ml-auto">
                         You
                       </p>
-                      <div className="__chat_box bg-sky-300 p-3">
+                      <div className="__chat_box bg-sky-300 p-3 rounded-xl">
                         {message.message}
                       </div>
                     </div>
