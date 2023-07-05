@@ -7,4 +7,10 @@ declare namespace API {
     topK?: number;
     table_id: string;
   };
+
+  // Product
+  type ProductsSearchUsingPostBody = {
+    phrase: string;
+    namespace: string;
+  };
 }
