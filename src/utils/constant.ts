@@ -1,3 +1,3 @@
 // export const BASE_URL = 'http://127.0.0.1:8000/api';
 
-export const BASE_URL = 'http://wondrfulfindsy.com/api';
+export const BASE_URL = 'https://wondrfulfindsy.com/api';

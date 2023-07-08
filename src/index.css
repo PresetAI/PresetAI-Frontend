@@ -157,6 +157,13 @@ a {
   -webkit-box-orient: vertical;
 }
 
+.__text_gradient{
+  background: #151BCF;
+  background: linear-gradient(to right, #151BCF 0%, #938FFF 50%, #71659E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /*==================== MEDIA QUERIES ====================*/
 /* For small devices */
 @media screen and (max-width: 350px) {
