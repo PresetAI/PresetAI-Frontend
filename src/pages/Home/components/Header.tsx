@@ -3,6 +3,7 @@ import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { BASE_URL } from '../../../utils/constant';
+import logo from '../../assets/logo.png';
 
 const navigation = [
   { name: 'Use Cases', href: '#' },
@@ -28,11 +29,7 @@ function Header() {
         <div className="flex lg:flex-1">
           {/*<a href="#" className="-m-1.5 p-1.5">*/}
           {/*  <span className="sr-only">PresetAI</span>*/}
-          {/*  <img*/}
-          {/*    className="h-8 w-auto"*/}
-          {/*    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"*/}
-          {/*    alt=""*/}
-          {/*  />*/}
+          {/*  <img className="h-8 w-auto" src={logo} alt="" />*/}
           {/*</a>*/}
           <Link
             to="/"
