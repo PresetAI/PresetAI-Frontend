@@ -4,7 +4,6 @@ import { AuthContext } from '../../contexts/auth_context';
 
 function PrivateRoute({ children }: any) {
   const { isAuthenticated } = useContext(AuthContext);
-  // const isAuthenticated = false;
 
   if (!isAuthenticated) {
     return <Navigate to="/" replace />;
@@ -12,9 +11,5 @@ function PrivateRoute({ children }: any) {
 
   return children;
 }
-
-// PrivateRoute.propTypes = {
-//   children: PropTypes.node.isRequired,
-// };
 
 export default PrivateRoute;

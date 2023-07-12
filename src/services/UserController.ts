@@ -6,3 +6,9 @@ export async function getCurrentUserUsingGet() {
     withCredentials: true,
   });
 }
+
+// export async function logoutUsingPost() {
+//   return axios.post(`${BASE_URL}/users/logout`, {
+//     withCredentials: true,
+//   });
+// }
