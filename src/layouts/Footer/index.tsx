@@ -77,14 +77,14 @@ function Footer() {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-gray-400 hover:text-gray-500"
+                className="text-gray-400 hover:text-gray-500 dark:text-gray-200"
               >
                 <span className="sr-only">{item.name}</span>
                 <item.icon className="h-6 w-6" aria-hidden="true" />
               </a>
             ))}
           </div>
-          <p className="mt-8 text-xs leading-5 text-gray-500 md:order-1 md:mt-0">
+          <p className="mt-8 text-xs leading-5 text-gray-500 dark:text-gray-200 md:order-1 md:mt-0">
             &copy; 2023 PresetAI, Inc. All rights reserved.
           </p>
         </div>

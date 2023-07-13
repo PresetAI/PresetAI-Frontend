@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { BASE_URL } from '../../utils/constant';
 import logo from '../../assets/logo.png';
 import { AuthContext } from '../../contexts/auth_context';
+import ModeToggle from '../../components/ModeToggle';
 
 const navigation = [
   { name: 'Use Cases', href: '#' },
@@ -31,7 +32,7 @@ function HeaderLight() {
   };
 
   return (
-    <header className="absolute inset-x-0 top-0 z-50">
+    <header className="fixed backdrop-sepia-0 bg-primary-foreground/60 inset-x-0 top-0 z-50">
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
@@ -59,13 +60,13 @@ function HeaderLight() {
             <Link
               key={item.name}
               to={item.href}
-              className="text-sm font-semibold leading-6 text-gray-900"
+              className="text-sm font-semibold leading-6"
             >
               {item.name}
             </Link>
           ))}
         </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        <div className="hidden items-center gap-4 lg:flex lg:flex-1 lg:justify-end">
           {isAuthenticated ? (
             <div className="flex gap-4">
               <Link
@@ -84,11 +85,12 @@ function HeaderLight() {
           ) : (
             <span
               onClick={login}
-              className="text-sm font-semibold leading-6 text-gray-900 cursor-pointer hover:text-gray-500 duration-300"
+              className="text-sm font-semibold leading-6 cursor-pointer hover:text-gray-500 duration-300"
             >
               Log in <span aria-hidden="true">&rarr;</span>
             </span>
           )}
+          <ModeToggle />
         </div>
       </nav>
       <Dialog
