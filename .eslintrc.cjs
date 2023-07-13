@@ -32,6 +32,18 @@ module.exports = {
         "no-underscore-dangle": [
             "error",
             { "allow": ["_id"] }
-        ]
-    }
+        ],
+        'import/extensions': ['error', 'always', {
+            'js': 'never',
+            'ts': 'never',
+            'tsx': 'never',
+        }],
+    },
+    "settings": {
+        'import/resolver': {
+            node: {
+                extensions: ['.js', '.jsx', '.ts', '.tsx'],
+            },
+        },
+    },
 }

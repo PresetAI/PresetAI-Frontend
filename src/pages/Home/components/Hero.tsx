@@ -18,10 +18,10 @@ function Hero() {
       <div className="py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+            <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">
               Build AI-Powered Product Recommendation Chatbot
             </h1>
-            <p className="mt-6 text-based leading-8 text-gray-600 sm:text-lg">
+            <p className="mt-6 text-based leading-8 text-gray-600 dark:text-gray-300 sm:text-lg">
               Integrate our AI chatbot into your platform for personalized
               product recommendations. Easy setup with just one line of code.
             </p>
@@ -32,10 +32,7 @@ function Hero() {
               >
                 Get started
               </a>
-              <a
-                href="#"
-                className="text-sm font-semibold leading-6 text-gray-900"
-              >
+              <a href="#" className="text-sm font-semibold leading-6">
                 Learn more <span aria-hidden="true">→</span>
               </a>
             </div>

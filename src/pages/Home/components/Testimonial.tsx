@@ -99,7 +99,7 @@ function Testimonial() {
           <h2 className="text-lg font-semibold leading-8 tracking-tight __text_gradient">
             Trusted by Top E-commerce Platforms
           </h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
             We have worked with thousands of amazing people
           </p>
         </div>

@@ -16,12 +16,12 @@ function CTA() {
         />
       </div>
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
           Boost your online retail efficiency.
           <br />
           Start integrating PresetAI.
         </h2>
-        <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600">
+        <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-600 dark:text-gray-300">
           PresetAI provides seamless integration via a straightforward online
           dashboard and our API. You can conveniently adapt, refine, or enhance
           the AI's recommendation logic for different product types and customer
@@ -34,7 +34,7 @@ function CTA() {
           >
             Get started
           </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
+          <a href="#" className="text-sm font-semibold leading-6">
             Learn more <span aria-hidden="true">→</span>
           </a>
         </div>

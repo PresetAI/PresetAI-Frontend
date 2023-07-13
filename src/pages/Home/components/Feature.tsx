@@ -45,7 +45,7 @@ function Feature() {
         <p className="mt-2 text-3xl font-bold tracking-tight text-skin-black sm:text-4xl">
           Build for Multitude of Scenarios
         </p>
-        <p className="mt-6 text-lg leading-8 text-gray-600">
+        <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
           Revolutionize your digital retail with our multi-purpose AI chatbot
           that caters to customer support, employee training, product guidance,
           and document navigation.
@@ -64,7 +64,7 @@ function Feature() {
                 </div>
                 {feature.name}
               </dt>
-              <dd className="mt-2 text-base leading-7 text-gray-600">
+              <dd className="mt-2 text-base leading-7 text-gray-600 dark:text-gray-300">
                 {feature.description}
               </dd>
             </div>

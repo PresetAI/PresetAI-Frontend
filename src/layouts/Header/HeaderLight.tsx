@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { BASE_URL } from '../../utils/constant';
 import logo from '../../assets/logo.png';
+import { AuthContext } from '../../contexts/auth_context';
+import ModeToggle from '../../components/ModeToggle';
 
 const navigation = [
   { name: 'Use Cases', href: '#' },
@@ -14,14 +16,23 @@ const navigation = [
 
 function HeaderLight() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { isAuthenticated } = useContext(AuthContext);
 
   // const redirectToGoggleSSO = async () => {
   //   const googleLoginURL = `${BASE_URL}/users/login`;
   //   const newWindow = window.open(googleLoginURL, '', 'width=500,height=600');
   // };
 
+  const login = () => {
+    window.location.href = `${BASE_URL}/users/login`;
+  };
+
+  const signout = () => {
+    window.location.href = `${BASE_URL}/users/logout`;
+  };
+
   return (
-    <header className="absolute inset-x-0 top-0 z-50">
+    <header className="fixed backdrop-sepia-0 bg-primary-foreground/60 inset-x-0 top-0 z-50">
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
@@ -49,19 +60,37 @@ function HeaderLight() {
             <Link
               key={item.name}
               to={item.href}
-              className="text-sm font-semibold leading-6 text-gray-900"
+              className="text-sm font-semibold leading-6"
             >
               {item.name}
             </Link>
           ))}
         </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a
-            href={`${BASE_URL}/users/login`}
-            className="text-sm font-semibold leading-6 text-gray-900"
-          >
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+        <div className="hidden items-center gap-4 lg:flex lg:flex-1 lg:justify-end">
+          {isAuthenticated ? (
+            <div className="flex gap-4">
+              <Link
+                to="/dashboard"
+                className="text-sm font-semibold leading-6 text-skin-black hover:text-gray-500 duration-300"
+              >
+                Dashboard
+              </Link>
+              <span
+                className="text-sm font-semibold leading-6 text-gray-900 cursor-pointer hover:text-gray-500 duration-300"
+                onClick={signout}
+              >
+                Sign out
+              </span>
+            </div>
+          ) : (
+            <span
+              onClick={login}
+              className="text-sm font-semibold leading-6 cursor-pointer hover:text-gray-500 duration-300"
+            >
+              Log in <span aria-hidden="true">&rarr;</span>
+            </span>
+          )}
+          <ModeToggle />
         </div>
       </nav>
       <Dialog
