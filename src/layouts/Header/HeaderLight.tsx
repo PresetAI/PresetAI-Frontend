@@ -32,7 +32,7 @@ function HeaderLight() {
   };
 
   return (
-    <header className="fixed backdrop-sepia-0 bg-primary-foreground/60 inset-x-0 top-0 z-50">
+    <header className="fixed backdrop-blur-lg bg-white/30 dark:bg-primary-foreground/30 inset-x-0 top-0 z-50">
       <nav
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
         aria-label="Global"
@@ -40,7 +40,7 @@ function HeaderLight() {
         <div className="flex lg:flex-1">
           <Link
             to="/"
-            className="flex items-center text-skin-black text-2xl font-semibold tracking-widest xl:text-4xl"
+            className="flex items-center text-2xl font-semibold tracking-widest xl:text-4xl"
           >
             PresetAI
           </Link>
@@ -48,7 +48,7 @@ function HeaderLight() {
         <div className="flex lg:hidden">
           <button
             type="button"
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 dark:text-gray-300"
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">Open main menu</span>
@@ -100,19 +100,25 @@ function HeaderLight() {
         onClose={setMobileMenuOpen}
       >
         <div className="fixed inset-0 z-50" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-primary-foreground px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
-              />
-            </a>
+            {/*<a href="#" className="-m-1.5 p-1.5">*/}
+            {/*  <span className="sr-only">Your Company</span>*/}
+            {/*  <img*/}
+            {/*    className="h-8 w-auto"*/}
+            {/*    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"*/}
+            {/*    alt=""*/}
+            {/*  />*/}
+            {/*</a>*/}
+            <Link
+              to="/"
+              className="flex items-center text-skin-black text-xl font-semibold tracking-widest xl:text-4xl"
+            >
+              PresetAI
+            </Link>
             <button
               type="button"
-              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+              className="-m-2.5 rounded-md p-2.5 text-gray-700 dark:text-gray-300"
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className="sr-only">Close menu</span>
@@ -126,7 +132,7 @@ function HeaderLight() {
                   <Link
                     key={item.name}
                     to={item.href}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 hover:bg-gray-50 dark:hover:bg-gray-500"
                   >
                     {item.name}
                   </Link>
@@ -135,12 +141,15 @@ function HeaderLight() {
               <div className="py-6">
                 <a
                   href={`${BASE_URL}/users/login`}
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 hover:bg-gray-50 dark:hover:bg-gray-500"
                 >
                   Log in
                 </a>
               </div>
             </div>
+          </div>
+          <div className="absolute bottom-4">
+            <ModeToggle />
           </div>
         </Dialog.Panel>
       </Dialog>

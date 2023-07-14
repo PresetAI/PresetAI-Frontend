@@ -43,7 +43,7 @@ function AuthProvider({ children }: AuthContextProviderProps) {
     <AuthContext.Provider
       value={{ isAuthenticated, setIsAuthenticated, userInfo }}
     >
-      {loading ? <div>Loading...</div> : children}
+      {loading ? <div> </div> : children}
     </AuthContext.Provider>
   );
 }
