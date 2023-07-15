@@ -144,7 +144,7 @@ function Pricing() {
   const [frequency, setFrequency] = useState(pricing.frequencies[0]);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white dark:bg-primary-foreground">
       <HeaderDark />
 
       <main className="block">
@@ -303,7 +303,7 @@ function Pricing() {
               </div>
             </div>
           </div>
-          <div className="relative bg-gray-50 lg:pt-14">
+          <div className="relative bg-gray-50 dark:bg-primary-foreground lg:pt-14">
             <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
               {/* Feature comparison (up to lg) */}
               <section
@@ -341,7 +341,7 @@ function Pricing() {
                       <div className="mt-10 space-y-10">
                         {pricing.sections.map((section: any) => (
                           <div key={section.name}>
-                            <h4 className="text-sm font-semibold leading-6 text-gray-900">
+                            <h4 className="text-sm font-semibold leading-6 text-gray-100">
                               {section.name}
                             </h4>
                             <div className="relative mt-6">
@@ -450,12 +450,12 @@ function Pricing() {
                         <p
                           className={classNames(
                             tier.featured ? 'text-indigo-600' : 'text-gray-900',
-                            'text-sm font-semibold leading-6'
+                            'text-sm font-semibold leading-6 dark:text-white'
                           )}
                         >
                           {tier.name}
                         </p>
-                        <p className="mt-1 text-sm leading-6 text-gray-600">
+                        <p className="mt-1 text-sm leading-6 text-gray-600 dark:text-gray-300">
                           {tier.description}
                         </p>
                       </div>
@@ -466,7 +466,7 @@ function Pricing() {
                 <div className="-mt-6 space-y-16">
                   {pricing.sections.map((section: any) => (
                     <div key={section.name}>
-                      <h3 className="text-sm font-semibold leading-6 text-gray-900">
+                      <h3 className="text-sm font-semibold leading-6 text-gray-900 dark:text-white">
                         {section.name}
                       </h3>
                       <div className="relative -mx-8 mt-10">
@@ -501,12 +501,12 @@ function Pricing() {
                                 <tr key={feature.name}>
                                   <th
                                     scope="row"
-                                    className="w-1/4 py-3 pr-4 text-left text-sm font-normal leading-6 text-gray-900"
+                                    className="w-1/4 py-3 pr-4 text-left text-sm font-normal leading-6 text-gray-900 dark:text-white"
                                   >
                                     {feature.name}
                                     {featureIdx !==
                                     section.features.length - 1 ? (
-                                      <div className="absolute inset-x-8 mt-3 h-px bg-gray-200" />
+                                      <div className="absolute inset-x-8 mt-3 h-px bg-gray-200 dark:bg-gray-400" />
                                     ) : null}
                                   </th>
                                   {pricing.tiers.map((tier: any) => (

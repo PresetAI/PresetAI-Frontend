@@ -19,6 +19,11 @@ declare namespace API {
     table_id: string;
   };
 
+  type NewProjectUsingPostBody = {
+    project_name: string;
+    top_k: number;
+  };
+
   // Product
   type ProductsSearchUsingPostBody = {
     phrase: string;

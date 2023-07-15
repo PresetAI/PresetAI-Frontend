@@ -1,5 +1,9 @@
 import { Sidebar } from '../../layouts';
 import ProjectList from './components/ProjectList';
+import ProjectCreateDialog from '@/pages/Project/components/ProjectCreateDialog';
+import { useState } from 'react';
+import AlertDestructive from '@/components/Alert/AlertDestructive';
+import { AlertDefault } from '@/components/Alert/AlertDefault';
 
 const ProjectListData: API.Project[] = [
   {
@@ -47,8 +51,27 @@ const ProjectListData: API.Project[] = [
 ];
 
 function Project() {
+  const [dialogOpen, setDialogOpen] = useState<boolean>(false); // dialog open or not
+  const [alert, setAlert] = useState<null | 'default' | 'destructive'>(null);
+  const [description, setDescription] = useState<string>('');
   return (
-    <Sidebar component={<ProjectList ProjectListData={ProjectListData} />} />
+    <Sidebar
+      component={
+        <>
+          {alert === 'destructive' && (
+            <AlertDestructive description={description} />
+          )}
+          {alert === 'default' && <AlertDefault description={description} />}
+          <ProjectCreateDialog
+            dialogOpen={dialogOpen}
+            setDialogOpen={setDialogOpen}
+            setAlert={setAlert}
+            setDescription={setDescription}
+          />
+          <ProjectList ProjectListData={ProjectListData} />
+        </>
+      }
+    />
   );
 }
 
