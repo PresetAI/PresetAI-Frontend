@@ -18,10 +18,17 @@ type ProjectCreateDialogProps = {
   setDialogOpen: (dialogOpen: boolean) => void;
   setAlert: (alert: null | 'default' | 'destructive') => void;
   setDescription: (description: string) => void;
+  getProjectsList: () => void;
 };
 
 function ProjectCreateDialog(props: ProjectCreateDialogProps) {
-  const { dialogOpen, setDialogOpen, setAlert, setDescription } = props;
+  const {
+    dialogOpen,
+    setDialogOpen,
+    setAlert,
+    setDescription,
+    getProjectsList,
+  } = props;
   // useref to get the input value
   const projectNameRef = useRef<HTMLInputElement>(null);
   const [projectForm, setProjectForm] = useState<API.NewProjectUsingPostBody>();
@@ -51,6 +58,7 @@ function ProjectCreateDialog(props: ProjectCreateDialogProps) {
         setTimeout(() => {
           setAlert(null);
         }, 5000);
+        getProjectsList();
       }
     } catch (err: any) {
       setDescription(err.response.data.message);
@@ -62,12 +70,15 @@ function ProjectCreateDialog(props: ProjectCreateDialogProps) {
   };
 
   return (
-    <Dialog open={dialogOpen}>
-      <DialogTrigger asChild>
-        <Button variant="outline" onClick={() => setDialogOpen(true)}>
-          Create the Project
-        </Button>
-      </DialogTrigger>
+    <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+      <div className="flex justify-end">
+        <DialogTrigger asChild>
+          <Button variant="outline" onClick={() => setDialogOpen(true)}>
+            Create the Project
+          </Button>
+        </DialogTrigger>
+      </div>
+
       <DialogContent className="sm:max-w-[460px]">
         <DialogHeader>
           <DialogTitle>Create New Project</DialogTitle>
