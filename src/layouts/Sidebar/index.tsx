@@ -1,82 +1,3 @@
-// import { useState } from 'react';
-// import { Bars3Icon, MagnifyingGlassIcon } from '@heroicons/react/20/solid';
-// import DashboardSidebar from './components/DashboardSidebar';
-//
-// type Props = {
-//   component: any;
-// };
-//
-// function Sidebar(props: Props) {
-//   const { component } = props;
-//   const [sidebarOpen, setSidebarOpen] = useState(false);
-//
-//   return (
-//     <div className="h-screen bg-gray-900">
-//       <DashboardSidebar
-//         sidebarOpen={sidebarOpen}
-//         setSidebarOpen={setSidebarOpen}
-//       />
-//
-//       <div className="xl:pl-72">
-//         {/* Sticky search header */}
-//         <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-6 border-b border-white/5 bg-gray-900 px-4 shadow-sm sm:px-6 lg:px-8">
-//           <button
-//             type="button"
-//             className="-m-2.5 p-2.5 text-white xl:hidden"
-//             onClick={() => setSidebarOpen(true)}
-//           >
-//             <span className="sr-only">Open sidebar</span>
-//             <Bars3Icon className="h-5 w-5" aria-hidden="true" />
-//           </button>
-//
-//           <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-//             <form className="flex flex-1" action="#" method="GET">
-//               <label htmlFor="search-field" className="sr-only">
-//                 Search
-//               </label>
-//               <div className="relative w-full">
-//                 <MagnifyingGlassIcon
-//                   className="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-500"
-//                   aria-hidden="true"
-//                 />
-//                 <input
-//                   id="search-field"
-//                   className="block h-full w-full border-0 bg-transparent py-0 pl-8 pr-0 text-white focus:ring-0 sm:text-sm"
-//                   placeholder="Search..."
-//                   type="search"
-//                   name="search"
-//                 />
-//               </div>
-//             </form>
-//           </div>
-//         </div>
-//
-//         <main className="py-10">
-//           <div className="w-full mx-auto px-2">
-//             {/* Your content */}
-//             {component}
-//           </div>
-//         </main>
-//       </div>
-//     </div>
-//   );
-// }
-// export default Sidebar;
-
-/*
-  This example requires some changes to your config:
-
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 import { Fragment, useState } from 'react';
 import { Dialog, Menu, Transition } from '@headlessui/react';
 import {
@@ -96,11 +17,12 @@ import {
   MagnifyingGlassIcon,
 } from '@heroicons/react/20/solid';
 import BackgroundGradient from '../../components/BackgroundGradient';
+import { Link } from 'react-router-dom';
 
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
   { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
+  { name: 'Projects', href: '/projects', icon: FolderIcon, current: false },
   { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
   { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
   { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
@@ -198,8 +120,8 @@ function Sidebar(props: Props) {
                           <ul role="list" className="-mx-2 space-y-1">
                             {navigation.map((item) => (
                               <li key={item.name}>
-                                <a
-                                  href={item.href}
+                                <Link
+                                  to={item.href}
                                   className={classNames(
                                     item.current
                                       ? 'bg-gray-50 text-indigo-600'
@@ -217,7 +139,7 @@ function Sidebar(props: Props) {
                                     aria-hidden="true"
                                   />
                                   {item.name}
-                                </a>
+                                </Link>
                               </li>
                             ))}
                           </ul>
