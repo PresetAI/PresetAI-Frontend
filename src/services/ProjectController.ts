@@ -14,3 +14,11 @@ export async function newProjectUsingPost(
     withCredentials: true,
   });
 }
+
+export async function getProjectByProjectIdUsingGet(
+  projectId: string | undefined
+) {
+  return axios.get(`${BASE_URL}/project/get_project/${projectId}`, {
+    withCredentials: true,
+  });
+}

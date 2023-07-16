@@ -71,12 +71,12 @@ function HeaderLight() {
             <div className="flex gap-4">
               <Link
                 to="/dashboard"
-                className="text-sm font-semibold leading-6 text-skin-black hover:text-gray-500 duration-300"
+                className="text-sm font-semibold leading-6 hover:text-gray-500 duration-300"
               >
                 Dashboard
               </Link>
               <span
-                className="text-sm font-semibold leading-6 text-gray-900 cursor-pointer hover:text-gray-500 duration-300"
+                className="text-sm font-semibold leading-6 cursor-pointer hover:text-gray-500 duration-300"
                 onClick={signout}
               >
                 Sign out

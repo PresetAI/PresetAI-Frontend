@@ -1,10 +1,10 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 type ProjectItemProps = {
   item: API.Project;
@@ -24,7 +24,9 @@ function ProjectItem(props: ProjectItemProps) {
               <div>namespace: {item.namespace}</div>
               <div>topK: {item.topK}</div>
               <div>commodityTable: {item.commodityTable}</div>
-              <div>createTime: {item.createTime}</div>
+              <div>
+                Create Time: {moment(item.createTime).format('YYYY-MM-DD')}
+              </div>
             </Typography>
           </CardContent>
         </CardActionArea>
