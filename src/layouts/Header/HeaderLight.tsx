@@ -24,11 +24,11 @@ function HeaderLight() {
   // };
 
   const login = () => {
-    window.location.href = `${BASE_URL}/user/login`;
+    // window.location.href = `${BASE_URL}/user/login`;
   };
 
   const signout = () => {
-    window.location.href = `${BASE_URL}/user/logout`;
+    // window.location.href = `${BASE_URL}/user/logout`;
   };
 
   return (

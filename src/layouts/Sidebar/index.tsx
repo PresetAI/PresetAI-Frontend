@@ -18,6 +18,8 @@ import {
 } from '@heroicons/react/20/solid';
 import BackgroundGradient from '../../components/BackgroundGradient';
 import { Link } from 'react-router-dom';
+import logo from '../../assets/logo.svg';
+import avatar from '../../assets/avatar.png';
 
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
@@ -28,9 +30,9 @@ const navigation = [
   { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
 ];
 const teams = [
-  { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
-  { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
-  { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
+  { id: 1, name: 'Team', href: '#', initial: 'T', current: false },
+  // { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
+  // { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
 ];
 const userNavigation = [
   { name: 'Your profile', href: '#' },
@@ -110,7 +112,7 @@ function Sidebar(props: Props) {
                     <div className="flex h-16 shrink-0 items-center">
                       <img
                         className="h-8 w-auto"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                        src={logo}
                         alt="Your Company"
                       />
                     </div>
@@ -202,11 +204,7 @@ function Sidebar(props: Props) {
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-skin-main px-6 pb-4">
             <div className="flex h-16 shrink-0 items-center">
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt="Your Company"
-              />
+              <img className="h-8 w-auto" src={logo} alt="Your Company" />
             </div>
             <nav className="flex flex-1 flex-col">
               <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -315,7 +313,7 @@ function Sidebar(props: Props) {
                 />
                 <input
                   id="search-field"
-                  className="bg-skin-main block h-full w-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
+                  className="bg-transparent block h-full w-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
                   placeholder="Search..."
                   type="search"
                   name="search"
@@ -342,7 +340,7 @@ function Sidebar(props: Props) {
                     <span className="sr-only">Open user menu</span>
                     <img
                       className="h-8 w-8 rounded-full bg-gray-50"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      src={avatar}
                       alt=""
                     />
                     <span className="hidden lg:flex lg:items-center">
@@ -350,7 +348,7 @@ function Sidebar(props: Props) {
                         className="ml-4 text-sm font-semibold leading-6 text-gray-900"
                         aria-hidden="true"
                       >
-                        Tom Cook
+                        PresetAI
                       </span>
                       <ChevronDownIcon
                         className="ml-2 h-5 w-5 text-gray-400"
