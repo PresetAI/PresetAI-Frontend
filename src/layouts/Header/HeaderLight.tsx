@@ -3,7 +3,7 @@ import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { BASE_URL } from '../../utils/constant';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo.svg';
 import { AuthContext } from '../../contexts/auth_context';
 import ModeToggle from '../../components/ModeToggle';
 
@@ -38,11 +38,17 @@ function HeaderLight() {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
+          {/*<Link*/}
+          {/*  to="/"*/}
+          {/*  className="flex items-center text-2xl font-semibold tracking-widest xl:text-4xl"*/}
+          {/*>*/}
+          {/*  PresetAI*/}
+          {/*</Link>*/}
           <Link
             to="/"
             className="flex items-center text-2xl font-semibold tracking-widest xl:text-4xl"
           >
-            PresetAI
+            <img className="h-8" src={logo} alt="logo" />
           </Link>
         </div>
         <div className="flex lg:hidden">
@@ -110,12 +116,13 @@ function HeaderLight() {
             {/*    alt=""*/}
             {/*  />*/}
             {/*</a>*/}
-            <Link
-              to="/"
-              className="flex items-center text-skin-black text-xl font-semibold tracking-widest xl:text-4xl"
-            >
-              PresetAI
-            </Link>
+            {/*<Link*/}
+            {/*  to="/"*/}
+            {/*  className="flex items-center text-skin-black text-xl font-semibold tracking-widest xl:text-4xl"*/}
+            {/*>*/}
+            {/*  PresetAI*/}
+            {/*</Link>*/}
+            <img className="h-8" src={logo} alt="logo" />
             <button
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-gray-700 dark:text-gray-300"
