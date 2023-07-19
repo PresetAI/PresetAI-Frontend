@@ -16,7 +16,7 @@ function Home() {
       <main className="isolate block">
         <Hero />
         <Feature />
-        <Testimonial />
+        {/*<Testimonial />*/}
         <FAQ />
         <CTA />
         {/*<Blog />*/}

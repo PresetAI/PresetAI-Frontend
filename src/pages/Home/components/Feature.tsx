@@ -10,27 +10,27 @@ import SmartToyOutlinedIcon from '@mui/icons-material/SmartToyOutlined';
 
 const features = [
   {
-    name: 'AI-Driven Product Recommendations',
+    name: 'AI-Powered Documentation Search:',
     description:
-      'Transform your customer service with our AI chatbot. Provide your customers with efficient and highly personalized product recommendations.',
+      'Revolutionize your developer support with our AI chatbot, offering precise and personalized results for complex documentation searches.',
     icon: CursorArrowRaysIcon,
   },
   {
-    name: 'Customer Behavior Insights',
+    name: 'Developer Activity Analysis',
     description:
-      'Track and analyze customer interactions, enabling you to gain valuable insights into customer preferences and shopping habits.',
+      'Track and evaluate developer interactions to gain invaluable insights into their search habits and preferred resources.',
     icon: ChartBarIcon,
   },
   {
-    name: 'Product Copilots',
+    name: 'Intelligent Development Assistants',
     description:
-      'Create smart applications that guide your customers in exploring and understanding the potential and specifics of your products.',
+      "Forge intelligent applications that guide developers through complex documentations, enhancing understanding and application of your products' features.",
     icon: SmartToyOutlinedIcon,
   },
   {
-    name: 'Fast Document Navigation',
+    name: 'Rapid Document Navigation',
     description:
-      'Quickly ingest and deploy AI Chat Search apps for efficient navigation of both external and internal documents within minutes.',
+      'Quickly deploy our AI Chat Search apps for swift and efficient exploration of both external and internal technical documents within minutes.',
     icon: DocumentTextIcon,
   },
 ];
@@ -40,15 +40,17 @@ function Feature() {
     <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8">
       <div className="mx-auto max-w-2xl lg:text-center">
         <h2 className="text-base font-semibold leading-7 __text_gradient">
-          From Personal Shopping Assistants to Intelligent Product Guides
+          From Personalized Query Assistants to Intelligent Documentation Search
+          Guides
         </h2>
         <p className="mt-2 text-3xl font-bold tracking-tight text-skin-black sm:text-4xl">
-          Build for Multitude of Scenarios
+          Engineered for a Range of Use Cases
         </p>
         <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
-          Revolutionize your digital retail with our multi-purpose AI chatbot
-          that caters to customer support, employee training, product guidance,
-          and document navigation.
+          Transform your digital development environment with our versatile AI
+          chatbot, designed to facilitate efficient developer support, employee
+          learning, guide through product documentation, and navigate complex
+          technical documents.
         </p>
       </div>
       <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">

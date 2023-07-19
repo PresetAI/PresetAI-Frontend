@@ -13,7 +13,12 @@ type Message = {
   suggestion: string[] | null;
 };
 
-function ProjectDetailChatbot() {
+type ProjectDetailChatbotProps = {
+  projectDetailData: API.Project;
+};
+
+function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
+  const { projectDetailData } = props;
   const [userMessage, setUserMessage] = useState<string>(''); // user input
   const [suggestions, setSuggestions] = useState<any[]>([]); // suggestions items get from backend
   const [isTyping, setIsTyping] = useState<boolean>(false); // is typing
@@ -66,9 +71,9 @@ function ProjectDetailChatbot() {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages]);
+  // useEffect(() => {
+  //   messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  // }, [messages]);
 
   return (
     <div className="w-full sm:w-[80%] sm:col-span-6 self-start rounded-2xl p-4 bg-slate-100">

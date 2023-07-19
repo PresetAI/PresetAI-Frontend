@@ -3,22 +3,22 @@ import React from 'react';
 const faqs = [
   {
     id: 1,
-    question: "What's the best thing about Switzerland?",
+    question: "What's the PresetAI?",
     answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+      'PresetAI is a powerhouse for chat-based search operations. We specialize in addressing developer documentation queries with simplicity and efficiency. Integration is effortless, and achievable everywhere with just a single line of code.',
   },
-  {
-    id: 2,
-    question: "What's the best thing about Switzerland?",
-    answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-  },
-  {
-    id: 3,
-    question: "What's the best thing about Switzerland?",
-    answer:
-      "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-  },
+  // {
+  //   id: 2,
+  //   question: "What's the best thing about Switzerland?",
+  //   answer:
+  //     "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+  // },
+  // {
+  //   id: 3,
+  //   question: "What's the best thing about Switzerland?",
+  //   answer:
+  //     "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
+  // },
   // More questions...
 ];
 

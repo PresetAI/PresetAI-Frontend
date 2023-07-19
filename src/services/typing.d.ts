@@ -16,7 +16,8 @@ declare namespace API {
     name?: string;
     namespace?: string;
     topK?: number;
-    table_id: string;
+    commodityTable?: string;
+    createTime?: string;
   };
 
   type NewProjectUsingPostBody = {
