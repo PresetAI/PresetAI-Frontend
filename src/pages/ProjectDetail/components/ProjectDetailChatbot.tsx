@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import avatar_right from '../../../assets/avatar_right.jpg';
 import logo from '../../../assets/logo.svg';
+import userAvatar from '../../../assets/user.jpg';
 import UseAnimations from 'react-useanimations';
 import loading from 'react-useanimations/lib/loading';
 import { productsSearchUsingPost } from '../../../services/ProductController';
@@ -14,6 +15,11 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import {
+  ClipboardIcon,
+  HandThumbUpIcon,
+  HandThumbDownIcon,
+} from '@heroicons/react/24/outline';
 
 type Message = {
   message: string;
@@ -83,29 +89,45 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
   // }, [messages]);
 
   return (
-    <div className="w-full sm:w-[90%] sm:col-span-6 self-start rounded-2xl">
-      <Card>
-        <div className="flex flex-col h-[35em] overflow-auto p-4">
+    <div className="w-full h-full sm:col-span-7 self-start rounded-2xl">
+      <Card className="flex flex-col rounded-l-2xl rounded-r-none h-full">
+        <CardHeader className="border-b-2 drop-shadow-md">
+          <CardTitle>AI Chat</CardTitle>
+        </CardHeader>
+        <div className="flex flex-col overflow-auto p-4">
           <div>
             {messages.map((message) => {
               return (
                 <div key={message.message}>
                   {message.sender === 'ChatGPT' ||
                   message.sender === 'assistant' ? (
-                    <div className="flex gap-2">
+                    <div className="flex p-4 gap-2 backdrop-blur-lg bg-green-100/30 rounded-2xl shadow-lg shadow-green-50/40">
                       <img
                         className="rounded-full w-12 h-12 bg-amber-50"
                         src={logo}
                         alt="bot"
                       />
-                      <div>
-                        <p className="text-gray-900 font-semibold tracking-wide">
-                          Assistant
-                        </p>
-                        <div className="__chat_box pt-3 pb-3 inline-block text-skin-black">
+                      <div className="flex flex-col w-full">
+                        <div className="__chat_box pt-3 text-gray-600">
                           {message.message}
                         </div>
-                        <div className="grid grid-cols-3 gap-4 mb-2 mt-2 animate__animated animate__fadeInDown">
+                        <div className="flex items-center mt-4">
+                          <div>
+                            <div className="flex gap-2">
+                              <div className="bg-white rounded-full p-2">
+                                <HandThumbUpIcon className="h-4 w-4" />
+                              </div>
+                              <div className="bg-white rounded-full p-2">
+                                <HandThumbDownIcon className="h-4 w-4" />
+                              </div>
+                            </div>
+                          </div>
+                          <div className="ml-auto bg-white text-gray-500 p-2 rounded-xl text-sm">
+                            <ClipboardIcon className="inline-block h-4 w-4" />
+                            copy
+                          </div>
+                        </div>
+                        <div className="animate__animated animate__fadeInDown">
                           {message.suggestion &&
                             message.suggestion.map(
                               (item: any, index: number) => (
@@ -135,6 +157,51 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
                 </div>
               );
             })}
+            {/*presentation*/}
+            <div className="flex p-4 gap-2 pt-6">
+              <img
+                className="rounded-full w-12 h-12 bg-amber-50"
+                src={userAvatar}
+                alt="bot"
+              />
+              <div className="flex flex-col w-full">
+                <div className="__chat_box pt-3 text-gray-600">
+                  What is PresetAI?
+                </div>
+              </div>
+            </div>
+            <div className="flex p-4 gap-2 backdrop-blur-lg bg-green-100/30 rounded-2xl shadow-lg shadow-green-50/40">
+              <img
+                className="rounded-full w-12 h-12 bg-amber-50"
+                src={logo}
+                alt="bot"
+              />
+              <div className="flex flex-col w-full">
+                <div className="__chat_box pt-2 text-gray-600">
+                  PresetAI is a powerhouse for chat-based search operations. We
+                  specialize in addressing developer documentation queries with
+                  simplicity and efficiency. Integration is effortless, and
+                  achievable everywhere with just a single line of code.
+                </div>
+                <div className="flex items-center mt-4">
+                  <div>
+                    <div className="flex gap-2">
+                      <div className="bg-white rounded-full p-2">
+                        <HandThumbUpIcon className="h-4 w-4" />
+                      </div>
+                      <div className="bg-white rounded-full p-2">
+                        <HandThumbDownIcon className="h-4 w-4" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="ml-auto bg-white text-gray-500 p-2 rounded-xl text-sm">
+                    <ClipboardIcon className="inline-block h-4 w-4" />
+                    copy
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/*presentation*/}
 
             {isTyping && (
               <div className="text-black mt-2 flex gap-2">
@@ -145,7 +212,7 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
             <div ref={messagesEndRef} />
           </div>
         </div>
-        <div className="mt-auto p-4">
+        <div className="mt-auto p-6">
           <form className="flex items-center" onSubmit={(e) => handleSend(e)}>
             <label htmlFor="simple-search" className="sr-only">
               Chat here...
@@ -169,7 +236,7 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
               <input
                 type="text"
                 id="simple-search"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 py-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Chat here..."
                 value={userMessage}
                 autoComplete="off"
@@ -197,7 +264,7 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
               </button>
             )}
           </form>
-          <h3 className="flex ml-auto text-sm text-gray-500">
+          <h3 className="flex mt-2 ml-auto text-sm text-gray-500">
             Power by &nbsp;
             <p className="font-medium text-gray-700">PresetAI</p>
           </h3>

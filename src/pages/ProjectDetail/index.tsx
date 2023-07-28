@@ -29,9 +29,12 @@ function ProjectDetail() {
     <Sidebar
       component={
         // <section className="grid grid-cols-2 gap-20">
-        <section className="grid grid-cols-1 sm:grid-cols-9 justify-items-start place-items-start mx-auto px-8 sm:px-12 lg:px-16">
-          <ProjectDetailChatbot projectDetailData={projectDetailData} />
-          <ProjectDetailForm projectDetailData={projectDetailData} />
+        // <section className="grid grid-cols-1 sm:grid-cols-9 justify-items-start place-items-start mx-auto px-8 sm:px-12 lg:px-16">
+        <section className="h-[100vh]">
+          <div className="h-full py-4 grid grid-cols-1 sm:grid-cols-9 rounded-2xl">
+            <ProjectDetailChatbot projectDetailData={projectDetailData} />
+            <ProjectDetailForm projectDetailData={projectDetailData} />
+          </div>
         </section>
       }
     />

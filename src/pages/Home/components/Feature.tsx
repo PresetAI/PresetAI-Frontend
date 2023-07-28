@@ -37,7 +37,7 @@ const features = [
 
 function Feature() {
   return (
-    <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-56 lg:px-8">
+    <div className="mx-auto mt-32 max-w-7xl px-6 sm:mt-32 lg:px-8">
       <div className="mx-auto max-w-2xl lg:text-center">
         <h2 className="text-base font-semibold leading-7 __text_gradient">
           From Personalized Query Assistants to Intelligent Documentation Search

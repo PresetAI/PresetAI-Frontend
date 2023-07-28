@@ -24,15 +24,12 @@ type ProjectDetailFormProps = {
 function ProjectDetailForm(props: ProjectDetailFormProps) {
   const { projectDetailData } = props;
   return (
-    <div className="mt-10 w-full sm:mt-0 sm:col-span-3">
-      <Card>
-        <CardHeader>
-          <CardTitle>Customize Model</CardTitle>
-          <CardDescription>
-            Customize your model&apos;s settings.
-          </CardDescription>
+    <div className="w-full sm:mt-0 sm:col-span-2 rounded-2xl">
+      <Card className="rounded-l-none rounded-r-2xl h-full bg-gray-50">
+        <CardHeader className="border-b-2 drop-shadow-md">
+          <CardTitle>Customize</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-4">
           <form>
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
@@ -52,13 +49,13 @@ function ProjectDetailForm(props: ProjectDetailFormProps) {
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="framework">Framework</Label>
+                <Label htmlFor="framework">Model</Label>
                 <Select>
                   <SelectTrigger id="framework">
                     <SelectValue placeholder="Select" />
                   </SelectTrigger>
                   <SelectContent position="popper">
-                    <SelectItem value="next">Next.js</SelectItem>
+                    <SelectItem value="next">gpt-3.5-turbo</SelectItem>
                     <SelectItem value="sveltekit">SvelteKit</SelectItem>
                     <SelectItem value="astro">Astro</SelectItem>
                     <SelectItem value="nuxt">Nuxt.js</SelectItem>
