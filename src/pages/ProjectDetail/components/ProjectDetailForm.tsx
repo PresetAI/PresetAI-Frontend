@@ -45,7 +45,7 @@ function ProjectDetailForm(props: ProjectDetailFormProps) {
                   type="number"
                   id="topK"
                   placeholder="3"
-                  value={projectDetailData.topK}
+                  value={projectDetailData.top_k}
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
