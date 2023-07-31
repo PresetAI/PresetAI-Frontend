@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Dialog, Menu, Transition } from '@headlessui/react';
 import {
   Bars3Icon,
@@ -12,23 +12,33 @@ import {
   UsersIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-import {
-  ChevronDownIcon,
-  MagnifyingGlassIcon,
-} from '@heroicons/react/20/solid';
-import BackgroundGradient from '../../components/BackgroundGradient';
+import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
+import FolderCopyOutlinedIcon from '@mui/icons-material/FolderCopyOutlined';
+import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
 import { Link } from 'react-router-dom';
+import BackgroundGradient from '../../components/BackgroundGradient';
 import logo from '../../assets/logo.svg';
-import avatar from '../../assets/avatar.png';
 
-const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '/projects', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
-];
+// const navigation = [
+//   {
+//     name: 'Dashboard',
+//     href: '/project/dashboard/123',
+//     icon: DashboardOutlinedIcon,
+//     current: true,
+//   },
+//   {
+//     name: 'Manage Data Sources',
+//     href: '/project/file-management/123',
+//     icon: FolderCopyOutlinedIcon,
+//     current: false,
+//   },
+//   {
+//     name: 'API Keys',
+//     href: '/projects',
+//     icon: KeyOutlinedIcon,
+//     current: false,
+//   },
+// ];
 const teams = [
   { id: 1, name: 'Team', href: '#', initial: 'T', current: false },
   // { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
@@ -45,11 +55,43 @@ function classNames(...classes: any[]) {
 
 type Props = {
   component: any;
+  projectId: string | undefined;
 };
 
 function Sidebar(props: Props) {
-  const { component } = props;
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { component, projectId } = props;
+  const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+  const [navigation, setNavigation] = useState([
+    {
+      name: 'Dashboard',
+      href: `/project/dashboard/${projectId}`,
+      icon: DashboardOutlinedIcon,
+      current: true,
+    },
+    {
+      name: 'Manage Data Sources',
+      href: `/project/file-management/${projectId}`,
+      icon: FolderCopyOutlinedIcon,
+      current: false,
+    },
+    {
+      name: 'API Keys',
+      href: `/project/api-keys/${projectId}`,
+      icon: KeyOutlinedIcon,
+      current: false,
+    },
+  ]);
+
+  useEffect(() => {
+    // set navigation data current status based on url
+    const newNavigationData = navigation.map((item) => {
+      return {
+        ...item,
+        current: item.href === window.location.pathname,
+      };
+    });
+    setNavigation(newNavigationData);
+  }, []);
 
   return (
     <>
@@ -131,6 +173,7 @@ function Sidebar(props: Props) {
                                     'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                   )}
                                 >
+                                  {/*{item.icon}*/}
                                   <item.icon
                                     className={classNames(
                                       item.current
@@ -221,6 +264,7 @@ function Sidebar(props: Props) {
                             'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                           )}
                         >
+                          {/*{item.icon}*/}
                           <item.icon
                             className={classNames(
                               item.current

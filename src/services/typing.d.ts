@@ -15,14 +15,22 @@ declare namespace API {
     _id?: string;
     name?: string;
     namespace?: string;
-    topK?: number;
-    commodityTable?: string;
-    createTime?: string;
+    top_k?: number;
+    table_name?: string;
+    create_time?: string;
   };
 
   type NewProjectUsingPostBody = {
     project_name: string;
     top_k: number;
+  };
+
+  type ProjectFileList = {
+    _id?: string;
+    filename?: string;
+    provider?: string;
+    source_link?: string;
+    create_time?: string;
   };
 
   // Product

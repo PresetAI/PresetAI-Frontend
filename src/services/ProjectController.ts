@@ -22,3 +22,15 @@ export async function getProjectByProjectIdUsingGet(
     withCredentials: true,
   });
 }
+
+export async function getProjectFileByProjectIdUsingPost(
+  projectId: string | undefined
+) {
+  return axios.post(
+    `${BASE_URL}/project/get_project_file_by_project_id/${projectId}`,
+    {},
+    {
+      withCredentials: true,
+    }
+  );
+}

@@ -24,11 +24,11 @@ function HeaderLight() {
   // };
 
   const login = () => {
-    // window.location.href = `${BASE_URL}/user/login`;
+    window.location.href = `${BASE_URL}/user/login`;
   };
 
   const signout = () => {
-    // window.location.href = `${BASE_URL}/user/logout`;
+    window.location.href = `${BASE_URL}/user/logout`;
   };
 
   return (
@@ -76,7 +76,7 @@ function HeaderLight() {
           {isAuthenticated ? (
             <div className="flex gap-4">
               <Link
-                to="/dashboard"
+                to="/projects"
                 className="text-sm font-semibold leading-6 hover:text-gray-500 duration-300"
               >
                 Dashboard

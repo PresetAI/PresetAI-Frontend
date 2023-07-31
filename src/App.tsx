@@ -6,6 +6,7 @@ import {
   Project,
   Pricing,
   ProjectDetail,
+  ProjectDetailFileManagement,
   Error,
   PrivateRoute,
 } from './pages';
@@ -15,7 +16,16 @@ const routes = [
   { path: '/pricing', element: <Pricing />, auth: false },
   { path: '/dashboard', element: <Dashboard />, auth: true },
   { path: '/projects', element: <Project />, auth: true },
-  { path: '/project/:projectId', element: <ProjectDetail />, auth: true },
+  {
+    path: '/project/dashboard/:projectId',
+    element: <ProjectDetail />,
+    auth: true,
+  },
+  {
+    path: '/project/file-management/:projectId',
+    element: <ProjectDetailFileManagement />,
+    auth: true,
+  },
   { path: '*', element: <Error />, auth: false },
 ];
 

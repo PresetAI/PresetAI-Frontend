@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 
 function ProjectDetail() {
   // get params from url
-  const { projectId } = useParams<{ projectId: string }>();
+  const { projectId } = useParams<{ projectId: string | undefined }>();
   const [projectDetailData, setProjectDetailData] = useState<API.Project>({}); // project detail
 
   const getProjectDetail = async () => {
@@ -27,6 +27,7 @@ function ProjectDetail() {
 
   return (
     <Sidebar
+      projectId={projectId}
       component={
         // <section className="grid grid-cols-2 gap-20">
         // <section className="grid grid-cols-1 sm:grid-cols-9 justify-items-start place-items-start mx-auto px-8 sm:px-12 lg:px-16">

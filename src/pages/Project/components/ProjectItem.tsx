@@ -13,7 +13,7 @@ type ProjectItemProps = {
 function ProjectItem(props: ProjectItemProps) {
   const { item } = props;
   return (
-    <Link to={`/project/${item._id}`}>
+    <Link to={`/project/dashboard/${item._id}`}>
       <Card>
         <CardActionArea>
           <CardContent>
@@ -22,10 +22,10 @@ function ProjectItem(props: ProjectItemProps) {
             </Typography>
             <Typography variant="body2" color="text.secondary">
               <div>namespace: {item.namespace}</div>
-              <div>topK: {item.topK}</div>
-              <div>commodityTable: {item.commodityTable}</div>
+              <div>topK: {item.top_k}</div>
+              <div>commodityTable: {item.table_name}</div>
               <div>
-                Create Time: {moment(item.createTime).format('YYYY-MM-DD')}
+                Create Time: {moment(item.create_time).format('YYYY-MM-DD')}
               </div>
             </Typography>
           </CardContent>
