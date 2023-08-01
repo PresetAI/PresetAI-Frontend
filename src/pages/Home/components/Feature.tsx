@@ -10,7 +10,7 @@ import SmartToyOutlinedIcon from '@mui/icons-material/SmartToyOutlined';
 
 const features = [
   {
-    name: 'AI-Powered Documentation Search:',
+    name: 'AI-Powered Documentation Search',
     description:
       'Revolutionize your developer support with our AI chatbot, offering precise and personalized results for complex documentation searches.',
     icon: CursorArrowRaysIcon,
