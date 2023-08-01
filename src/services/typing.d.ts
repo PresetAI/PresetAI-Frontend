@@ -10,6 +10,27 @@ declare namespace API {
     avatar?: string;
   };
 
+  type UserAPIKey = {
+    id?: string;
+    name?: string;
+    api_key?: string;
+    create_time?: string;
+    isDeleted?: boolean;
+  };
+
+  type NewAPIKeyUsingPostBody = {
+    name: string;
+  };
+
+  type UpdateAPIKeyUsingPutBody = {
+    api_key_id: string;
+    name: string;
+  };
+
+  type DeleteAPIKeyUsingDeleteBody = {
+    api_key_id: string;
+  };
+
   // Project
   type Project = {
     _id?: string;

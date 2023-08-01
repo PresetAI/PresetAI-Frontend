@@ -4,6 +4,7 @@ import {
   Home,
   Dashboard,
   Project,
+  UserAPIKey,
   Pricing,
   ProjectDetail,
   ProjectDetailFileManagement,
@@ -16,6 +17,7 @@ const routes = [
   { path: '/pricing', element: <Pricing />, auth: false },
   { path: '/dashboard', element: <Dashboard />, auth: true },
   { path: '/projects', element: <Project />, auth: true },
+  { path: '/user/api-keys', element: <UserAPIKey />, auth: true },
   {
     path: '/project/dashboard/:projectId',
     element: <ProjectDetail />,

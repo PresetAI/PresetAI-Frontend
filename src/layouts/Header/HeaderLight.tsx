@@ -8,10 +8,10 @@ import { AuthContext } from '../../contexts/auth_context';
 import ModeToggle from '../../components/ModeToggle';
 
 const navigation = [
-  { name: 'Use Cases', href: '#' },
   { name: 'Docs', href: '#' },
   { name: 'Pricing', href: '/pricing' },
-  { name: 'Blog', href: '#' },
+  // { name: 'TBD', href: '#' },
+  // { name: 'TBD', href: '#' },
 ];
 
 function HeaderLight() {
