@@ -2,15 +2,24 @@ import moment from 'moment';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import { Button } from '@/components/ui/button';
-import { DialogTrigger } from '@/components/ui/dialog';
 
 type APIKeyTableProps = {
   apiKeyData: API.UserAPIKey[];
   setDialogOpen: (dialogOpen: boolean) => void;
+  onClickOpenDeleteAPIKeyDialog: (id: string | undefined) => void;
+  onClickOpenUpdateAPIKeyDialog: (
+    id: string | undefined,
+    value: string | undefined
+  ) => void;
 };
 
 function APIKeyTable(props: APIKeyTableProps) {
-  const { apiKeyData, setDialogOpen } = props;
+  const {
+    apiKeyData,
+    setDialogOpen,
+    onClickOpenDeleteAPIKeyDialog,
+    onClickOpenUpdateAPIKeyDialog,
+  } = props;
 
   return (
     <div className="mt-8">
@@ -80,10 +89,20 @@ function APIKeyTable(props: APIKeyTableProps) {
                       {moment(apiKey.create_time).format('YYYY-MM-DD')}
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-                      <Button variant="ghost" className="p-2">
+                      <Button
+                        variant="ghost"
+                        className="p-2"
+                        onClick={() =>
+                          onClickOpenUpdateAPIKeyDialog(apiKey.id, apiKey.name)
+                        }
+                      >
                         <CreateOutlinedIcon sx={{ width: 18 }} />
                       </Button>
-                      <Button variant="ghost" className="p-2">
+                      <Button
+                        variant="ghost"
+                        className="p-2"
+                        onClick={() => onClickOpenDeleteAPIKeyDialog(apiKey.id)}
+                      >
                         <DeleteOutlineOutlinedIcon sx={{ width: 20 }} />
                       </Button>
                     </td>

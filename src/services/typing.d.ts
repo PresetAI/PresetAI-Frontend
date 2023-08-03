@@ -43,7 +43,6 @@ declare namespace API {
 
   type NewProjectUsingPostBody = {
     project_name: string;
-    top_k: number;
   };
 
   type ProjectFileList = {

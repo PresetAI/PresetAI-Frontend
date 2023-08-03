@@ -7,9 +7,7 @@ export async function getProjectsUsingGet() {
   });
 }
 
-export async function newProjectUsingPost(
-  body: API.NewProjectUsingPostBody | undefined
-) {
+export async function newProjectUsingPost(body: string) {
   return axios.post(`${BASE_URL}/project/new_project`, body, {
     withCredentials: true,
   });

@@ -29,9 +29,7 @@ export async function updateAPIKeyUsingPut(body: API.UpdateAPIKeyUsingPutBody) {
   });
 }
 
-export async function deleteAPIKeyUsingDelete(
-  api_key_id: API.DeleteAPIKeyUsingDeleteBody
-) {
+export async function deleteAPIKeyUsingDelete(api_key_id: string | undefined) {
   return axios.delete(`${BASE_URL}/user/delete_api_key/${api_key_id}`, {
     withCredentials: true,
   });
