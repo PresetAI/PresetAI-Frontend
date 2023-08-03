@@ -10,26 +10,28 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RefObject } from 'react';
 
-type ProjectCreateDialogProps = {
+type UpdateAPIKeyDialogProps = {
   apiKeyNameValue: RefObject<HTMLInputElement>;
+  updateAPIKeyNameValue: string | undefined;
   dialogOpen: boolean;
   setDialogOpen: (dialogOpen: boolean) => void;
-  onClickConfirmCreateAPIKey: (e: any) => void;
+  onClickConfirmUpdateAPIKey: (e: any) => void;
 };
 
-function CreateAPIKeyDialog(props: ProjectCreateDialogProps) {
+function UpdateAPIKeyDialog(props: UpdateAPIKeyDialogProps) {
   const {
     apiKeyNameValue,
+    updateAPIKeyNameValue,
     dialogOpen,
     setDialogOpen,
-    onClickConfirmCreateAPIKey,
+    onClickConfirmUpdateAPIKey,
   } = props;
 
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <DialogContent className="sm:max-w-[400px]">
         <DialogHeader>
-          <DialogTitle>Create new API Key</DialogTitle>
+          <DialogTitle>Update API Key</DialogTitle>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-5 items-center gap-4">
@@ -41,6 +43,7 @@ function CreateAPIKeyDialog(props: ProjectCreateDialogProps) {
               placeholder="My Test Key"
               className="col-span-4"
               ref={apiKeyNameValue}
+              defaultValue={updateAPIKeyNameValue}
             />
           </div>
         </div>
@@ -48,12 +51,12 @@ function CreateAPIKeyDialog(props: ProjectCreateDialogProps) {
           <Button variant="secondary" onClick={() => setDialogOpen(false)}>
             Cancel
           </Button>
-          <Button type="submit" onClick={onClickConfirmCreateAPIKey}>
-            Create
+          <Button type="submit" onClick={onClickConfirmUpdateAPIKey}>
+            Update
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
 }
-export default CreateAPIKeyDialog;
+export default UpdateAPIKeyDialog;
