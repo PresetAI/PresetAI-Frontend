@@ -6,7 +6,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
-import { BASE_URL } from '../../utils/constant';
+import { BASE_URL } from '@/config/domain';
 import ModeToggle from '@/components/ModeToggle';
 import { AuthContext } from '@/contexts/auth_context';
 

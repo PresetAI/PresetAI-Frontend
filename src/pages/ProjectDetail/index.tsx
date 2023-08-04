@@ -1,9 +1,9 @@
-import { Sidebar } from '../../layouts';
+import { useParams } from 'react-router-dom';
+import { Sidebar } from '@/layouts';
 import ProjectDetailChatbot from './components/ProjectDetailChatbot';
 import ProjectDetailForm from './components/ProjectDetailForm';
 import { useEffect, useState } from 'react';
 import { getProjectByProjectIdUsingGet } from '@/services/ProjectController';
-import { useParams } from 'react-router-dom';
 
 function ProjectDetail() {
   // get params from url

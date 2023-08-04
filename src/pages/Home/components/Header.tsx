@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
-import { BASE_URL } from '../../../utils/constant';
+import { BASE_URL } from '@/config/domain';
 import logo from '../../assets/logo.png';
 
 const navigation = [
