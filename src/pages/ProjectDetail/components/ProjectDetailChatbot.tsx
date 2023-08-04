@@ -1,25 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
-import avatar_right from '../../../assets/avatar_right.jpg';
-import logo from '../../../assets/logo.svg';
-import userAvatar from '../../../assets/user.jpg';
 import UseAnimations from 'react-useanimations';
 import loading from 'react-useanimations/lib/loading';
-import { productsSearchUsingPost } from '../../../services/ProductController';
-import SuggestItem from './SuggestItem';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
 import {
   ClipboardIcon,
   HandThumbUpIcon,
   HandThumbDownIcon,
 } from '@heroicons/react/24/outline';
+import avatar_right from '@/assets/avatar_right.jpg';
+import logo from '@/assets/logo.svg';
+import userAvatar from '@/assets/user.jpg';
+import { productsSearchUsingPost } from '@/services/ProductController';
+import SuggestItem from './SuggestItem';
+import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 
 type Message = {
   message: string;
@@ -157,7 +150,7 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
                 </div>
               );
             })}
-            {/*presentation*/}
+            {/* presentation */}
             <div className="flex p-4 gap-2 pt-6">
               <img
                 className="rounded-full w-12 h-12 bg-amber-50"
@@ -201,7 +194,7 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
                 </div>
               </div>
             </div>
-            {/*presentation*/}
+            {/* presentation */}
 
             {isTyping && (
               <div className="text-black mt-2 flex gap-2">
@@ -227,9 +220,9 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                     d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                    clip-rule="evenodd"
+                    clipRule="evenodd"
                   />
                 </svg>
               </div>

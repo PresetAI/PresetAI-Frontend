@@ -4,8 +4,8 @@ import {
   CheckIcon,
   XMarkIcon as XMarkIconMini,
 } from '@heroicons/react/20/solid';
-import HeaderDark from '../../layouts/Header/HeaderDark';
-import Footer from '../../layouts/Footer';
+import HeaderDark from '@/layouts/Header/HeaderDark';
+import Footer from '@/layouts/Footer';
 
 const pricing: any = {
   frequencies: [

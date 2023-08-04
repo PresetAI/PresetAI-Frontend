@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { BASE_URL } from '../utils/constant';
+import { BASE_URL } from '@/config/domain';
 
 export async function productsSearchUsingPost(
   body: API.ProductsSearchUsingPostBody | undefined

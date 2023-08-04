@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sidebar } from '../../layouts';
+import { Sidebar } from '@/layouts';
 
 function Dashboard() {
   return <Sidebar projectId="123" component={null} />;

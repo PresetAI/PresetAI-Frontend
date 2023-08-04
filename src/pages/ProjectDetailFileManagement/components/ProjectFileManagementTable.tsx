@@ -99,22 +99,22 @@ const headCells: readonly HeadCell[] = [
   //   label: 'id',
   // },
   {
-    id: 'filename',
+    id: 'source_link',
     numeric: false,
     disablePadding: true,
-    label: 'filename',
+    label: 'Source link',
   },
   {
     id: 'provider',
     numeric: true,
     disablePadding: false,
-    label: 'provider',
+    label: 'Provider',
   },
   {
-    id: 'source_link',
+    id: 'filename',
     numeric: true,
     disablePadding: false,
-    label: 'source link',
+    label: 'Filename',
   },
   {
     id: 'create_time',
@@ -153,6 +153,17 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   return (
     <TableHead>
       <TableRow>
+        <TableCell padding="checkbox">
+          <Checkbox
+            color="primary"
+            indeterminate={numSelected > 0 && numSelected < rowCount}
+            checked={rowCount > 0 && numSelected === rowCount}
+            onChange={onSelectAllClick}
+            inputProps={{
+              'aria-label': 'select all files',
+            }}
+          />
+        </TableCell>
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
@@ -216,7 +227,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
           id="tableTitle"
           component="div"
         >
-          Nutrition
+          Data Sources
         </Typography>
       )}
       {numSelected > 0 ? (
@@ -287,6 +298,26 @@ function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
     setSelected([]);
   };
 
+  const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
+    const selectedIndex = selected.indexOf(name);
+    let newSelected: readonly string[] = [];
+
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, name);
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1));
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1));
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1)
+      );
+    }
+
+    setSelected(newSelected);
+  };
+
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -309,7 +340,7 @@ function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
       page * rowsPerPage,
       page * rowsPerPage + rowsPerPage
     );
-  }, [order, orderBy, page, rows, rowsPerPage, setRows]); // Add rowsUpdated here
+  }, [order, orderBy, page, rows, rowsPerPage]); // Add rowsUpdated here
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -334,22 +365,34 @@ function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
                   <TableRow
                     hover
                     role="checkbox"
+                    onClick={(event) => handleClick(event, row.filename)}
+                    aria-checked={isItemSelected}
+                    selected={isItemSelected}
                     tabIndex={-1}
                     key={row._id}
                     sx={{ cursor: 'pointer' }}
                   >
+                    <TableCell padding="checkbox">
+                      <Checkbox
+                        color="primary"
+                        checked={isItemSelected}
+                        inputProps={{
+                          'aria-labelledby': labelId,
+                        }}
+                      />
+                    </TableCell>
                     <TableCell align="right">
                       <a
-                        href={row.filename}
+                        href={row.source_link}
                         target="_blank"
                         rel="noreferrer"
                         className="transition duration-150 hover:text-gray-400"
                       >
-                        {row.filename}
+                        {row.source_link}
                       </a>
                     </TableCell>
                     <TableCell align="right">{row.provider}</TableCell>
-                    <TableCell align="right">{row.source_link}</TableCell>
+                    <TableCell align="right">{row.filename}</TableCell>
                     <TableCell align="right">
                       {moment(row.create_time).format('YYYY-MM-DD hh:mm a')}
                     </TableCell>

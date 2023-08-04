@@ -1,7 +1,5 @@
-import { Terminal, Waves } from 'lucide-react';
-
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 type AlertDefaultProps = {
   description: string;

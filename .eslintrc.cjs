@@ -33,11 +33,12 @@ module.exports = {
             "error",
             { "allow": ["_id"] }
         ],
-        'import/extensions': ['error', 'always', {
-            'js': 'never',
-            'ts': 'never',
-            'tsx': 'never',
-        }],
+        "import/extensions": "off",
+        // 'import/extensions': ['error', 'always', {
+        //     'js': 'never',
+        //     'ts': 'never',
+        //     'tsx': 'never',
+        // }],
     },
     "settings": {
         'import/resolver': {
