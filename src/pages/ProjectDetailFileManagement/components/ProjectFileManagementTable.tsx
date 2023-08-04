@@ -92,12 +92,6 @@ interface HeadCell {
 }
 
 const headCells: readonly HeadCell[] = [
-  // {
-  //   id: '_id',
-  //   numeric: false,
-  //   disablePadding: true,
-  //   label: 'id',
-  // },
   {
     id: 'source_link',
     numeric: false,
@@ -151,7 +145,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     };
 
   return (
-    <TableHead>
+    <TableHead sx={{ bgcolor: 'tranparent' }}>
       <TableRow>
         <TableCell padding="checkbox">
           <Checkbox
@@ -248,11 +242,11 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
 }
 
 interface ProjectFileManagementTableProps {
-  projectFileList: API.ProjectFileList[];
+  filteredFileList: API.ProjectFileList[];
 }
 
 function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
-  const { projectFileList } = props;
+  const { filteredFileList } = props;
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<keyof Data>('filename');
   const [selected, setSelected] = useState<readonly string[]>([]);
@@ -263,7 +257,7 @@ function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
   const rowData: ((prevState: never[]) => never[]) | Data[] = [];
   const [rowsUpdated, setRowsUpdated] = useState(false);
   const createRows = () => {
-    projectFileList.forEach((projectFile) => {
+    filteredFileList.forEach((projectFile) => {
       const row = createData(
         projectFile._id,
         projectFile.filename,
@@ -278,7 +272,7 @@ function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
   };
   useEffect(() => {
     createRows();
-  }, [projectFileList]);
+  }, [filteredFileList]);
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -344,7 +338,7 @@ function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
+      <Paper sx={{ width: '100%', mb: 2, bgcolor: 'transparent' }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
