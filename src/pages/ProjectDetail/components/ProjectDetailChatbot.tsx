@@ -13,6 +13,7 @@ import userAvatar from '@/assets/user.jpg';
 import { productsSearchUsingPost } from '@/services/ProductController';
 import SuggestItem from './SuggestItem';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
+import { doChaClientSideUsingPost } from '@/services/ProjectController';
 
 type Message = {
   message: string;
@@ -21,11 +22,12 @@ type Message = {
 };
 
 type ProjectDetailChatbotProps = {
+  projectId: string | undefined;
   projectDetailData: API.Project;
 };
 
 function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
-  const { projectDetailData } = props;
+  const { projectId, projectDetailData } = props;
   const [userMessage, setUserMessage] = useState<string>(''); // user input
   const [suggestions, setSuggestions] = useState<any[]>([]); // suggestions items get from backend
   const [isTyping, setIsTyping] = useState<boolean>(false); // is typing
@@ -43,7 +45,8 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
 
   const processMessage = async (chatMessages: any) => {
     setUserMessage('');
-    const response = await productsSearchUsingPost(chatMessages);
+    const response = await doChaClientSideUsingPost(projectId, chatMessages);
+    console.log(response.data.data);
 
     if (response.data.code === 200) {
       const newMessage = {
