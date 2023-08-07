@@ -8,6 +8,7 @@ import {
   Pricing,
   ProjectDetail,
   ProjectDetailFileManagement,
+  UploadDataSource,
   Error,
   PrivateRoute,
 } from './pages';
@@ -26,6 +27,11 @@ const routes = [
   {
     path: '/project/file-management/:projectId',
     element: <ProjectDetailFileManagement />,
+    auth: true,
+  },
+  {
+    path: '/project/upload-data-source/:projectId',
+    element: <UploadDataSource />,
     auth: true,
   },
   { path: '*', element: <Error />, auth: false },

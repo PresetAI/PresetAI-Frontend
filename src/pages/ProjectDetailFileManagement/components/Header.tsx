@@ -9,7 +9,7 @@ type Props = {
 function Header(props: Props) {
   const { filterText, setFilterText } = props;
   return (
-    <div className="">
+    <div>
       <div className="sm:flex-auto">
         <h1 className="text-3xl font-bold leading-6 text-gray-900">
           File Management

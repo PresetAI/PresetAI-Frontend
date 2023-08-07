@@ -1,20 +1,14 @@
 import { Fragment, useEffect, useState } from 'react';
-import { Dialog, Menu, Transition } from '@headlessui/react';
+import { Dialog, Transition } from '@headlessui/react';
 import {
   Bars3Icon,
-  BellIcon,
-  CalendarIcon,
-  ChartPieIcon,
   Cog6ToothIcon,
-  DocumentDuplicateIcon,
-  FolderIcon,
-  HomeIcon,
-  UsersIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import FolderCopyOutlinedIcon from '@mui/icons-material/FolderCopyOutlined';
 import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
+import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined';
 import { Link } from 'react-router-dom';
 import BackgroundGradient from '../../components/BackgroundGradient';
 import logo from '../../assets/logo.svg';
@@ -72,6 +66,12 @@ function Sidebar(props: Props) {
       name: 'Manage Data Sources',
       href: `/project/file-management/${projectId}`,
       icon: FolderCopyOutlinedIcon,
+      current: false,
+    },
+    {
+      name: 'Add Data Sources',
+      href: `/project/upload-data-source/${projectId}`,
+      icon: BackupOutlinedIcon,
       current: false,
     },
     {

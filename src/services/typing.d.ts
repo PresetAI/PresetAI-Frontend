@@ -31,6 +31,12 @@ declare namespace API {
     api_key_id: string;
   };
 
+  type IngestDataClientUsingPostBody = {
+    project_id: string;
+    url: string;
+    provider: string;
+  };
+
   // Project
   type Project = {
     _id?: string;

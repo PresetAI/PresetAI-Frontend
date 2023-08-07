@@ -41,3 +41,11 @@ export async function doChaClientSideUsingPost(
     withCredentials: true,
   });
 }
+
+export async function ingestDataClientUsingPost(
+  body: API.IngestDataClientUsingPostBody
+) {
+  return axios.post(`${BASE_URL}/project/ingest_data/client`, body, {
+    withCredentials: true,
+  });
+}
