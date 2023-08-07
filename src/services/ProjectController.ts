@@ -32,3 +32,12 @@ export async function getProjectFileByProjectIdUsingPost(
     }
   );
 }
+
+export async function doChaClientSideUsingPost(
+  project_id: string | undefined,
+  body: string
+) {
+  return axios.post(`${BASE_URL}/project/do_chat_client/${project_id}`, body, {
+    withCredentials: true,
+  });
+}
