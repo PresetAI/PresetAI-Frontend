@@ -9,6 +9,7 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import FolderCopyOutlinedIcon from '@mui/icons-material/FolderCopyOutlined';
 import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
 import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined';
+import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
 import { Link } from 'react-router-dom';
 import BackgroundGradient from '../../components/BackgroundGradient';
 import logo from '../../assets/logo.svg';
@@ -72,6 +73,12 @@ function Sidebar(props: Props) {
       name: 'Add Data Sources',
       href: `/project/upload-data-source/${projectId}`,
       icon: BackupOutlinedIcon,
+      current: false,
+    },
+    {
+      name: 'Upload History',
+      href: `/project/upload-history/${projectId}`,
+      icon: HistoryOutlinedIcon,
       current: false,
     },
     {

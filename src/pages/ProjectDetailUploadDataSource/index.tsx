@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Sidebar } from '@/layouts';
 import Title from '@/components/Title';
-import { TabList } from '@/pages/UploadDataSource/components/TabList';
+import { TabList } from '@/pages/ProjectDetailUploadDataSource/components/TabList';
 import { ingestDataClientUsingPost } from '@/services/ProjectController';
 import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
@@ -32,7 +32,7 @@ const codeDocsProviderInit = [
   },
 ];
 
-function UploadDataSource() {
+function ProjectDetailUploadDataSource() {
   const { toast } = useToast();
 
   const { projectId } = useParams<{ projectId: string | undefined }>();
@@ -83,4 +83,4 @@ function UploadDataSource() {
   );
 }
 
-export default UploadDataSource;
+export default ProjectDetailUploadDataSource;

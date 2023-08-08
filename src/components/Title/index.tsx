@@ -10,7 +10,7 @@ function Title(props: Props) {
       <div className="sm:flex-auto">
         <h1 className="text-3xl font-bold leading-6 text-gray-900">{title}</h1>
       </div>
-      <p>fewafewafewafewafweaf</p>
+      {/*<p>fewafewafewafewafweaf</p>*/}
     </div>
   );
 }

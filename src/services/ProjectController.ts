@@ -49,3 +49,9 @@ export async function ingestDataClientUsingPost(
     withCredentials: true,
   });
 }
+
+export async function getTasksUsingGet(projectId: string | undefined) {
+  return axios.get(`${BASE_URL}/project/get_tasks/${projectId}`, {
+    withCredentials: true,
+  });
+}
