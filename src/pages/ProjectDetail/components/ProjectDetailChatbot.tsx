@@ -14,6 +14,9 @@ import { productsSearchUsingPost } from '@/services/ProductController';
 import SuggestItem from './SuggestItem';
 import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { doChaClientSideUsingPost } from '@/services/ProjectController';
+import useCopyToClipboard from '@/hooks/useCopyToClipboard';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 type Message = {
   message: string;
@@ -27,6 +30,8 @@ type ProjectDetailChatbotProps = {
 };
 
 function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
+  const [copyToClipboard, { success }] = useCopyToClipboard();
+
   const { projectId, projectDetailData } = props;
   const [userMessage, setUserMessage] = useState<string>(''); // user input
   const [suggestions, setSuggestions] = useState<any[]>([]); // suggestions items get from backend
@@ -50,9 +55,9 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
 
     if (response.data.code === 200) {
       const newMessage = {
-        message: '',
+        message: response.data.data,
         sender: 'ChatGPT',
-        suggestion: response.data.data,
+        suggestion: null,
       };
       setMessages((prevMessages) => [...prevMessages, newMessage]);
       setSuggestions((prevSuggestions) => [
@@ -75,7 +80,7 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
 
     setMessages((prevMessages) => [...prevMessages, newMessage]);
     // Initial system message
-    await processMessage({ phrase: userMessage, namespace: 'amazon1' });
+    await processMessage(userMessage);
   };
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -85,7 +90,7 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
   // }, [messages]);
 
   return (
-    <div className="w-full h-full sm:col-span-7 self-start rounded-2xl">
+    <div className="w-full h-[50rem] sm:col-span-7 self-start rounded-2xl">
       <Card className="flex flex-col rounded-l-2xl rounded-r-none h-full">
         <CardHeader className="border-b-2 drop-shadow-md">
           <CardTitle>AI Chat</CardTitle>
@@ -104,8 +109,16 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
                         alt="bot"
                       />
                       <div className="flex flex-col w-full">
-                        <div className="__chat_box pt-3 text-gray-600">
-                          {message.message}
+                        <div className="__chat_box pt-3 text-gray-600 animate__animated animate__fadeInDown">
+                          {/*{message.message}*/}
+                          <ReactMarkdown
+                            remarkPlugins={[
+                              [remarkGfm, { singleTilde: false }],
+                            ]}
+                            className="prose prose-slate"
+                          >
+                            {message.message}
+                          </ReactMarkdown>
                         </div>
                         <div className="flex items-center mt-4">
                           <div>
@@ -118,23 +131,19 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
                               </div>
                             </div>
                           </div>
-                          <div className="ml-auto bg-white text-gray-500 p-2 rounded-xl text-sm">
+                          <button
+                            type="button"
+                            className="ml-auto bg-white text-gray-500 p-2 rounded-xl text-sm cursor-pointer hover:bg-green-100 transition duration-300"
+                            onClick={() => copyToClipboard(message.message)}
+                          >
                             <ClipboardIcon className="inline-block h-4 w-4" />
                             copy
-                          </div>
-                        </div>
-                        <div className="animate__animated animate__fadeInDown">
-                          {message.suggestion &&
-                            message.suggestion.map(
-                              (item: any, index: number) => (
-                                <SuggestItem key={index} item={item} />
-                              )
-                            )}
+                          </button>
                         </div>
                       </div>
                     </div>
                   ) : (
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 mb-2">
                       <div className="ml-auto flex flex-col">
                         <p className="text-gray-900 font-semibold tracking-wide ml-auto">
                           You
@@ -154,49 +163,49 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
               );
             })}
             {/* presentation */}
-            <div className="flex p-4 gap-2 pt-6">
-              <img
-                className="rounded-full w-12 h-12 bg-amber-50"
-                src={userAvatar}
-                alt="bot"
-              />
-              <div className="flex flex-col w-full">
-                <div className="__chat_box pt-3 text-gray-600">
-                  What is PresetAI?
-                </div>
-              </div>
-            </div>
-            <div className="flex p-4 gap-2 backdrop-blur-lg bg-green-100/30 rounded-2xl shadow-lg shadow-green-50/40">
-              <img
-                className="rounded-full w-12 h-12 bg-amber-50"
-                src={logo}
-                alt="bot"
-              />
-              <div className="flex flex-col w-full">
-                <div className="__chat_box pt-2 text-gray-600">
-                  PresetAI is a powerhouse for chat-based search operations. We
-                  specialize in addressing developer documentation queries with
-                  simplicity and efficiency. Integration is effortless, and
-                  achievable everywhere with just a single line of code.
-                </div>
-                <div className="flex items-center mt-4">
-                  <div>
-                    <div className="flex gap-2">
-                      <div className="bg-white rounded-full p-2">
-                        <HandThumbUpIcon className="h-4 w-4" />
-                      </div>
-                      <div className="bg-white rounded-full p-2">
-                        <HandThumbDownIcon className="h-4 w-4" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="ml-auto bg-white text-gray-500 p-2 rounded-xl text-sm">
-                    <ClipboardIcon className="inline-block h-4 w-4" />
-                    copy
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/*<div className="flex p-4 gap-2 pt-6">*/}
+            {/*  <img*/}
+            {/*    className="rounded-full w-12 h-12 bg-amber-50"*/}
+            {/*    src={userAvatar}*/}
+            {/*    alt="bot"*/}
+            {/*  />*/}
+            {/*  <div className="flex flex-col w-full">*/}
+            {/*    <div className="__chat_box pt-3 text-gray-600">*/}
+            {/*      What is PresetAI?*/}
+            {/*    </div>*/}
+            {/*  </div>*/}
+            {/*</div>*/}
+            {/*<div className="flex p-4 gap-2 backdrop-blur-lg bg-green-100/30 rounded-2xl shadow-lg shadow-green-50/40">*/}
+            {/*  <img*/}
+            {/*    className="rounded-full w-12 h-12 bg-amber-50"*/}
+            {/*    src={logo}*/}
+            {/*    alt="bot"*/}
+            {/*  />*/}
+            {/*  <div className="flex flex-col w-full">*/}
+            {/*    <div className="__chat_box pt-2 text-gray-600">*/}
+            {/*      PresetAI is a powerhouse for chat-based search operations. We*/}
+            {/*      specialize in addressing developer documentation queries with*/}
+            {/*      simplicity and efficiency. Integration is effortless, and*/}
+            {/*      achievable everywhere with just a single line of code.*/}
+            {/*    </div>*/}
+            {/*    <div className="flex items-center mt-4">*/}
+            {/*      <div>*/}
+            {/*        <div className="flex gap-2">*/}
+            {/*          <div className="bg-white rounded-full p-2">*/}
+            {/*            <HandThumbUpIcon className="h-4 w-4" />*/}
+            {/*          </div>*/}
+            {/*          <div className="bg-white rounded-full p-2">*/}
+            {/*            <HandThumbDownIcon className="h-4 w-4" />*/}
+            {/*          </div>*/}
+            {/*        </div>*/}
+            {/*      </div>*/}
+            {/*      <div className="ml-auto bg-white text-gray-500 p-2 rounded-xl text-sm">*/}
+            {/*        <ClipboardIcon className="inline-block h-4 w-4" />*/}
+            {/*        copy*/}
+            {/*      </div>*/}
+            {/*    </div>*/}
+            {/*  </div>*/}
+            {/*</div>*/}
             {/* presentation */}
 
             {isTyping && (

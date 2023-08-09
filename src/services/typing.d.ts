@@ -59,6 +59,14 @@ declare namespace API {
     create_time?: string;
   };
 
+  type ProjectTask = {
+    _id?: string;
+    provider?: string;
+    status?: string;
+    create_time?: string;
+    is_deleted?: boolean;
+  };
+
   // Product
   type ProductsSearchUsingPostBody = {
     phrase: string;

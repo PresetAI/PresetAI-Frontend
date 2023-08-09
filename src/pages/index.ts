@@ -5,7 +5,8 @@ import UserAPIKey from './UserAPIKey';
 import Pricing from './Pricing';
 import ProjectDetail from './ProjectDetail';
 import ProjectDetailFileManagement from './ProjectDetailFileManagement';
-import UploadDataSource from './UploadDataSource';
+import ProjectDetailUploadDataSource from './ProjectDetailUploadDataSource';
+import ProjectDetailUploadHistory from './ProjectDetailUploadHistory';
 import Error from './Error';
 import PrivateRoute from './PrivateRoute';
 
@@ -17,7 +18,8 @@ export {
   Pricing,
   ProjectDetail,
   ProjectDetailFileManagement,
-  UploadDataSource,
+  ProjectDetailUploadDataSource,
+  ProjectDetailUploadHistory,
   Error,
   PrivateRoute,
 };
