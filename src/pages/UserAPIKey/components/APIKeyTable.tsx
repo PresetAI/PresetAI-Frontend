@@ -6,9 +6,9 @@ import { Button } from '@/components/ui/button';
 type APIKeyTableProps = {
   apiKeyData: API.UserAPIKey[];
   setDialogOpen: (dialogOpen: boolean) => void;
-  onClickOpenDeleteAPIKeyDialog: (id: string | undefined) => void;
+  onClickOpenDeleteAPIKeyDialog: (id: string) => void;
   onClickOpenUpdateAPIKeyDialog: (
-    id: string | undefined,
+    id: string,
     value: string | undefined
   ) => void;
 };
@@ -93,7 +93,10 @@ function APIKeyTable(props: APIKeyTableProps) {
                         variant="ghost"
                         className="p-2"
                         onClick={() =>
-                          onClickOpenUpdateAPIKeyDialog(apiKey.id, apiKey.name)
+                          onClickOpenUpdateAPIKeyDialog(
+                            apiKey.id || '',
+                            apiKey.name
+                          )
                         }
                       >
                         <CreateOutlinedIcon sx={{ width: 18 }} />
@@ -101,7 +104,9 @@ function APIKeyTable(props: APIKeyTableProps) {
                       <Button
                         variant="ghost"
                         className="p-2"
-                        onClick={() => onClickOpenDeleteAPIKeyDialog(apiKey.id)}
+                        onClick={() =>
+                          onClickOpenDeleteAPIKeyDialog(apiKey.id || '')
+                        }
                       >
                         <DeleteOutlineOutlinedIcon sx={{ width: 20 }} />
                       </Button>

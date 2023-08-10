@@ -23,7 +23,6 @@ declare namespace API {
   };
 
   type UpdateAPIKeyUsingPutBody = {
-    api_key_id: string;
     name: string;
   };
 
