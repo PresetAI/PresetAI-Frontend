@@ -9,7 +9,7 @@ function ProjectList(props: ProjectListProps) {
   return (
     <div className="grid grid-cols-1 gap-x-8 gap-y-4 md:grid-cols-2 lg:grid-cols-3 mt-8">
       {projectsListData.map((item: API.Project) => {
-        return <ProjectItem key={item._id} item={item} />;
+        return <ProjectItem key={item.id} item={item} />;
       })}
     </div>
   );

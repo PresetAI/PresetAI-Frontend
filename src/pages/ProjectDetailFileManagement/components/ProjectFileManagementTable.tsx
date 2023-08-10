@@ -22,7 +22,7 @@ import { useEffect, useMemo, useState } from 'react';
 import moment from 'moment';
 
 interface Data {
-  _id: string;
+  id: string;
   filename: string;
   provider: string;
   source_link: string;
@@ -30,14 +30,14 @@ interface Data {
 }
 
 function createData(
-  _id: string | undefined,
+  id: string | undefined,
   filename: string | undefined,
   provider: string | undefined,
   source_link: string | undefined,
   create_time: string | undefined
 ): Data {
   return {
-    _id,
+    id,
     filename,
     provider,
     source_link,
@@ -259,7 +259,7 @@ function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
   const createRows = () => {
     filteredFileList.forEach((projectFile) => {
       const row = createData(
-        projectFile._id,
+        projectFile.id,
         projectFile.filename,
         projectFile.provider,
         projectFile.source_link,
@@ -363,7 +363,7 @@ function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
                     aria-checked={isItemSelected}
                     selected={isItemSelected}
                     tabIndex={-1}
-                    key={row._id}
+                    key={row.id}
                     sx={{ cursor: 'pointer' }}
                   >
                     <TableCell padding="checkbox">

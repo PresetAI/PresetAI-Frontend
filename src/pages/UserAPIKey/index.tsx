@@ -16,7 +16,7 @@ import UpdateAPIKeyDialog from '@/pages/UserAPIKey/components/UpdateAPIKeyDialog
 function UserAPIKey() {
   const [dialogOpen, setDialogOpen] = useState<boolean>(false); // dialog open or not
   const apiKeyNameValue = useRef<HTMLInputElement>(null);
-  const [selectedId, setSelectedId] = useState<string | undefined>(''); // selected id
+  const [selectedId, setSelectedId] = useState<string>(''); // selected id
 
   // For update dialog
   const [updateDialogOpen, setUpdateDialogOpen] = useState<boolean>(false); // update dialog open or not
@@ -63,7 +63,10 @@ function UserAPIKey() {
       return;
     }
     try {
-      const res = await newAPIKeyUsingPost(apiKeyName);
+      const body: API.NewAPIKeyUsingPostBody = {
+        name: apiKeyName,
+      };
+      const res = await newAPIKeyUsingPost(body);
       if (res.data.code === 200) {
         setDescription('API Key create successfully');
         setAlert('default');
@@ -86,7 +89,7 @@ function UserAPIKey() {
   // For Update API Key
   // open alert confirm dialog
   const onClickOpenUpdateAPIKeyDialog = (
-    id: string | undefined,
+    id: string,
     value: string | undefined
   ) => {
     setUpdateDialogOpen(true);
@@ -106,10 +109,9 @@ function UserAPIKey() {
       return;
     }
     const body: API.UpdateAPIKeyUsingPutBody = {
-      api_key_id: selectedId || '',
       name: apiKeyNameValue.current?.value || '',
     };
-    const res = await updateAPIKeyUsingPut(body);
+    const res = await updateAPIKeyUsingPut(selectedId, body);
     if (res.data.code === 200) {
       setDescription('API Key update successfully');
       setAlert('default');
@@ -124,7 +126,7 @@ function UserAPIKey() {
 
   // For Delete API Key
   // open alert confirm dialog
-  const onClickOpenDeleteAPIKeyDialog = (id: string | undefined) => {
+  const onClickOpenDeleteAPIKeyDialog = (id: string) => {
     setAlertConfirmDialogTitle('Delete API Key');
     setAlertConfirmDialogDescription(
       'Are you sure you want to delete this API Key?'

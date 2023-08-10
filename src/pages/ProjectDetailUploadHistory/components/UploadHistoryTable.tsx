@@ -23,7 +23,7 @@ import moment from 'moment';
 import { getComparator, stableSort, Order } from '@/utils/sortTable';
 
 interface Data {
-  _id: string;
+  id: string;
   provider: string;
   status: string;
   create_time: string;
@@ -31,14 +31,14 @@ interface Data {
 }
 
 function createData(
-  _id: string | undefined,
+  id: string | undefined,
   provider: string | undefined,
   status: string | undefined,
   create_time: string | undefined,
   is_deleted: string | undefined
 ): Data {
   return {
-    _id,
+    id,
     provider,
     status,
     create_time,
@@ -219,7 +219,7 @@ function UploadHistoryTable(props: UploadHistoryTableProps) {
   const createRows = () => {
     data.forEach((projectFile) => {
       const row = createData(
-        projectFile._id,
+        projectFile.id,
         projectFile.provider,
         projectFile.status,
         projectFile.create_time,
@@ -245,7 +245,7 @@ function UploadHistoryTable(props: UploadHistoryTableProps) {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n._id);
+      const newSelected = rows.map((n) => n.id);
       setSelected(newSelected);
       return;
     }
@@ -323,7 +323,7 @@ function UploadHistoryTable(props: UploadHistoryTableProps) {
                     aria-checked={isItemSelected}
                     selected={isItemSelected}
                     tabIndex={-1}
-                    key={row._id}
+                    key={row.id}
                     sx={{ cursor: 'pointer' }}
                   >
                     <TableCell padding="checkbox">

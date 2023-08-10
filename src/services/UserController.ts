@@ -7,7 +7,8 @@ export async function getCurrentUserUsingGet() {
   });
 }
 
-export async function newAPIKeyUsingPost(name: string) {
+// Create an API key
+export async function newAPIKeyUsingPost(name: API.NewAPIKeyUsingPostBody) {
   return axios.post(`${BASE_URL}/user/new_api_key`, name, {
     withCredentials: true,
   });
@@ -23,8 +24,11 @@ export async function getAPIKeyUsingPost() {
   );
 }
 
-export async function updateAPIKeyUsingPut(body: API.UpdateAPIKeyUsingPutBody) {
-  return axios.put(`${BASE_URL}/user/update_api_key`, body, {
+export async function updateAPIKeyUsingPut(
+  api_key_id: string,
+  body: API.UpdateAPIKeyUsingPutBody
+) {
+  return axios.put(`${BASE_URL}/user/update_api_key/` + api_key_id, body, {
     withCredentials: true,
   });
 }

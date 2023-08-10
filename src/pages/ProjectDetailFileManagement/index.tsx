@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Sidebar } from '../../layouts';
 import ProjectFileManagementTable from '@/pages/ProjectDetailFileManagement/components/ProjectFileManagementTable';
-import { getProjectFileByProjectIdUsingPost } from '@/services/ProjectController';
+import { getProjectFileByProjectIdUsingGet } from '@/services/ProjectController';
 import Header from '@/pages/ProjectDetailFileManagement/components/Header';
 
 function ProjectDetailFileManagement() {
@@ -21,7 +21,7 @@ function ProjectDetailFileManagement() {
   }, [projectFileList, filterText]);
 
   const getProjectFileByProjectId = async () => {
-    const res = await getProjectFileByProjectIdUsingPost(projectId);
+    const res = await getProjectFileByProjectIdUsingGet(projectId);
     if (res.data.code === 200) {
       setProjectFileList(res.data.data);
     }
