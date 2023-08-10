@@ -46,7 +46,10 @@ function ProjectCreateDialog(props: ProjectCreateDialogProps) {
     }
     // setProjectForm();
     try {
-      const res = await newProjectUsingPost(projectName);
+      const body: API.NewProjectUsingPostBody = {
+        project_name: projectName,
+      };
+      const res = await newProjectUsingPost(body);
       if (res.data.code === 200) {
         setDescription('Project create successfully');
         setAlert('default');

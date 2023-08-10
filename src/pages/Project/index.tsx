@@ -18,7 +18,6 @@ function Project() {
       if (res.data.code === 200) {
         setProjectsListData(res.data.data);
       }
-      console.log(res.data.data);
     } catch (e: any) {
       console.log(e);
     }

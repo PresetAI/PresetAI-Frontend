@@ -38,7 +38,7 @@ declare namespace API {
 
   // Project
   type Project = {
-    _id?: string;
+    id?: string;
     name?: string;
     namespace?: string;
     top_k?: number;
@@ -51,7 +51,7 @@ declare namespace API {
   };
 
   type ProjectFileList = {
-    _id?: string;
+    id?: string;
     filename?: string;
     provider?: string;
     source_link?: string;
@@ -59,7 +59,7 @@ declare namespace API {
   };
 
   type ProjectTask = {
-    _id?: string;
+    id?: string;
     provider?: string;
     status?: string;
     create_time?: string;

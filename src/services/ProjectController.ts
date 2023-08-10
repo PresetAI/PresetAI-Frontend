@@ -7,7 +7,7 @@ export async function getProjectsUsingGet() {
   });
 }
 
-export async function newProjectUsingPost(body: string) {
+export async function newProjectUsingPost(body: API.NewProjectUsingPostBody) {
   return axios.post(`${BASE_URL}/project/new_project`, body, {
     withCredentials: true,
   });
@@ -21,12 +21,11 @@ export async function getProjectByProjectIdUsingGet(
   });
 }
 
-export async function getProjectFileByProjectIdUsingPost(
+export async function getProjectFileByProjectIdUsingGet(
   projectId: string | undefined
 ) {
-  return axios.post(
+  return axios.get(
     `${BASE_URL}/project/get_project_file_by_project_id/${projectId}`,
-    {},
     {
       withCredentials: true,
     }
