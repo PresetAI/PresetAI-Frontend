@@ -13,10 +13,8 @@ function Home() {
       <main className="isolate block">
         <Hero />
         <Feature />
-        {/*<Testimonial />*/}
         <FAQ />
         <CTA />
-        {/*<Blog />*/}
       </main>
       <Footer />
     </div>
