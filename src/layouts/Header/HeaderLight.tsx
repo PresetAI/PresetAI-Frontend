@@ -4,6 +4,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { BASE_URL } from '@/config/domain';
 import logo from '@/assets/logo.svg';
+import logo_white from '@/assets/logo_white.svg';
 import { AuthContext } from '@/contexts/auth_context';
 import ModeToggle from '@/components/ModeToggle';
 
@@ -17,6 +18,9 @@ const navigation = [
 function HeaderLight() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { isAuthenticated } = useContext(AuthContext);
+  const [isUsingDeviceMode, setIsUsingDeviceMode] = useState(
+    () => !('theme' in localStorage)
+  );
 
   // const redirectToGoggleSSO = async () => {
   //   const googleLoginURL = `${BASE_URL}/users/login`;
