@@ -39,7 +39,7 @@ function Chatbot() {
                 <div key={message.message}>
                   {message.sender === 'ChatGPT' ||
                   message.sender === 'assistant' ? (
-                    <div className="flex p-4 gap-2 backdrop-blur-lg bg-slate-50 rounded-2xl shadow-lg shadow-gray-50/40 dark:bg-slate-800 dark:shadow-slate-700">
+                    <div className="flex p-4 gap-2 backdrop-blur-lg bg-slate-50 rounded-2xl shadow-lg shadow-gray-50/40 dark:bg-slate-800 dark:shadow-slate-700/50">
                       <img
                         className="rounded-full w-12 h-12 bg-amber-50"
                         src={logo}
@@ -135,7 +135,7 @@ function Chatbot() {
             {isTyping ? (
               <button
                 type="submit"
-                className="p-2.5 ml-2 text-sm font-medium text-white bg-gray-600 rounded-lg border border-blue-700 "
+                className="p-2.5 ml-2 text-sm font-medium text-white bg-indigo-600/90 shadow-xl rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 disabled
               >
                 <SendRoundedIcon />

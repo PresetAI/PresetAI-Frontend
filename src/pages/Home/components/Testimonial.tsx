@@ -2,7 +2,7 @@ const featuredTestimonial = {
   body: 'Our entire development team swears by PresetAI. The efficiency it brings to the table when it comes to diving deep into documentation is unparalleled. A must-have tool for every development environment.',
   author: {
     name: 'Anna',
-    handle: 'brennagoyette',
+    handle: 'anna',
     imageUrl:
       'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=1024&h=1024&q=80',
     logoUrl: 'https://tailwindui.com/img/logos/savvycal-logo-gray-900.svg',
@@ -99,12 +99,12 @@ export default function Testimonial() {
           <h2 className="text-lg font-semibold leading-8 tracking-tight text-indigo-600">
             Testimonials
           </h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl dark:text-gray-100">
             We have worked with thousands of amazing people
           </p>
         </div>
         <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 grid-rows-1 gap-8 text-sm leading-6 text-gray-900 sm:mt-20 sm:grid-cols-2 xl:mx-0 xl:max-w-none xl:grid-flow-col xl:grid-cols-4">
-          <figure className="col-span-2 hidden sm:block sm:rounded-2xl sm:bg-white sm:shadow-lg sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1">
+          <figure className="col-span-2 hidden backdrop-blur-lg sm:bg-white/50 dark:bg-gray-300/90 sm:block sm:rounded-2xl sm:shadow-lg sm:ring-1 sm:ring-gray-900/5 xl:col-start-2 xl:row-end-1">
             <blockquote className="p-12 text-xl font-semibold leading-8 tracking-tight text-gray-900">
               <p>{`“${featuredTestimonial.body}”`}</p>
             </blockquote>
@@ -142,7 +142,7 @@ export default function Testimonial() {
                   {column.map((testimonial) => (
                     <figure
                       key={testimonial.author.handle}
-                      className="rounded-2xl bg-white p-6 shadow-lg ring-1 ring-gray-900/5"
+                      className="rounded-2xl backdrop-blur-lg bg-white/30 dark:bg-gray-200/90 p-6 shadow-lg ring-1 ring-gray-900/5"
                     >
                       <blockquote className="text-gray-900">
                         <p>{`“${testimonial.body}”`}</p>
