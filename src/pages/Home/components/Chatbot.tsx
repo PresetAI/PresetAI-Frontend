@@ -25,7 +25,7 @@ function Chatbot() {
     },
   ]);
   return (
-    <section className="mx-auto max-w-3xl px-4 py-4 lg:px-6 backdrop-blur-lg bg-slate-200/70 rounded-3xl dark:bg-slate-500/10 mt-20 max-h-[40rem] shadow-slate-200 shadow-2xl">
+    <section className="mx-auto max-w-3xl px-4 py-4 lg:px-6 backdrop-blur-lg bg-slate-200/70 rounded-3xl dark:bg-slate-500/10 mt-20 max-h-[40rem] shadow-slate-200 shadow-2xl dark:shadow-slate-800">
       <div className="flex flex-col w-full sm:col-span-6 self-start rounded-3xl drop-shadow-sm">
         <div className="flex flex-col overflow-auto p-4">
           <div>
@@ -34,7 +34,7 @@ function Chatbot() {
                 <div key={message.message}>
                   {message.sender === 'ChatGPT' ||
                   message.sender === 'assistant' ? (
-                    <div className="flex p-4 gap-2 backdrop-blur-lg bg-slate-50 rounded-2xl shadow-lg shadow-gray-50/40">
+                    <div className="flex p-4 gap-2 backdrop-blur-lg bg-slate-50 rounded-2xl shadow-lg shadow-gray-50/40 dark:bg-slate-800 dark:shadow-slate-700">
                       <img
                         className="rounded-full w-12 h-12 bg-amber-50"
                         src={logo}
@@ -46,7 +46,7 @@ function Chatbot() {
                             remarkPlugins={[
                               [remarkGfm, { singleTilde: false }],
                             ]}
-                            className="prose prose-slate"
+                            className="prose prose-slate dark:text-gray-50"
                           >
                             {message.message}
                           </ReactMarkdown>
@@ -55,10 +55,10 @@ function Chatbot() {
                           <div>
                             <div className="flex gap-2">
                               <div className="bg-white rounded-full p-2">
-                                <HandThumbUpIcon className="h-4 w-4" />
+                                <HandThumbUpIcon className="h-4 w-4 dark:text-black" />
                               </div>
                               <div className="bg-white rounded-full p-2">
-                                <HandThumbDownIcon className="h-4 w-4" />
+                                <HandThumbDownIcon className="h-4 w-4 dark:text-black" />
                               </div>
                             </div>
                           </div>
