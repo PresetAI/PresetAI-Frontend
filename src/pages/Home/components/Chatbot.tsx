@@ -1,35 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
-import SendRoundedIcon from '@mui/icons-material/SendRounded';
-import UseAnimations from 'react-useanimations';
-import loading from 'react-useanimations/lib/loading';
+import React, { useState } from 'react';
+import { Card } from '@/components/ui/card';
+import logo from '@/assets/logo.svg';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import {
   ClipboardIcon,
   HandThumbDownIcon,
   HandThumbUpIcon,
 } from '@heroicons/react/24/outline';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import avatar_right from '@/assets/avatar_right.jpg';
-import logo from '@/assets/logo.svg';
-import { Card } from '@/components/ui/card';
-import { doChaClientSideUsingPost } from '@/services/ProjectController';
-import useCopyToClipboard from '@/hooks/useCopyToClipboard';
+import UseAnimations from 'react-useanimations';
+import loading from 'react-useanimations/lib/loading';
+import SendRoundedIcon from '@mui/icons-material/SendRounded';
 
-type Message = {
-  message: string;
-  sender: string;
-  suggestion: string[] | null;
-};
-
-type ProjectDetailChatbotProps = {
-  projectId: string | undefined;
-  projectDetailData: API.Project;
-};
-
-function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
-  const [copyToClipboard, { success }] = useCopyToClipboard();
-
-  const { projectId, projectDetailData } = props;
+function Chatbot() {
   const [userMessage, setUserMessage] = useState<string>(''); // user input
   const [suggestions, setSuggestions] = useState<any[]>([]); // suggestions items get from backend
   const [isTyping, setIsTyping] = useState<boolean>(false); // is typing
@@ -40,94 +24,17 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
       suggestion: null,
     },
   ]);
-
-  /*
-   * Send message to backend and get response
-   * */
-  const [mess, setMess] = useState<any[]>([]);
-  const processMessage = async (chatMessages: any) => {
-    setUserMessage('');
-    const response = await doChaClientSideUsingPost(projectId, chatMessages);
-    if (response.data.code === 200) {
-      const newMessage = {
-        message: response.data.data,
-        sender: 'ChatGPT',
-        suggestion: null,
-      };
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
-      setSuggestions((prevSuggestions) => [
-        ...prevSuggestions,
-        [...response.data.data],
-      ]);
-    }
-    setIsTyping(false);
-  };
-
-  /*
-   * Handle send message / ask question
-   * */
-  const handleSend = async (e: any) => {
-    setIsTyping(true);
-    e.preventDefault();
-    const newMessage = {
-      message: userMessage,
-      sender: 'user',
-      suggestion: null,
-    };
-
-    setMessages((prevMessages) => [...prevMessages, newMessage]);
-    // Initial system message
-    await processMessage(userMessage);
-  };
-
-  /*
-   * Handle auto scroll to bottom when send the message
-   * */
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const smoothScrollTo = (
-    element: HTMLDivElement,
-    target: number,
-    duration: number
-  ) => {
-    const start = element.scrollTop;
-    const change = target - start;
-    let startTime = 0;
-
-    const easeInOutQuad = (t: number, b: number, c: number, d: number) => {
-      t /= d / 2;
-      if (t < 1) return (c / 2) * t * t + b;
-      t--;
-      return (-c / 2) * (t * (t - 2) - 1) + b;
-    };
-
-    const animateScroll = (currentTime: number) => {
-      if (!startTime) startTime = currentTime;
-      const progress = currentTime - startTime;
-      element.scrollTop = easeInOutQuad(progress, start, change, duration);
-      if (progress < duration) {
-        window.requestAnimationFrame(animateScroll);
-      }
-    };
-    window.requestAnimationFrame(animateScroll);
-  };
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      const targetScroll = messagesEndRef.current.scrollHeight;
-      smoothScrollTo(messagesEndRef.current, targetScroll, 500);
-    }
-  }, [messages]);
-
   return (
-    <div className="w-full sm:col-span-6 self-start rounded-3xl drop-shadow-sm">
-      <Card className="flex flex-col rounded-3xl w-full max-h-[40rem] overflow-y-auto">
-        <div ref={messagesEndRef} className="flex flex-col overflow-auto p-4">
+    <section className="mx-auto max-w-3xl px-4 py-4 lg:px-6 backdrop-blur-lg bg-slate-200/70 rounded-3xl dark:bg-slate-500/10 mt-20 max-h-[40rem] shadow-slate-200 shadow-2xl">
+      <div className="flex flex-col w-full sm:col-span-6 self-start rounded-3xl drop-shadow-sm">
+        <div className="flex flex-col overflow-auto p-4">
           <div>
             {messages.map((message) => {
               return (
                 <div key={message.message}>
                   {message.sender === 'ChatGPT' ||
                   message.sender === 'assistant' ? (
-                    <div className="flex p-4 gap-2 backdrop-blur-lg bg-green-100/30 rounded-2xl shadow-lg shadow-green-50/40">
+                    <div className="flex p-4 gap-2 backdrop-blur-lg bg-slate-50 rounded-2xl shadow-lg shadow-gray-50/40">
                       <img
                         className="rounded-full w-12 h-12 bg-amber-50"
                         src={logo}
@@ -158,7 +65,6 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
                           <button
                             type="button"
                             className="ml-auto bg-white text-gray-500 p-2 rounded-xl text-sm cursor-pointer hover:bg-green-100 transition duration-300"
-                            onClick={() => copyToClipboard(message.message)}
                           >
                             <ClipboardIcon className="inline-block h-4 w-4" />
                             copy
@@ -194,8 +100,8 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
             )}
           </div>
         </div>
-        <div className="mt-auto p-6">
-          <form className="flex items-center" onSubmit={(e) => handleSend(e)}>
+        <div className="mt-auto px-6 pt-6">
+          <form className="flex items-center">
             <label htmlFor="simple-search" className="sr-only">
               Chat here...
             </label>
@@ -220,10 +126,8 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
                 id="simple-search"
                 className="bg-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 py-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Chat here..."
-                value={userMessage}
                 autoComplete="off"
                 required
-                onChange={(e: any) => setUserMessage(e.target.value)}
               />
             </div>
             {isTyping ? (
@@ -238,8 +142,7 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
             ) : (
               <button
                 type="submit"
-                className="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                onClick={(e) => handleSend(e)}
+                className="p-2.5 ml-2 text-sm font-medium text-white bg-indigo-600/90 shadow-xl rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 <SendRoundedIcon />
                 <span className="sr-only">Search</span>
@@ -247,13 +150,12 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
             )}
           </form>
           <h3 className="flex mt-2 ml-auto text-sm text-gray-500">
-            Power by &nbsp;
+            Power by&nbsp;
             <p className="font-medium text-gray-700">PresetAI</p>
           </h3>
         </div>
-      </Card>
-      <div className="bg-red">mess: {mess}</div>
-    </div>
+      </div>
+    </section>
   );
 }
-export default ProjectDetailChatbot;
+export default Chatbot;
