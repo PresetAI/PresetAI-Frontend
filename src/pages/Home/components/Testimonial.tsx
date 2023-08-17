@@ -1,7 +1,7 @@
 const featuredTestimonial = {
-  body: 'Integer id nunc sit semper purus. Bibendum at lacus ut arcu blandit montes vitae auctor libero. Hac condimentum dignissim nibh vulputate ut nunc. Amet nibh orci mi venenatis blandit vel et proin. Non hendrerit in vel ac diam.',
+  body: 'Our entire development team swears by PresetAI. The efficiency it brings to the table when it comes to diving deep into documentation is unparalleled. A must-have tool for every development environment.',
   author: {
-    name: 'Brenna Goyette',
+    name: 'Anna',
     handle: 'brennagoyette',
     imageUrl:
       'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=1024&h=1024&q=80',
@@ -12,24 +12,24 @@ const testimonials = [
   [
     [
       {
-        body: 'Laborum quis quam. Dolorum et ut quod quia. Voluptas numquam delectus nihil. Aut enim doloremque et ipsam.',
+        body: "Before PresetAI, sifting through documentation used to be a task in itself. Now, I just shoot a question and get the exact information I need within seconds. It's like having a knowledgeable colleague right beside me 24/7.",
         author: {
-          name: 'Leslie Alexander',
+          name: 'Liam',
           handle: 'lesliealexander',
           imageUrl:
-            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+            'https://images.unsplash.com/photo-1654110455429-cf322b40a906?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80',
         },
       },
       // More testimonials...
     ],
     [
       {
-        body: 'Aut reprehenderit voluptatem eum asperiores beatae id. Iure molestiae ipsam ut officia rem nulla blanditiis.',
+        body: 'PresetAI has significantly reduced the time our team spends on searching through documentation. Its seamless integration across platforms means our developers can get instant answers without leaving their workflow. A game-changer for project timelines!',
         author: {
-          name: 'Lindsay Walton',
+          name: 'Sophia',
           handle: 'lindsaywalton',
           imageUrl:
-            'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+            'https://images.unsplash.com/photo-1645378999013-95abebf5f3c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
         },
       },
       // More testimonials...
@@ -38,24 +38,24 @@ const testimonials = [
   [
     [
       {
-        body: 'Voluptas quos itaque ipsam in voluptatem est. Iste eos blanditiis repudiandae. Earum deserunt enim molestiae ipsum perferendis recusandae saepe corrupti.',
+        body: "I was initially skeptical about how well PresetAI would work, but it has exceeded my expectations. It's AI-powered chatbot understands developer jargon and provides accurate answers, every single time.",
         author: {
-          name: 'Tom Cook',
+          name: 'Kim',
           handle: 'tomcook',
           imageUrl:
-            'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+            'https://images.unsplash.com/photo-1655874819398-c6dfbec68ac7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80',
         },
       },
       // More testimonials...
     ],
     [
       {
-        body: 'Molestias ea earum quos nostrum doloremque sed. Quaerat quasi aut velit incidunt excepturi rerum voluptatem minus harum.',
+        body: "I've tried many documentation tools in the past, but none come close to PresetAI. Its versatility across platforms like GitHub and Slack has made my workday a lot smoother. It's like a documentation wizard at my fingertips!",
         author: {
-          name: 'Leonard Krasner',
+          name: 'Grace',
           handle: 'leonardkrasner',
           imageUrl:
-            'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+            'https://plus.unsplash.com/premium_photo-1691784778805-e1067ac42e01?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
         },
       },
       // More testimonials...
@@ -67,7 +67,7 @@ function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-function Testimonial() {
+export default function Testimonial() {
   return (
     <div className="relative isolate pb-32 pt-24 sm:pt-32">
       <div
@@ -96,10 +96,10 @@ function Testimonial() {
       </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-xl text-center">
-          <h2 className="text-lg font-semibold leading-8 tracking-tight __text_gradient">
-            Trusted by Top E-commerce Platforms
+          <h2 className="text-lg font-semibold leading-8 tracking-tight text-indigo-600">
+            Testimonials
           </h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
+          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             We have worked with thousands of amazing people
           </p>
         </div>
@@ -120,11 +120,6 @@ function Testimonial() {
                 </div>
                 <div className="text-gray-600">{`@${featuredTestimonial.author.handle}`}</div>
               </div>
-              <img
-                className="h-10 w-auto flex-none"
-                src={featuredTestimonial.author.logoUrl}
-                alt=""
-              />
             </figcaption>
           </figure>
           {testimonials.map((columnGroup, columnGroupIdx) => (
@@ -162,7 +157,6 @@ function Testimonial() {
                           <div className="font-semibold">
                             {testimonial.author.name}
                           </div>
-                          <div className="text-gray-600">{`@${testimonial.author.handle}`}</div>
                         </div>
                       </figcaption>
                     </figure>
@@ -176,4 +170,3 @@ function Testimonial() {
     </div>
   );
 }
-export default Testimonial;

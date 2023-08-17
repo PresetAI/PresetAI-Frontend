@@ -7,6 +7,7 @@ import HeaderLight from '@/layouts/Header/HeaderLight';
 import Footer from '@/layouts/Footer';
 import Platform from '@/pages/Home/components/Platform';
 import Chatbot from '@/pages/Home/components/Chatbot';
+import Testimonial from '@/pages/Home/components/Testimonial';
 
 function Home() {
   return (
@@ -17,6 +18,7 @@ function Home() {
         <Platform />
         <Chatbot />
         <Feature />
+        <Testimonial />
         <FAQ />
         <CTA />
       </main>

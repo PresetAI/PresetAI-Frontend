@@ -8,7 +8,7 @@ import {
   HandThumbDownIcon,
   HandThumbUpIcon,
 } from '@heroicons/react/24/outline';
-import avatar_right from '@/assets/avatar_right.jpg';
+import avatar from '@/assets/icons/avatar.png';
 import UseAnimations from 'react-useanimations';
 import loading from 'react-useanimations/lib/loading';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
@@ -21,6 +21,11 @@ function Chatbot() {
     {
       message: '👋 Hello, How I can help you today?',
       sender: 'ChatGPT',
+      suggestion: null,
+    },
+    {
+      message: 'What is PresetAI?',
+      sender: 'user',
       suggestion: null,
     },
   ]);
@@ -73,19 +78,16 @@ function Chatbot() {
                       </div>
                     </div>
                   ) : (
-                    <div className="flex gap-2 mb-2">
+                    <div className="flex gap-2 my-6">
                       <div className="ml-auto flex flex-col">
-                        <p className="text-gray-900 font-semibold tracking-wide ml-auto">
-                          You
-                        </p>
-                        <div className="__chat_box bg-sky-300 p-3 rounded-xl">
+                        <div className="bg-indigo-500/90 shadow-lg p-3 rounded-xl text-gray-100">
                           {message.message}
                         </div>
                       </div>
                       <img
                         className="rounded-full w-12 h-12"
-                        src={avatar_right}
-                        alt="user"
+                        src={avatar}
+                        alt="avatar"
                       />
                     </div>
                   )}
@@ -100,7 +102,7 @@ function Chatbot() {
             )}
           </div>
         </div>
-        <div className="mt-auto px-6 pt-6">
+        <div className="mt-auto px-6">
           <form className="flex items-center">
             <label htmlFor="simple-search" className="sr-only">
               Chat here...
@@ -149,10 +151,6 @@ function Chatbot() {
               </button>
             )}
           </form>
-          <h3 className="flex mt-2 ml-auto text-sm text-gray-500">
-            Power by&nbsp;
-            <p className="font-medium text-gray-700">PresetAI</p>
-          </h3>
         </div>
       </div>
     </section>
