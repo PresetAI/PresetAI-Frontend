@@ -8,9 +8,13 @@ function Hero() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-              <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-50 ring-1 ring-white/10 hover:ring-white/20 bg-indigo-500 hover:bg-indigo-400 transition duration-150 flex gap-2 cursor-pointer">
+              <a
+                href="https://www.npmjs.com/package/@presetai/search"
+                target="_blank"
+                className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-50 ring-1 ring-white/10 hover:ring-white/20 bg-indigo-500 hover:bg-indigo-400 transition duration-150 flex gap-2 cursor-pointer"
+              >
                 npm install @presetai/search
-              </div>
+              </a>
             </div>
             <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
               Build AI-Powered Documentation Chatbot
