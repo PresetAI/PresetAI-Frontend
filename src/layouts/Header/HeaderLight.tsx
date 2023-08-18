@@ -10,9 +10,9 @@ import ModeToggle from '@/components/ModeToggle';
 
 const navigation = [
   { name: 'Docs', href: '#' },
-  { name: 'Pricing', href: '/pricing' },
-  // { name: 'TBD', href: '#' },
-  // { name: 'TBD', href: '#' },
+  { name: 'Pricing', href: '$' },
+  { name: 'Use Cases', href: '#' },
+  { name: 'Blog', href: '#' },
 ];
 
 function HeaderLight() {
@@ -42,12 +42,6 @@ function HeaderLight() {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          {/*<Link*/}
-          {/*  to="/"*/}
-          {/*  className="flex items-center text-2xl font-semibold tracking-widest xl:text-4xl"*/}
-          {/*>*/}
-          {/*  PresetAI*/}
-          {/*</Link>*/}
           <Link
             to="/"
             className="flex items-center text-2xl font-semibold tracking-widest xl:text-4xl"
@@ -87,14 +81,14 @@ function HeaderLight() {
               </Link>
               <span
                 className="text-sm font-semibold leading-6 cursor-pointer hover:text-gray-500 duration-300"
-                onClick={signout}
+                // onClick={signout}
               >
                 Sign out
               </span>
             </div>
           ) : (
             <span
-              onClick={login}
+              // onClick={login}
               className="text-sm font-semibold leading-6 cursor-pointer hover:text-gray-500 duration-300"
             >
               Log in <span aria-hidden="true">&rarr;</span>
@@ -112,20 +106,6 @@ function HeaderLight() {
         <div className="fixed inset-0 z-50" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-primary-foreground px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            {/*<a href="#" className="-m-1.5 p-1.5">*/}
-            {/*  <span className="sr-only">Your Company</span>*/}
-            {/*  <img*/}
-            {/*    className="h-8 w-auto"*/}
-            {/*    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"*/}
-            {/*    alt=""*/}
-            {/*  />*/}
-            {/*</a>*/}
-            {/*<Link*/}
-            {/*  to="/"*/}
-            {/*  className="flex items-center text-skin-black text-xl font-semibold tracking-widest xl:text-4xl"*/}
-            {/*>*/}
-            {/*  PresetAI*/}
-            {/*</Link>*/}
             <img className="h-8" src={logo} alt="logo" />
             <button
               type="button"
@@ -151,8 +131,8 @@ function HeaderLight() {
               </div>
               <div className="py-6">
                 <a
-                  href={`${BASE_URL}/users/login`}
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 hover:bg-gray-50 dark:hover:bg-gray-500"
+                  // href={`${BASE_URL}/users/login`}
+                  className="-mx-3 block cursor-pointer rounded-lg px-3 py-2.5 text-base font-semibold leading-7 hover:bg-gray-50 dark:hover:bg-gray-500"
                 >
                   Log in
                 </a>
