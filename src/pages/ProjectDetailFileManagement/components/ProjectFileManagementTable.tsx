@@ -259,7 +259,7 @@ function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
   const createRows = () => {
     filteredFileList.forEach((projectFile) => {
       const row = createData(
-        projectFile.id,
+        projectFile._id,
         projectFile.filename,
         projectFile.provider,
         projectFile.source_link,

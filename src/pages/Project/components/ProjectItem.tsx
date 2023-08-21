@@ -13,7 +13,7 @@ type ProjectItemProps = {
 function ProjectItem(props: ProjectItemProps) {
   const { item } = props;
   return (
-    <Link to={`/project/dashboard/${item.id}`}>
+    <Link to={`/project/dashboard/${item._id}`}>
       <Card>
         <CardActionArea>
           <CardContent>

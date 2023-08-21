@@ -47,7 +47,10 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
   const [mess, setMess] = useState<any[]>([]);
   const processMessage = async (chatMessages: any) => {
     setUserMessage('');
-    const response = await doChaClientSideUsingPost(projectId, chatMessages);
+    const body: API.DoChaClientSideUsingPostBody = {
+      question: chatMessages,
+    };
+    const response = await doChaClientSideUsingPost(projectId, body);
     if (response.data.code === 200) {
       const newMessage = {
         message: response.data.data,

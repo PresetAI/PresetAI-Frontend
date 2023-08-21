@@ -1,7 +1,7 @@
 declare namespace API {
   // user
   type User = {
-    id?: string;
+    _id?: string;
     googleId?: string;
     username?: string;
     email?: string;
@@ -11,11 +11,10 @@ declare namespace API {
   };
 
   type UserAPIKey = {
-    id?: string;
+    _id?: string;
     name?: string;
     api_key?: string;
     create_time?: string;
-    isDeleted?: boolean;
   };
 
   type NewAPIKeyUsingPostBody = {
@@ -26,10 +25,6 @@ declare namespace API {
     name: string;
   };
 
-  type DeleteAPIKeyUsingDeleteBody = {
-    api_key_id: string;
-  };
-
   type IngestDataClientUsingPostBody = {
     project_id: string;
     url: string;
@@ -38,7 +33,7 @@ declare namespace API {
 
   // Project
   type Project = {
-    id?: string;
+    _id?: string;
     name?: string;
     namespace?: string;
     top_k?: number;
@@ -51,7 +46,7 @@ declare namespace API {
   };
 
   type ProjectFileList = {
-    id?: string;
+    _id?: string;
     filename?: string;
     provider?: string;
     source_link?: string;
@@ -59,7 +54,7 @@ declare namespace API {
   };
 
   type ProjectTask = {
-    id?: string;
+    _id?: string;
     provider?: string;
     status?: string;
     create_time?: string;
@@ -70,5 +65,9 @@ declare namespace API {
   type ProductsSearchUsingPostBody = {
     phrase: string;
     namespace: string;
+  };
+
+  type DoChaClientSideUsingPostBody = {
+    question: string;
   };
 }

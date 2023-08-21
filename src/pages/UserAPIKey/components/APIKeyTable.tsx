@@ -78,7 +78,7 @@ function APIKeyTable(props: APIKeyTableProps) {
               </thead>
               <tbody className="divide-y divide-gray-200">
                 {apiKeyData.map((apiKey) => (
-                  <tr key={apiKey.id}>
+                  <tr key={apiKey._id}>
                     <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
                       {apiKey.name}
                     </td>
@@ -94,7 +94,7 @@ function APIKeyTable(props: APIKeyTableProps) {
                         className="p-2"
                         onClick={() =>
                           onClickOpenUpdateAPIKeyDialog(
-                            apiKey.id || '',
+                            apiKey._id || '',
                             apiKey.name
                           )
                         }
@@ -105,7 +105,7 @@ function APIKeyTable(props: APIKeyTableProps) {
                         variant="ghost"
                         className="p-2"
                         onClick={() =>
-                          onClickOpenDeleteAPIKeyDialog(apiKey.id || '')
+                          onClickOpenDeleteAPIKeyDialog(apiKey._id || '')
                         }
                       >
                         <DeleteOutlineOutlinedIcon sx={{ width: 20 }} />

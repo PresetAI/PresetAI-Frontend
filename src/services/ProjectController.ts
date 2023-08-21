@@ -34,7 +34,7 @@ export async function getProjectFileByProjectIdUsingGet(
 
 export async function doChaClientSideUsingPost(
   project_id: string | undefined,
-  body: string
+  body: API.DoChaClientSideUsingPostBody
 ) {
   return axios.post(`${BASE_URL}/project/do_chat_client/${project_id}`, body, {
     withCredentials: true,

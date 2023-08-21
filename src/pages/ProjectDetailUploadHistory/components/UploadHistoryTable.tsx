@@ -219,7 +219,7 @@ function UploadHistoryTable(props: UploadHistoryTableProps) {
   const createRows = () => {
     data.forEach((projectFile) => {
       const row = createData(
-        projectFile.id,
+        projectFile._id,
         projectFile.provider,
         projectFile.status,
         projectFile.create_time,
@@ -323,7 +323,7 @@ function UploadHistoryTable(props: UploadHistoryTableProps) {
                     aria-checked={isItemSelected}
                     selected={isItemSelected}
                     tabIndex={-1}
-                    key={row.id}
+                    key={row._id}
                     sx={{ cursor: 'pointer' }}
                   >
                     <TableCell padding="checkbox">
