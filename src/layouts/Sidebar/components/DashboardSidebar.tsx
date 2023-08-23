@@ -9,6 +9,7 @@ import {
   SignalIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
+import { Link } from 'react-router-dom';
 
 const navigation = [
   { name: 'Projects', href: '#', icon: FolderIcon, current: false },
@@ -36,7 +37,7 @@ type DashboardSidebarProps = {
 function DashboardSidebar(props: DashboardSidebarProps) {
   const { sidebarOpen, setSidebarOpen } = props;
   return (
-    <>
+    <main className="h-screen block bg-gradient-to-b from-white from-10% via-slate-50 via-30% to-slate-100 to-100% dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
       <Transition.Root show={sidebarOpen} as={Fragment}>
         <Dialog
           as="div"
@@ -65,7 +66,7 @@ function DashboardSidebar(props: DashboardSidebarProps) {
               leaveFrom="translate-x-0"
               leaveTo="-translate-x-full"
             >
-              <Dialog.Panel className="relative mr-16 flex w-full max-w-xs flex-1">
+              <Dialog.Panel className="relative mr-16 flex w-full max-w-xs flex-1 bg-[#f1f1f1]">
                 <Transition.Child
                   as={Fragment}
                   enter="ease-in-out duration-300"
@@ -104,21 +105,24 @@ function DashboardSidebar(props: DashboardSidebarProps) {
                         <ul role="list" className="-mx-2 space-y-1">
                           {navigation.map((item) => (
                             <li key={item.name}>
-                              <a
-                                href={item.href}
+                              <Link
+                                to={item.href}
                                 className={classNames(
                                   item.current
-                                    ? 'bg-gray-800 text-white'
-                                    : 'text-gray-400 hover:text-white hover:bg-gray-800',
+                                    ? 'bg-white font-bold'
+                                    : 'text-gray-700 hover:bg-gray-50 font-medium',
                                   'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                 )}
                               >
                                 <item.icon
-                                  className="h-6 w-6 shrink-0"
+                                  className={classNames(
+                                    item.current ? '' : 'text-gray-500',
+                                    'h-6 w-6 shrink-0'
+                                  )}
                                   aria-hidden="true"
                                 />
                                 {item.name}
-                              </a>
+                              </Link>
                             </li>
                           ))}
                         </ul>
@@ -250,7 +254,7 @@ function DashboardSidebar(props: DashboardSidebarProps) {
           </nav>
         </div>
       </div>
-    </>
+    </main>
   );
 }
 export default DashboardSidebar;

@@ -5,9 +5,9 @@ import Title from '@/components/Title';
 import { TabList } from '@/pages/ProjectDetailUploadDataSource/components/TabList';
 import { ingestDataClientUsingPost } from '@/services/ProjectController';
 import { useToast } from '@/components/ui/use-toast';
-import { Button } from '@/components/ui/button';
 import { Toaster } from '@/components/ui/toaster';
 import GithubIcon from '@/assets/icons/github.png';
+import common from '@/config/common';
 
 const ingestDataInit: API.IngestDataClientUsingPostBody = {
   project_id: '',
@@ -62,11 +62,12 @@ function ProjectDetailUploadDataSource() {
     <Sidebar
       projectId={projectId}
       component={
-        // <section className="grid grid-cols-2 gap-20">
-        // <section className="grid grid-cols-1 sm:grid-cols-9 justify-items-start place-items-start mx-auto px-8 sm:px-12 lg:px-16">
-        <section className="h-[100vh] pt-10 px-10">
-          <Title title="Upload Data Source" />
-          <div className="flex justify-center">
+        <>
+          <Title
+            title={common['projectDetailUploadDataSource.title']}
+            subtitle={common['projectDetailUploadDataSource.subtitle']}
+          />
+          <div className="flex justify-center py-4">
             <TabList
               setType={setType}
               ingestData={ingestData}
@@ -77,7 +78,7 @@ function ProjectDetailUploadDataSource() {
             />
           </div>
           <Toaster />
-        </section>
+        </>
       }
     />
   );

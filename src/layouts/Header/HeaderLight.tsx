@@ -2,9 +2,7 @@ import { useContext, useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
-import { BASE_URL } from '@/config/domain';
 import logo from '@/assets/logo.svg';
-import logo_white from '@/assets/logo_white.svg';
 import { AuthContext } from '@/contexts/auth_context';
 import ModeToggle from '@/components/ModeToggle';
 
@@ -17,23 +15,7 @@ const navigation = [
 
 function HeaderLight() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { isAuthenticated } = useContext(AuthContext);
-  const [isUsingDeviceMode, setIsUsingDeviceMode] = useState(
-    () => !('theme' in localStorage)
-  );
-
-  // const redirectToGoggleSSO = async () => {
-  //   const googleLoginURL = `${BASE_URL}/users/login`;
-  //   const newWindow = window.open(googleLoginURL, '', 'width=500,height=600');
-  // };
-
-  const login = () => {
-    window.location.href = `${BASE_URL}/user/login`;
-  };
-
-  const signout = () => {
-    window.location.href = `${BASE_URL}/user/logout`;
-  };
+  const { isAuthenticated, login, signout } = useContext(AuthContext);
 
   return (
     <header className="fixed backdrop-blur-lg bg-white/30 dark:bg-primary-foreground/30 inset-x-0 top-0 z-50">
@@ -81,14 +63,14 @@ function HeaderLight() {
               </Link>
               <span
                 className="text-sm font-semibold leading-6 cursor-pointer hover:text-gray-500 duration-300"
-                // onClick={signout}
+                onClick={signout}
               >
                 Sign out
               </span>
             </div>
           ) : (
             <span
-              // onClick={login}
+              onClick={login}
               className="text-sm font-semibold leading-6 cursor-pointer hover:text-gray-500 duration-300"
             >
               Log in <span aria-hidden="true">&rarr;</span>
@@ -130,12 +112,12 @@ function HeaderLight() {
                 ))}
               </div>
               <div className="py-6">
-                <a
-                  // href={`${BASE_URL}/users/login`}
+                <span
+                  onClick={login}
                   className="-mx-3 block cursor-pointer rounded-lg px-3 py-2.5 text-base font-semibold leading-7 hover:bg-gray-50 dark:hover:bg-gray-500"
                 >
                   Log in
-                </a>
+                </span>
               </div>
             </div>
           </div>

@@ -1,16 +1,48 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useContext, useEffect, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import {
   Bars3Icon,
   Cog6ToothIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
-import FolderCopyOutlinedIcon from '@mui/icons-material/FolderCopyOutlined';
 import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
 import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
 import { Link } from 'react-router-dom';
-import BackgroundGradient from '../../components/BackgroundGradient';
 import logo from '../../assets/logo.svg';
+import SkeletonComponent from '@/components/Skeleton';
+import { AuthContext } from '@/contexts/auth_context';
+import Avatar from '@mui/material/Avatar';
+import { styled } from '@mui/material/styles';
+import Badge from '@mui/material/Badge';
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    backgroundColor: '#44b700',
+    color: '#44b700',
+    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    '&::after': {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      borderRadius: '50%',
+      animation: 'ripple 1.2s infinite ease-in-out',
+      border: '1px solid currentColor',
+      content: '""',
+    },
+  },
+  '@keyframes ripple': {
+    '0%': {
+      transform: 'scale(.8)',
+      opacity: 1,
+    },
+    '100%': {
+      transform: 'scale(2.4)',
+      opacity: 0,
+    },
+  },
+}));
 
 const teams = [
   { id: 1, name: 'Team', href: '#', initial: 'T', current: false },
@@ -32,6 +64,7 @@ type Props = {
 };
 
 function ProjectSidebar(props: Props) {
+  const { userInfo, fetchLoading } = useContext(AuthContext);
   const { component, projectId } = props;
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [navigation, setNavigation] = useState([
@@ -61,8 +94,7 @@ function ProjectSidebar(props: Props) {
   }, []);
 
   return (
-    <>
-      <BackgroundGradient />
+    <main className="min-h-screen block bg-gradient-to-b from-white from-10% via-slate-50 via-30% to-slate-100 to-100% dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
       <div>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
@@ -92,7 +124,7 @@ function ProjectSidebar(props: Props) {
                 leaveFrom="translate-x-0"
                 leaveTo="-translate-x-full"
               >
-                <Dialog.Panel className="relative mr-16 flex w-full max-w-xs flex-1">
+                <Dialog.Panel className="relative mr-16 flex w-full max-w-xs flex-1 bg-[#f1f1f1]">
                   <Transition.Child
                     as={Fragment}
                     enter="ease-in-out duration-300"
@@ -135,17 +167,14 @@ function ProjectSidebar(props: Props) {
                                   to={item.href}
                                   className={classNames(
                                     item.current
-                                      ? 'bg-gray-50 text-indigo-600'
-                                      : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
+                                      ? 'bg-white font-bold'
+                                      : 'text-gray-700 hover:bg-gray-50 font-medium',
                                     'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                   )}
                                 >
-                                  {/*{item.icon}*/}
                                   <item.icon
                                     className={classNames(
-                                      item.current
-                                        ? 'text-indigo-600'
-                                        : 'text-gray-400 group-hover:text-indigo-600',
+                                      item.current ? '' : 'text-gray-500',
                                       'h-6 w-6 shrink-0'
                                     )}
                                     aria-hidden="true"
@@ -163,8 +192,8 @@ function ProjectSidebar(props: Props) {
                           <ul role="list" className="-mx-2 mt-2 space-y-1">
                             {teams.map((team) => (
                               <li key={team.name}>
-                                <a
-                                  href={team.href}
+                                <Link
+                                  to={team.href}
                                   className={classNames(
                                     team.current
                                       ? 'bg-gray-50 text-indigo-600'
@@ -183,7 +212,7 @@ function ProjectSidebar(props: Props) {
                                     {team.initial}
                                   </span>
                                   <span className="truncate">{team.name}</span>
-                                </a>
+                                </Link>
                               </li>
                             ))}
                           </ul>
@@ -212,7 +241,7 @@ function ProjectSidebar(props: Props) {
         {/* Static sidebar for desktop */}
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-skin-main px-6 pb-4">
+          <div className="bg-[#f1f1f1] flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 px-6 pb-4">
             <div className="flex h-16 shrink-0 items-center">
               <img className="h-8 w-auto" src={logo} alt="Your Company" />
             </div>
@@ -222,27 +251,24 @@ function ProjectSidebar(props: Props) {
                   <ul role="list" className="-mx-2 space-y-1">
                     {navigation.map((item) => (
                       <li key={item.name}>
-                        <a
-                          href={item.href}
+                        <Link
+                          to={item.href}
                           className={classNames(
                             item.current
-                              ? 'bg-gray-50 text-indigo-600'
-                              : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50',
-                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+                              ? 'bg-white font-bold'
+                              : 'text-gray-700 hover:bg-gray-50 font-medium',
+                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 '
                           )}
                         >
-                          {/*{item.icon}*/}
                           <item.icon
                             className={classNames(
-                              item.current
-                                ? 'text-indigo-600'
-                                : 'text-gray-400 group-hover:text-indigo-600',
+                              item.current ? '' : 'text-gray-500',
                               'h-6 w-6 shrink-0'
                             )}
                             aria-hidden="true"
                           />
                           {item.name}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -294,6 +320,25 @@ function ProjectSidebar(props: Props) {
               </ul>
             </nav>
           </div>
+          <div className="bg-slate-200/50 border-r border-gray-200 p-6">
+            <div className="flex gap-4 items-center">
+              <StyledBadge
+                overlap="circular"
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                variant="dot"
+              >
+                <Avatar alt="Avatar" src={userInfo.avatar} />
+              </StyledBadge>
+              <div>
+                <div className="text-sm font-bold text-gray-900">
+                  {userInfo.username}
+                </div>
+                <div className="text-xs font-medium text-gray-500">
+                  {userInfo.email}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="lg:pl-72">
@@ -315,11 +360,13 @@ function ProjectSidebar(props: Props) {
           </div>
 
           <main className="">
-            <div className="px-4 sm:px-6 lg:px-8">{component}</div>
+            <div className="pt-4 px-10 md:pt-4 md:px-20 lg:pt-16 lg:px-30 xl:px-52">
+              {fetchLoading ? <SkeletonComponent /> : component}
+            </div>
           </main>
         </div>
       </div>
-    </>
+    </main>
   );
 }
 

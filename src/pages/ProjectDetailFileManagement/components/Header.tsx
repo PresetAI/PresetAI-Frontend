@@ -10,11 +10,6 @@ function Header(props: Props) {
   const { filterText, setFilterText } = props;
   return (
     <div>
-      <div className="sm:flex-auto">
-        <h1 className="text-3xl font-bold leading-6 text-gray-900">
-          File Management
-        </h1>
-      </div>
       <div className="flex justify-between py-8 pb-4">
         <Input
           className="w-96"

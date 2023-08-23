@@ -22,28 +22,7 @@ function APIKeyTable(props: APIKeyTableProps) {
   } = props;
 
   return (
-    <div className="mt-8">
-      <div className="sm:flex sm:items-center">
-        <div className="sm:flex-auto">
-          <h1 className="text-3xl font-bold leading-6 text-gray-900">
-            API Keys
-          </h1>
-          <p className="mt-2 text-sm text-gray-700">
-            fewa fewa fewa f ewa fwehtrsehgresgfewa fewa fewa f ewa
-            fwehtrsehgresgfewa fewa fewa f ewa fwehtrsehgresgfewa fewa fewa f
-            ewa fwehtrsehgresgfewa fewa fewa f ewa fwehtrsehgresgfewa fewa fewa
-            f ewa fwehtrsehgresg
-          </p>
-        </div>
-        <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-          <Button
-            className="text-sm font-semibold"
-            onClick={() => setDialogOpen(true)}
-          >
-            Create New Secret Key
-          </Button>
-        </div>
-      </div>
+    <>
       <div className="mt-8 flow-root">
         <div className="-my-2 overflow-x-auto">
           <div className="inline-block min-w-full py-2 align-middle">
@@ -118,7 +97,7 @@ function APIKeyTable(props: APIKeyTableProps) {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

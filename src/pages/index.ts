@@ -3,7 +3,7 @@ import Dashboard from './Dashboard';
 import Project from './Project';
 import UserAPIKey from './UserAPIKey';
 import Pricing from './Pricing';
-import ProjectDetail from './ProjectDetail';
+import ProjectDetailPlayground from './ProjectDetailPlayground';
 import ProjectDetailFileManagement from './ProjectDetailFileManagement';
 import ProjectDetailUploadDataSource from './ProjectDetailUploadDataSource';
 import ProjectDetailUploadHistory from './ProjectDetailUploadHistory';
@@ -16,7 +16,7 @@ export {
   Project,
   UserAPIKey,
   Pricing,
-  ProjectDetail,
+  ProjectDetailPlayground,
   ProjectDetailFileManagement,
   ProjectDetailUploadDataSource,
   ProjectDetailUploadHistory,

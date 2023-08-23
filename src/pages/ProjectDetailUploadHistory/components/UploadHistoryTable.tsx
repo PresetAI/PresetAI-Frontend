@@ -298,7 +298,9 @@ function UploadHistoryTable(props: UploadHistoryTableProps) {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2, bgcolor: 'transparent' }}>
+      <Paper
+        sx={{ width: '100%', mb: 2, bgcolor: 'transparent', borderRadius: 4 }}
+      >
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">

@@ -32,7 +32,7 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
   const { projectId, projectDetailData } = props;
   const [userMessage, setUserMessage] = useState<string>(''); // user input
   const [suggestions, setSuggestions] = useState<any[]>([]); // suggestions items get from backend
-  const [isTyping, setIsTyping] = useState<boolean>(false); // is typing
+  const [isTyping, setIsTyping] = useState<boolean>(false); // is typing]
   const [messages, setMessages] = useState<any[]>([
     {
       message: '👋 Hello, How I can help you today?',
@@ -130,7 +130,7 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
                 <div key={message.message}>
                   {message.sender === 'ChatGPT' ||
                   message.sender === 'assistant' ? (
-                    <div className="flex p-4 gap-2 backdrop-blur-lg bg-green-100/30 rounded-2xl shadow-lg shadow-green-50/40">
+                    <div className="flex p-4 gap-2 backdrop-blur-lg bg-slate-200/50 rounded-2xl shadow-lg shadow-slate-100/40">
                       <img
                         className="rounded-full w-12 h-12 bg-amber-50"
                         src={logo}
@@ -160,7 +160,7 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
                           </div>
                           <button
                             type="button"
-                            className="ml-auto bg-white text-gray-500 p-2 rounded-xl text-sm cursor-pointer hover:bg-green-100 transition duration-300"
+                            className="ml-auto bg-white text-gray-500 p-2 rounded-xl text-sm cursor-pointer hover:bg-slate-200 transition duration-100"
                             onClick={() => copyToClipboard(message.message)}
                           >
                             <ClipboardIcon className="inline-block h-4 w-4" />
@@ -229,7 +229,7 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
                 onChange={(e: any) => setUserMessage(e.target.value)}
               />
             </div>
-            {isTyping ? (
+            {isTyping || userMessage.length === 0 ? (
               <button
                 type="submit"
                 className="p-2.5 ml-2 text-sm font-medium text-white bg-gray-600 rounded-lg border border-blue-700 "
@@ -241,7 +241,7 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
             ) : (
               <button
                 type="submit"
-                className="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="p-2.5 ml-2 text-sm font-medium text-white bg-gray-900 rounded-lg border hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={(e) => handleSend(e)}
               >
                 <SendRoundedIcon />
@@ -255,7 +255,6 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
           </h3>
         </div>
       </Card>
-      <div className="bg-red">mess: {mess}</div>
     </div>
   );
 }

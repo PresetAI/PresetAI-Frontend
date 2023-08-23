@@ -73,7 +73,10 @@ function ProjectCreateDialog(props: ProjectCreateDialogProps) {
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <div className="flex justify-end">
         <DialogTrigger asChild>
-          <Button variant="outline" onClick={() => setDialogOpen(true)}>
+          <Button
+            className="text-sm font-semibold mt-4"
+            onClick={() => setDialogOpen(true)}
+          >
             Create the Project
           </Button>
         </DialogTrigger>

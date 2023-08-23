@@ -6,6 +6,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -27,6 +28,16 @@ function CreateAPIKeyDialog(props: ProjectCreateDialogProps) {
 
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+      <div className="flex justify-end">
+        <DialogTrigger asChild>
+          <Button
+            className="text-sm font-semibold mt-4"
+            onClick={() => setDialogOpen(true)}
+          >
+            Create New Secret Key
+          </Button>
+        </DialogTrigger>
+      </div>
       <DialogContent className="sm:max-w-[400px]">
         <DialogHeader>
           <DialogTitle>Create new API Key</DialogTitle>

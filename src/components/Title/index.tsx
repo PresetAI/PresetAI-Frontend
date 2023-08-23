@@ -1,17 +1,15 @@
 type Props = {
   title: string;
-  paragraph?: string;
+  subtitle?: string;
 };
 
 function Title(props: Props) {
-  const { title, paragraph } = props;
+  const { title, subtitle } = props;
   return (
-    <div>
-      <div className="sm:flex-auto">
-        <h1 className="text-3xl font-bold leading-6 text-gray-900">{title}</h1>
-      </div>
-      {/*<p>fewafewafewafewafweaf</p>*/}
-    </div>
+    <>
+      <h1 className="text-3xl font-semibold text-gray-900">{title}</h1>
+      <h3 className="mt-2 text-md text-gray-700">{subtitle}</h3>
+    </>
   );
 }
 

@@ -6,7 +6,7 @@ import {
   Project,
   UserAPIKey,
   Pricing,
-  ProjectDetail,
+  ProjectDetailPlayground,
   ProjectDetailFileManagement,
   ProjectDetailUploadDataSource,
   ProjectDetailUploadHistory,
@@ -21,8 +21,8 @@ const routes = [
   { path: '/projects', element: <Project />, auth: true },
   { path: '/user/api-keys', element: <UserAPIKey />, auth: true },
   {
-    path: '/project/dashboard/:projectId',
-    element: <ProjectDetail />,
+    path: '/project/playground/:projectId',
+    element: <ProjectDetailPlayground />,
     auth: true,
   },
   {
