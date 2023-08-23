@@ -24,8 +24,8 @@ type ProjectDetailFormProps = {
 function ProjectDetailForm(props: ProjectDetailFormProps) {
   const { projectDetailData } = props;
   return (
-    <div className="w-full sm:col-span-3 rounded-3xl">
-      <Card className="rounded-l-none rounded-3xl h-full bg-gray-50">
+    <div className="sm:col-span-3 rounded-3xl">
+      <Card className="rounded-3xl bg-gray-50">
         <CardHeader className="border-b-2 drop-shadow-md">
           <CardTitle>Customize</CardTitle>
         </CardHeader>

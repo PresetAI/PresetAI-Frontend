@@ -1,6 +1,6 @@
 import ProjectSidebar from '@/layouts/ProjectSidebar';
 import APIKeyTable from '@/pages/UserAPIKey/components/APIKeyTable';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import AlertDestructive from '@/components/Alert/AlertDestructive';
 import { AlertDefault } from '@/components/Alert/AlertDefault';
 import {
@@ -12,8 +12,12 @@ import {
 import CreateAPIKeyDialog from '@/pages/UserAPIKey/components/CreateAPIKeyDialog';
 import AlertConfirmDialog from '@/components/AlertConfirmDialog';
 import UpdateAPIKeyDialog from '@/pages/UserAPIKey/components/UpdateAPIKeyDialog';
+import Title from '@/components/Title';
+import common from '@/config/common';
+import { AuthContext } from '@/contexts/auth_context';
 
 function UserAPIKey() {
+  const { setFetchLoading } = useContext(AuthContext);
   const [dialogOpen, setDialogOpen] = useState<boolean>(false); // dialog open or not
   const apiKeyNameValue = useRef<HTMLInputElement>(null);
   const [selectedId, setSelectedId] = useState<string>(''); // selected id
@@ -39,6 +43,7 @@ function UserAPIKey() {
   const [apiKeyData, setApiKeyData] = useState<API.UserAPIKey[]>([]); // API KEY LIST
 
   const getApiKeyList = async () => {
+    setFetchLoading(true);
     const res = await getAPIKeyUsingPost();
     try {
       if (res.data.code === 200) {
@@ -47,6 +52,7 @@ function UserAPIKey() {
     } catch (e: any) {
       console.log(e);
     }
+    setFetchLoading(false);
   };
 
   // For Create API Key
@@ -152,7 +158,7 @@ function UserAPIKey() {
   return (
     <ProjectSidebar
       component={
-        <section className="pt-20 px-40">
+        <>
           {alert === 'destructive' && (
             <AlertDestructive description={description} />
           )}
@@ -166,6 +172,10 @@ function UserAPIKey() {
               onClickConfirm={onClickConfirmDeleteAPIKey}
             />
           )}
+          <Title
+            title={common['userAPIKeys.title']}
+            subtitle={common['userAPIKeys.subtitle']}
+          />
           <CreateAPIKeyDialog
             apiKeyNameValue={apiKeyNameValue}
             dialogOpen={dialogOpen}
@@ -185,7 +195,7 @@ function UserAPIKey() {
             onClickOpenDeleteAPIKeyDialog={onClickOpenDeleteAPIKeyDialog}
             onClickOpenUpdateAPIKeyDialog={onClickOpenUpdateAPIKeyDialog}
           />
-        </section>
+        </>
       }
       projectId="123"
     />

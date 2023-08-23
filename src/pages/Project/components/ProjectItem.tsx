@@ -13,19 +13,19 @@ type ProjectItemProps = {
 function ProjectItem(props: ProjectItemProps) {
   const { item } = props;
   return (
-    <Link to={`/project/dashboard/${item.id}`}>
-      <Card>
+    <Link to={`/project/playground/${item._id}`}>
+      <Card sx={{ borderRadius: 2 }}>
         <CardActionArea>
-          <CardContent>
+          <CardContent
+            sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}
+          >
             <Typography gutterBottom variant="h5" component="div">
               {item.name}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              <div>namespace: {item.namespace}</div>
-              <div>topK: {item.top_k}</div>
-              <div>commodityTable: {item.table_name}</div>
-              <div>
-                Create Time: {moment(item.create_time).format('YYYY-MM-DD')}
+              <div className="flex justify-between">
+                <div>ID: {item._id?.substring(0, 5)}</div>
+                <div>{moment(item.create_time).format('YYYY-MM-DD')}</div>
               </div>
             </Typography>
           </CardContent>
