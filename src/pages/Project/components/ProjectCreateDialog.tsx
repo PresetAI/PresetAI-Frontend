@@ -86,7 +86,7 @@ function ProjectCreateDialog(props: ProjectCreateDialogProps) {
         <DialogHeader>
           <DialogTitle>Create New Project</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
+            Create a new project for your team
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
@@ -102,12 +102,12 @@ function ProjectCreateDialog(props: ProjectCreateDialogProps) {
             />
           </div>
 
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
-          </div>
+          {/*<div className="grid grid-cols-4 items-center gap-4">*/}
+          {/*  <Label htmlFor="username" className="text-right">*/}
+          {/*    Username*/}
+          {/*  </Label>*/}
+          {/*  <Input id="username" value="@peduarte" className="col-span-3" />*/}
+          {/*</div>*/}
         </div>
         <DialogFooter>
           <Button type="submit" onClick={createProject}>

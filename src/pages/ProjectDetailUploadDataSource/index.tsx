@@ -44,7 +44,7 @@ function ProjectDetailUploadDataSource() {
 
   const onClickIngestData = async () => {
     try {
-      const res = await ingestDataClientUsingPost(ingestData);
+      // const res = await ingestDataClientUsingPost(ingestData);
     } catch (e: any) {
       toast({
         variant: 'destructive',

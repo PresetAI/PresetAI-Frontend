@@ -70,17 +70,17 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
    * Handle send message / ask question
    * */
   const handleSend = async (e: any) => {
-    setIsTyping(true);
+    // setIsTyping(true);
     e.preventDefault();
-    const newMessage = {
-      message: userMessage,
-      sender: 'user',
-      suggestion: null,
-    };
-
-    setMessages((prevMessages) => [...prevMessages, newMessage]);
-    // Initial system message
-    await processMessage(userMessage);
+    // const newMessage = {
+    //   message: userMessage,
+    //   sender: 'user',
+    //   suggestion: null,
+    // };
+    //
+    // setMessages((prevMessages) => [...prevMessages, newMessage]);
+    // // Initial system message
+    // await processMessage(userMessage);
   };
 
   /*

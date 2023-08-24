@@ -12,12 +12,12 @@ import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined';
 import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
-import ChatbotPalette from '@/components/ChatbotPalette';
 import { AuthContext } from '@/contexts/auth_context';
 import SkeletonComponent from '@/components/Skeleton';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
+import BreadcrumbsComponent from '@/components/Breadcrumbs';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -70,6 +70,7 @@ function Sidebar(props: Props) {
   const { component, projectId } = props;
   const [chatbotOpen, setChatbotOpen] = useState<boolean>(false);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+  const [currentPath, setCurrentPath] = useState<string>('');
   const [navigation, setNavigation] = useState([
     {
       name: 'Playground',
@@ -112,6 +113,7 @@ function Sidebar(props: Props) {
       };
     });
     setNavigation(newNavigationData);
+    setCurrentPath(newNavigationData.filter((item) => item.current)[0].name);
   }, []);
 
   return (
@@ -380,7 +382,10 @@ function Sidebar(props: Props) {
           <div className="h-6 w-px bg-gray-200 lg:hidden" aria-hidden="true" />
         </div>
 
-        <main className="px-4 py-4 sm:px-8 lg:px-12 pt-4 md:pt-4 lg:pt-16">
+        <div className="px-4 sm:px-8 lg:px-12 md:pt-8">
+          <BreadcrumbsComponent path={currentPath} />
+        </div>
+        <main className="px-4 py-4 sm:px-8 lg:px-12 pt-4 md:pt-4 lg:pt-8">
           {/*<ChatbotPalette open={chatbotOpen} setOpen={setChatbotOpen} />*/}
           {/*<button*/}
           {/*  className="w-[20rem] text-left border border-gray-300 rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-300/30 hover:text-gray-800 transition duration-150 cursor-pointer drop-shadow-md font-medium"*/}
