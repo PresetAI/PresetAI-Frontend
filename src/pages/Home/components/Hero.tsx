@@ -16,11 +16,11 @@ function Hero() {
               </a>
             </div>
             <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
-              Build AI-Powered Documentation Chatbot
+              Build AI-Powered Private Knowledge Base Chatbot
             </h1>
             <p className="mt-6 text-based leading-8 text-slate-600 dark:text-gray-300 sm:text-lg">
-              Integrate our AI chatbot into your platform for your development
-              documentation search. Easy setup with just one line of code.
+              Integrate our AI chatbot into your platform for your private
+              knowledge Base search. Easy setup with just one line of code.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
