@@ -5,7 +5,7 @@ export default {
   'userAPIKeys.title': 'API Keys',
   'userAPIKeys.subtitle':
     'Your secret API keys are listed below. Do not share your API key with others, or expose it in the browser or other client-side code.',
-  'projectDetailPlayground.title': 'Playground',
+  'projectDetailPlayground.title': 'Playground(Just for Display right now)',
   'projectDetailPlayground.subtitle': 'Test your ChatBot in here.',
   'projectDetailFileManagement.title': 'File Management',
   'projectDetailFileManagement.subtitle': 'Manage your files in here.',
