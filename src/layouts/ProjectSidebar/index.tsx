@@ -1,6 +1,7 @@
 import { Fragment, useContext, useEffect, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import {
+  ArrowLeftOnRectangleIcon,
   Bars3Icon,
   Cog6ToothIcon,
   XMarkIcon,
@@ -64,7 +65,7 @@ type Props = {
 };
 
 function ProjectSidebar(props: Props) {
-  const { userInfo, fetchLoading } = useContext(AuthContext);
+  const { userInfo, fetchLoading, signout } = useContext(AuthContext);
   const { component, projectId } = props;
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [navigation, setNavigation] = useState([
@@ -228,6 +229,16 @@ function ProjectSidebar(props: Props) {
                             />
                             Settings
                           </a>
+                          <span
+                            onClick={signout}
+                            className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 cursor-pointer"
+                          >
+                            <ArrowLeftOnRectangleIcon
+                              className="h-6 w-6 shrink-0 text-gray-500"
+                              aria-hidden="true"
+                            />
+                            Sign Out
+                          </span>
                         </li>
                       </ul>
                     </nav>
@@ -306,16 +317,26 @@ function ProjectSidebar(props: Props) {
                   </ul>
                 </li>
                 <li className="mt-auto">
-                  <a
-                    href="#"
-                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                  <Link
+                    to="#"
+                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50"
                   >
                     <Cog6ToothIcon
-                      className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
+                      className="h-6 w-6 shrink-0 text-gray-500"
                       aria-hidden="true"
                     />
                     Settings
-                  </a>
+                  </Link>
+                  <span
+                    onClick={signout}
+                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 cursor-pointer"
+                  >
+                    <ArrowLeftOnRectangleIcon
+                      className="h-6 w-6 shrink-0 text-gray-500"
+                      aria-hidden="true"
+                    />
+                    Sign Out
+                  </span>
                 </li>
               </ul>
             </nav>

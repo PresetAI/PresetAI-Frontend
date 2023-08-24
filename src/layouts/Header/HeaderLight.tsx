@@ -112,12 +112,29 @@ function HeaderLight() {
                 ))}
               </div>
               <div className="py-6">
-                <span
-                  onClick={login}
-                  className="-mx-3 block cursor-pointer rounded-lg px-3 py-2.5 text-base font-semibold leading-7 hover:bg-gray-50 dark:hover:bg-gray-500"
-                >
-                  Log in
-                </span>
+                {isAuthenticated ? (
+                  <div className="flex flex-col gap-4">
+                    <Link
+                      to="/projects"
+                      className="text-sm font-semibold leading-6 hover:text-gray-500 duration-300"
+                    >
+                      Dashboard
+                    </Link>
+                    <span
+                      className="text-sm font-semibold leading-6 cursor-pointer hover:text-gray-500 duration-300"
+                      onClick={signout}
+                    >
+                      Sign out
+                    </span>
+                  </div>
+                ) : (
+                  <span
+                    onClick={login}
+                    className="text-sm font-semibold leading-6 cursor-pointer hover:text-gray-500 duration-300"
+                  >
+                    Log in <span aria-hidden="true">&rarr;</span>
+                  </span>
+                )}
               </div>
             </div>
           </div>

@@ -56,9 +56,8 @@ function ProjectDetailForm(props: ProjectDetailFormProps) {
                   </SelectTrigger>
                   <SelectContent position="popper">
                     <SelectItem value="next">gpt-3.5-turbo</SelectItem>
-                    <SelectItem value="sveltekit">SvelteKit</SelectItem>
-                    <SelectItem value="astro">Astro</SelectItem>
-                    <SelectItem value="nuxt">Nuxt.js</SelectItem>
+                    <SelectItem value="sveltekit">gpt-4</SelectItem>
+                    <SelectItem value="astro">claude-2</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -66,7 +65,7 @@ function ProjectDetailForm(props: ProjectDetailFormProps) {
           </form>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <Button variant="outline">Cancel</Button>
+          <Button variant="outline">Reset</Button>
           <Button>Save</Button>
         </CardFooter>
       </Card>

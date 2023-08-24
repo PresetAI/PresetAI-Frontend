@@ -57,7 +57,7 @@ const headCells: readonly HeadCell[] = [
   {
     id: 'provider',
     numeric: false,
-    disablePadding: true,
+    disablePadding: false,
     label: 'Provider',
   },
   {
@@ -214,21 +214,17 @@ function UploadHistoryTable(props: UploadHistoryTableProps) {
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const [rows, setRows] = useState<Data[]>([]);
-  const rowData: ((prevState: never[]) => never[]) | Data[] = [];
-  const [rowsUpdated, setRowsUpdated] = useState(false);
   const createRows = () => {
-    data.forEach((projectFile) => {
-      const row = createData(
+    const newRowData = data.map((projectFile) =>
+      createData(
         projectFile._id,
         projectFile.provider,
         projectFile.status,
         projectFile.create_time,
         projectFile.is_deleted ? 'true' : 'false'
-      );
-      rowData.push(row);
-    });
-    setRows(rowData);
-    setRowsUpdated(true);
+      )
+    );
+    setRows(newRowData);
   };
   useEffect(() => {
     createRows();
@@ -337,12 +333,28 @@ function UploadHistoryTable(props: UploadHistoryTableProps) {
                         }}
                       />
                     </TableCell>
-                    <TableCell align="right">{row.provider}</TableCell>
-                    <TableCell align="right">{row.status}</TableCell>
-                    <TableCell align="right">
+                    <TableCell align="left">{row.provider}</TableCell>
+                    <TableCell
+                      sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
+                      align="left"
+                    >
+                      <div
+                        className={`${
+                          row.status === 'done'
+                            ? 'bg-green-500'
+                            : row.status === 'wait'
+                            ? 'bg-yellow-500'
+                            : row.status === 'processing'
+                            ? 'bg-blue-500'
+                            : 'bg-gray-500'
+                        } w-2 h-2 rounded-full`}
+                      />
+                      <p>{row.status}</p>
+                    </TableCell>
+                    <TableCell align="left">
                       {moment(row.create_time).format('YYYY-MM-DD hh:mm a')}
                     </TableCell>
-                    <TableCell align="right">{row.is_deleted}</TableCell>
+                    <TableCell align="left">{row.is_deleted}</TableCell>
                   </TableRow>
                 );
               })}

@@ -6,42 +6,53 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { TabsContent } from '@/components/ui/tabs';
 
-type CodeDocsCardProps = {
+type WebsiteCardProps = {
   setType: (type: string) => void;
   ingestData: API.IngestDataClientUsingPostBody;
   setIngestData: (ingestData: API.IngestDataClientUsingPostBody) => void;
   onClickIngestData: () => void;
-  codeDocsProvider: any;
-  setCodeDocsProvider: any;
+  websiteProvider: any;
+  setWebsiteProvider: any;
 };
 
-function CodeDocsCard(props: CodeDocsCardProps) {
+function WebsiteCard(props: WebsiteCardProps) {
   const {
     setType,
     ingestData,
     setIngestData,
     onClickIngestData,
-    codeDocsProvider,
-    setCodeDocsProvider,
+    websiteProvider,
+    setWebsiteProvider,
   } = props;
 
   const onClickProvider = (id: number) => {
     // set codeDocsProvider selected to true
-    const newCodeDocsProvider = codeDocsProvider.map((item: any) => {
+    const newCodeDocsProvider = websiteProvider.map((item: any) => {
       if (item.id === id) {
         return { ...item, selected: true };
       }
       return { ...item, selected: false };
     });
-    console.log(newCodeDocsProvider);
-    setCodeDocsProvider(newCodeDocsProvider);
+    setWebsiteProvider(newCodeDocsProvider);
+  };
+
+  const onClickType = (provider: string) => {
+    setType(provider);
+    setIngestData({ ...ingestData, provider });
+  };
+
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIngestData({ ...ingestData, url: e.target.value });
+    console.log(ingestData);
   };
 
   return (
-    <TabsContent value="codeDocs">
+    <TabsContent value="website">
       <Card>
         <CardHeader>
           <CardTitle>Provider</CardTitle>
@@ -50,7 +61,7 @@ function CodeDocsCard(props: CodeDocsCardProps) {
           </CardDescription>
         </CardHeader>
         <CardContent className="gap-x-2 grid grid-cols-2">
-          {codeDocsProvider.map((item: any) => {
+          {websiteProvider.map((item: any) => {
             return (
               <Button
                 key={item.id}
@@ -64,7 +75,7 @@ function CodeDocsCard(props: CodeDocsCardProps) {
           })}
         </CardContent>
         <CardContent className="space-y-2">
-          {codeDocsProvider.map((item: any) => {
+          {websiteProvider.map((item: any) => {
             if (item.selected) {
               return <div key={item.id}>{item.code}</div>;
             }
@@ -80,4 +91,4 @@ function CodeDocsCard(props: CodeDocsCardProps) {
   );
 }
 
-export default CodeDocsCard;
+export default WebsiteCard;
