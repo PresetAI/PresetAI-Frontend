@@ -95,26 +95,26 @@ interface HeadCell {
 
 const headCells: readonly HeadCell[] = [
   {
-    id: 'source_link',
-    numeric: false,
-    disablePadding: true,
-    label: 'Source link',
-  },
-  {
-    id: 'provider',
-    numeric: true,
-    disablePadding: false,
-    label: 'Provider',
-  },
-  {
     id: 'filename',
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: 'Filename',
   },
   {
+    id: 'source_link',
+    numeric: false,
+    disablePadding: false,
+    label: 'Source link',
+  },
+  {
+    id: 'provider',
+    numeric: false,
+    disablePadding: false,
+    label: 'Provider',
+  },
+  {
     id: 'create_time',
-    numeric: true,
+    numeric: false,
     disablePadding: false,
     label: 'Create Time',
   },
@@ -258,21 +258,17 @@ function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const [rows, setRows] = useState<Data[]>([]);
-  const rowData: ((prevState: never[]) => never[]) | Data[] = [];
-  const [rowsUpdated, setRowsUpdated] = useState(false);
   const createRows = () => {
-    filteredFileList.forEach((projectFile) => {
-      const row = createData(
+    const newRowData = filteredFileList.map((projectFile) =>
+      createData(
         projectFile._id,
         projectFile.filename,
         projectFile.provider,
         projectFile.source_link,
         projectFile.create_time
-      );
-      rowData.push(row);
-    });
-    setRows(rowData);
-    setRowsUpdated(true);
+      )
+    );
+    setRows(newRowData);
   };
   useEffect(() => {
     createRows();
@@ -392,19 +388,19 @@ function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
                           }}
                         />
                       </TableCell>
-                      <TableCell align="right">
+                      <TableCell align="left">{row.filename}</TableCell>
+                      <TableCell align="left">
                         <a
                           href={row.source_link}
                           target="_blank"
                           rel="noreferrer"
                           className="transition duration-150 hover:text-gray-400"
                         >
-                          {row.source_link}
+                          <Button variant="secondary">Link</Button>
                         </a>
                       </TableCell>
-                      <TableCell align="right">{row.provider}</TableCell>
-                      <TableCell align="right">{row.filename}</TableCell>
-                      <TableCell align="right">
+                      <TableCell align="left">{row.provider}</TableCell>
+                      <TableCell align="left">
                         {moment(row.create_time).format('YYYY-MM-DD hh:mm a')}
                       </TableCell>
                     </TableRow>

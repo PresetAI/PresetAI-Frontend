@@ -1,16 +1,6 @@
-import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import CodeDocsCard from '@/pages/ProjectDetailUploadDataSource/components/CodeDocsCard';
+import WebsiteCard from '@/pages/ProjectDetailUploadDataSource/components/WebsiteCard';
 
 type TabListProps = {
   setType: (type: string) => void;
@@ -19,6 +9,8 @@ type TabListProps = {
   onClickIngestData: () => void;
   codeDocsProvider: any;
   setCodeDocsProvider: any;
+  websiteProvider: any;
+  setWebsiteProvider: any;
 };
 
 export function TabList(props: TabListProps) {
@@ -29,12 +21,14 @@ export function TabList(props: TabListProps) {
     onClickIngestData,
     codeDocsProvider,
     setCodeDocsProvider,
+    websiteProvider,
+    setWebsiteProvider,
   } = props;
   return (
-    <Tabs defaultValue="account" className="w-[500px]">
+    <Tabs defaultValue="codeDocs" className="w-[500px]">
       <TabsList className="grid w-full grid-cols-2">
-        <TabsTrigger value="account">Code & Docs</TabsTrigger>
-        <TabsTrigger value="password">Password</TabsTrigger>
+        <TabsTrigger value="codeDocs">Code & Docs</TabsTrigger>
+        <TabsTrigger value="website">Website</TabsTrigger>
       </TabsList>
       <CodeDocsCard
         setType={setType}
@@ -44,29 +38,14 @@ export function TabList(props: TabListProps) {
         codeDocsProvider={codeDocsProvider}
         setCodeDocsProvider={setCodeDocsProvider}
       />
-      <TabsContent value="password">
-        <Card>
-          <CardHeader>
-            <CardTitle>Password</CardTitle>
-            <CardDescription>
-              Change your password here. After saving, you'll be logged out.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="current">Current password</Label>
-              <Input id="current" type="password" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="new">New password</Label>
-              <Input id="new" type="password" />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button>Save password</Button>
-          </CardFooter>
-        </Card>
-      </TabsContent>
+      <WebsiteCard
+        setType={setType}
+        ingestData={ingestData}
+        setIngestData={setIngestData}
+        onClickIngestData={onClickIngestData}
+        websiteProvider={websiteProvider}
+        setWebsiteProvider={setWebsiteProvider}
+      />
     </Tabs>
   );
 }

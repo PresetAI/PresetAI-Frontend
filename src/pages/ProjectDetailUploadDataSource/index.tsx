@@ -7,30 +7,19 @@ import { ingestDataClientUsingPost } from '@/services/ProjectController';
 import { useToast } from '@/components/ui/use-toast';
 import { Toaster } from '@/components/ui/toaster';
 import GithubIcon from '@/assets/icons/github.png';
+import FileIcon from '@/assets/icons/file.png';
+import YoutubeIcon from '@/assets/icons/youtube.png';
+import WebsiteIcon from '@/assets/icons/website1.png';
 import common from '@/config/common';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
 const ingestDataInit: API.IngestDataClientUsingPostBody = {
   project_id: '',
   provider: '',
   url: '',
 };
-
-const codeDocsProviderInit = [
-  {
-    id: 1,
-    name: 'Github',
-    provider: 'github',
-    icon: GithubIcon,
-    selected: false,
-  },
-  {
-    id: 2,
-    name: 'Upload Files or Folder',
-    provider: 'file',
-    icon: GithubIcon,
-    selected: false,
-  },
-];
 
 function ProjectDetailUploadDataSource() {
   const { toast } = useToast();
@@ -39,8 +28,71 @@ function ProjectDetailUploadDataSource() {
   const [type, setType] = useState<string>('');
   const [ingestData, setIngestData] =
     useState<API.IngestDataClientUsingPostBody>(ingestDataInit);
+
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIngestData({ ...ingestData, url: e.target.value });
+    console.log(ingestData);
+  };
+
+  const codeDocsProviderInit = [
+    {
+      id: 1,
+      name: 'Github',
+      provider: 'github',
+      icon: GithubIcon,
+      selected: true,
+      code: (
+        <div className="space-y-2">
+          <Label htmlFor="new">Enter your public GitHub URL:</Label>
+          <Input
+            id="new"
+            type="url"
+            placeholder="github.com/username/repo"
+            onChange={onChangeInput}
+          />
+        </div>
+      ),
+    },
+    {
+      id: 2,
+      name: 'Upload Files or Folder',
+      provider: 'file',
+      icon: FileIcon,
+      selected: false,
+      code: (
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="new">Upload your Markdown, PDF or txt files:</Label>
+          <div className="grid grid-cols-2 gap-2">
+            <Button variant="outline">Choose Files</Button>
+            <Button variant="outline">Choose Folder</Button>
+          </div>
+        </div>
+      ),
+    },
+  ];
+
+  const websiteProviderInit = [
+    {
+      id: 1,
+      name: 'Website',
+      provider: 'website',
+      icon: WebsiteIcon,
+      selected: true,
+      code: null,
+    },
+    {
+      id: 2,
+      name: 'Youtube',
+      provider: 'youtube',
+      icon: YoutubeIcon,
+      selected: false,
+      code: null,
+    },
+  ];
+
   const [codeDocsProvider, setCodeDocsProvider] =
     useState(codeDocsProviderInit);
+  const [websiteProvider, setWebsiteProvider] = useState(websiteProviderInit);
 
   const onClickIngestData = async () => {
     try {
@@ -75,6 +127,8 @@ function ProjectDetailUploadDataSource() {
               onClickIngestData={onClickIngestData}
               codeDocsProvider={codeDocsProvider}
               setCodeDocsProvider={setCodeDocsProvider}
+              websiteProvider={websiteProvider}
+              setWebsiteProvider={setWebsiteProvider}
             />
           </div>
           <Toaster />

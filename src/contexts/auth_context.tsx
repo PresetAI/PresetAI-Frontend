@@ -51,7 +51,6 @@ function AuthProvider({ children }: AuthContextProviderProps) {
       if (res.data.code === 200 && res.data.data.googleId !== null) {
         setIsAuthenticated(true);
         setUserInfo(res.data.data);
-        console.log(res.data.data);
       }
     } catch (e) {
       setIsAuthenticated(false);

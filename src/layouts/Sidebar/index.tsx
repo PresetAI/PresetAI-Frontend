@@ -4,6 +4,7 @@ import {
   Bars3Icon,
   Cog6ToothIcon,
   XMarkIcon,
+  ArrowLeftOnRectangleIcon,
 } from '@heroicons/react/24/outline';
 import PlayCircleFilledRoundedIcon from '@mui/icons-material/PlayCircleFilledRounded';
 import FolderCopyOutlinedIcon from '@mui/icons-material/FolderCopyOutlined';
@@ -66,7 +67,8 @@ type Props = {
 };
 
 function Sidebar(props: Props) {
-  const { userInfo, projectName, fetchLoading } = useContext(AuthContext);
+  const { userInfo, projectName, fetchLoading, signout } =
+    useContext(AuthContext);
   const { component, projectId } = props;
   const [chatbotOpen, setChatbotOpen] = useState<boolean>(false);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
@@ -98,7 +100,7 @@ function Sidebar(props: Props) {
     },
     {
       name: 'API Keys',
-      href: `/project/api-keys/${projectId}`,
+      href: `#`,
       icon: KeyOutlinedIcon,
       current: false,
     },
@@ -250,6 +252,16 @@ function Sidebar(props: Props) {
                           />
                           Settings
                         </Link>
+                        <span
+                          onClick={signout}
+                          className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 cursor-pointer"
+                        >
+                          <ArrowLeftOnRectangleIcon
+                            className="h-6 w-6 shrink-0 text-gray-500"
+                            aria-hidden="true"
+                          />
+                          Sign Out
+                        </span>
                       </li>
                     </ul>
                   </nav>
@@ -334,14 +346,24 @@ function Sidebar(props: Props) {
               <li className="mt-auto">
                 <Link
                   to="#"
-                  className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
+                  className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50"
                 >
                   <Cog6ToothIcon
-                    className="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
+                    className="h-6 w-6 shrink-0 text-gray-500"
                     aria-hidden="true"
                   />
                   Settings
                 </Link>
+                <span
+                  onClick={signout}
+                  className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 cursor-pointer"
+                >
+                  <ArrowLeftOnRectangleIcon
+                    className="h-6 w-6 shrink-0 text-gray-500"
+                    aria-hidden="true"
+                  />
+                  Sign Out
+                </span>
               </li>
             </ul>
           </nav>
