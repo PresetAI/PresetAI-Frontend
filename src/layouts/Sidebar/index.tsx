@@ -100,7 +100,7 @@ function Sidebar(props: Props) {
     },
     {
       name: 'API Keys',
-      href: `#`,
+      href: `/project/api-keys/${projectId}`,
       icon: KeyOutlinedIcon,
       current: false,
     },

@@ -11,7 +11,7 @@ import ContentCopyRoundedIcon from '@mui/icons-material/ContentCopyRounded';
 import { AlertDefault } from '@/components/Alert/AlertDefault';
 
 type APIKeyTableProps = {
-  apiKeyData: API.UserAPIKey[];
+  apiKeyData: API.ProjectAPIKey[];
   setDialogOpen: (dialogOpen: boolean) => void;
   onClickOpenDeleteAPIKeyDialog: (id: string) => void;
   onClickOpenUpdateAPIKeyDialog: (
@@ -66,7 +66,19 @@ function APIKeyTable(props: APIKeyTableProps) {
                     scope="col"
                     className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                   >
-                    Created
+                    Type
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    Create Time
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                  >
+                    Update Time
                   </th>
                   <th
                     scope="col"
@@ -117,7 +129,13 @@ function APIKeyTable(props: APIKeyTableProps) {
                       </div>
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                      {apiKey.type}
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       {moment(apiKey.create_time).format('YYYY-MM-DD')}
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                      {moment(apiKey.update_time).format('YYYY-MM-DD')}
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
                       <Button

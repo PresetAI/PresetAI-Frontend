@@ -21,6 +21,47 @@ export async function getProjectByProjectIdUsingGet(
   });
 }
 
+export async function getAPIKeyListByProjectIdUsingGet(projectId: string) {
+  return axios.get(`${BASE_URL}/project/get_api_key_list/${projectId}`, {
+    withCredentials: true,
+  });
+}
+
+export async function newAPIKeyByProjectIdUsingPost(
+  body: API.NewProjectAPIKeyUsingPostBody,
+  projectId: string
+) {
+  return axios.post(`${BASE_URL}/project/new_api_key/${projectId}`, body, {
+    withCredentials: true,
+  });
+}
+
+export async function updateAPIKeyByProjectIdAPIKeyIdUsingPut(
+  body: API.UpdateAPIKeyByProjectIdAPIKeyIdUsingPutBody,
+  projectId: string,
+  apiKeyId: string
+) {
+  return axios.put(
+    `${BASE_URL}/project/update_api_key/${projectId}/${apiKeyId}`,
+    body,
+    {
+      withCredentials: true,
+    }
+  );
+}
+
+export async function deleteAPIKeyByProjectIdAPIKeyIdUsingDelete(
+  projectId: string,
+  apiKeyId: string
+) {
+  return axios.delete(
+    `${BASE_URL}/project/delete_api_key/${projectId}/${apiKeyId}`,
+    {
+      withCredentials: true,
+    }
+  );
+}
+
 export async function getProjectFileByProjectIdUsingGet(
   projectId: string | undefined
 ) {

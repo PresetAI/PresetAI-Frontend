@@ -13,7 +13,7 @@ declare namespace API {
   type UserAPIKey = {
     _id?: string;
     name?: string;
-    api_key?: string;
+    api_key: string;
     create_time?: string;
   };
 
@@ -59,6 +59,24 @@ declare namespace API {
     status?: string;
     create_time?: string;
     is_deleted?: boolean;
+  };
+
+  type ProjectAPIKey = {
+    _id: string;
+    name: string;
+    api_key: string;
+    type: string;
+    create_time: string;
+    update_time: string;
+  };
+
+  type NewProjectAPIKeyUsingPostBody = {
+    name: string;
+    apikey_type: string;
+  };
+
+  type UpdateAPIKeyByProjectIdAPIKeyIdUsingPutBody = {
+    name: string;
   };
 
   // Product

@@ -12,6 +12,9 @@ export default function useCopyToClipboard(): ClipboardState {
     const result = copy(text, options);
     if (result) setValue(text);
     setSuccess(result);
+    setTimeout(() => {
+      setSuccess(false);
+    }, 4000);
   };
 
   return [copyToClipboard, { value, success }];

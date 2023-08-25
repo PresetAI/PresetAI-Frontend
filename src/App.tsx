@@ -10,6 +10,7 @@ import {
   ProjectDetailFileManagement,
   ProjectDetailUploadDataSource,
   ProjectDetailUploadHistory,
+  ProjectDetailAPIKey,
   Error,
   PrivateRoute,
 } from './pages';
@@ -38,6 +39,11 @@ const routes = [
   {
     path: '/project/upload-history/:projectId',
     element: <ProjectDetailUploadHistory />,
+    auth: true,
+  },
+  {
+    path: '/project/api-keys/:projectId',
+    element: <ProjectDetailAPIKey />,
     auth: true,
   },
   { path: '*', element: <Error />, auth: false },

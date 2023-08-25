@@ -7,6 +7,7 @@ import ProjectDetailPlayground from './ProjectDetailPlayground';
 import ProjectDetailFileManagement from './ProjectDetailFileManagement';
 import ProjectDetailUploadDataSource from './ProjectDetailUploadDataSource';
 import ProjectDetailUploadHistory from './ProjectDetailUploadHistory';
+import ProjectDetailAPIKey from './ProjectDetailAPIKey';
 import Error from './Error';
 import PrivateRoute from './PrivateRoute';
 
@@ -20,6 +21,7 @@ export {
   ProjectDetailFileManagement,
   ProjectDetailUploadDataSource,
   ProjectDetailUploadHistory,
+  ProjectDetailAPIKey,
   Error,
   PrivateRoute,
 };
