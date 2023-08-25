@@ -61,6 +61,19 @@ declare namespace API {
     is_deleted?: boolean;
   };
 
+  type ProjectAPIKey = {
+    _id: string;
+    name: string;
+    api_key: string;
+    type: string;
+    create_time: string;
+    update_time: string;
+  };
+
+  type UpdateAPIKeyByProjectIdAPIKeyIdUsingPutBody = {
+    name: string;
+  };
+
   // Product
   type ProductsSearchUsingPostBody = {
     phrase: string;

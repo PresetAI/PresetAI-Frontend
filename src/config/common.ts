@@ -15,4 +15,7 @@ export default {
   'projectDetailUploadHistory.title': 'Data Source Upload History',
   'projectDetailUploadHistory.subtitle':
     'Check your data source upload history.',
+  'projectDetailAPIKey.title': 'Project API Keys',
+  'projectDetailAPIKey.subtitle':
+    'Your secret API keys are listed below. Do not share your API key with others, or expose it in the browser or other client-side code.',
 };
