@@ -70,6 +70,11 @@ declare namespace API {
     update_time: string;
   };
 
+  type NewProjectAPIKeyUsingPostBody = {
+    name: string;
+    apikey_type: string;
+  };
+
   type UpdateAPIKeyByProjectIdAPIKeyIdUsingPutBody = {
     name: string;
   };

@@ -27,6 +27,15 @@ export async function getAPIKeyListByProjectIdUsingGet(projectId: string) {
   });
 }
 
+export async function newAPIKeyByProjectIdUsingPost(
+  body: API.NewProjectAPIKeyUsingPostBody,
+  projectId: string
+) {
+  return axios.post(`${BASE_URL}/project/new_api_key/${projectId}`, body, {
+    withCredentials: true,
+  });
+}
+
 export async function updateAPIKeyByProjectIdAPIKeyIdUsingPut(
   body: API.UpdateAPIKeyByProjectIdAPIKeyIdUsingPutBody,
   projectId: string,

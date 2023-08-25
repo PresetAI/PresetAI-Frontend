@@ -1,7 +1,6 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import AlertDestructive from '@/components/Alert/AlertDestructive';
 import { AlertDefault } from '@/components/Alert/AlertDefault';
-import { newAPIKeyUsingPost } from '@/services/UserController';
 import AlertConfirmDialog from '@/components/AlertConfirmDialog';
 import Title from '@/components/Title';
 import common from '@/config/common';
@@ -11,11 +10,17 @@ import { Sidebar } from '@/layouts';
 import {
   deleteAPIKeyByProjectIdAPIKeyIdUsingDelete,
   getAPIKeyListByProjectIdUsingGet,
+  newAPIKeyByProjectIdUsingPost,
   updateAPIKeyByProjectIdAPIKeyIdUsingPut,
 } from '@/services/ProjectController';
 import CreateAPIKeyDialog from '@/pages/ProjectDetailAPIKey/components/CreateAPIKeyDialog';
 import UpdateAPIKeyDialog from '@/pages/ProjectDetailAPIKey/components/UpdateAPIKeyDialog';
 import APIKeyTable from '@/pages/ProjectDetailAPIKey/components/APIKeyTable';
+
+const CreateAPIKeyBodyInit = {
+  name: '',
+  apikey_type: '',
+};
 
 function ProjectDetailAPIKey() {
   const { projectId } = useParams<{ projectId: string | undefined }>(); // get params from url
@@ -23,6 +28,9 @@ function ProjectDetailAPIKey() {
   const [dialogOpen, setDialogOpen] = useState<boolean>(false); // dialog open or not
   const apiKeyNameValue = useRef<HTMLInputElement>(null);
   const [selectedId, setSelectedId] = useState<string>(''); // selected id
+
+  const [createAPIKeyBody, setCreateAPIKeyBody] =
+    useState<API.NewProjectAPIKeyUsingPostBody>(CreateAPIKeyBodyInit);
 
   // For update dialog
   const [updateDialogOpen, setUpdateDialogOpen] = useState<boolean>(false); // update dialog open or not
@@ -40,7 +48,6 @@ function ProjectDetailAPIKey() {
 
   const [alert, setAlert] = useState<null | 'default' | 'destructive'>(null);
   const [description, setDescription] = useState<string>('');
-  const [projectsListData, setProjectsListData] = useState<API.Project[]>([]); // project list
 
   const [apiKeyData, setApiKeyData] = useState<API.ProjectAPIKey[]>([]); // API KEY LIST
 
@@ -61,8 +68,8 @@ function ProjectDetailAPIKey() {
   // confirm create API Key
   const onClickConfirmCreateAPIKey = async (e: any) => {
     e.preventDefault();
-    const apiKeyName = apiKeyNameValue.current?.value;
-    if (!apiKeyName) {
+    console.log('create:', createAPIKeyBody);
+    if (createAPIKeyBody.name === '' || createAPIKeyBody.name === undefined) {
       setDescription('Name cannot be empty');
       setAlert('destructive');
       setTimeout(() => {
@@ -70,16 +77,27 @@ function ProjectDetailAPIKey() {
       }, 5000);
       return;
     }
+    if (
+      createAPIKeyBody.apikey_type === '' ||
+      createAPIKeyBody.apikey_type === undefined
+    ) {
+      setDescription('Please select a type');
+      setAlert('destructive');
+      setTimeout(() => {
+        setAlert(null);
+      }, 5000);
+      return;
+    }
     try {
-      const body: API.NewAPIKeyUsingPostBody = {
-        name: apiKeyName,
-      };
-      const res = await newAPIKeyUsingPost(body);
+      const res = await newAPIKeyByProjectIdUsingPost(
+        createAPIKeyBody,
+        projectId || ''
+      );
       if (res.data.code === 200) {
         setDescription('API Key create successfully');
         setAlert('default');
         setDialogOpen(false);
-        apiKeyNameValue.current.value = ''; // clear the input
+        setCreateAPIKeyBody(CreateAPIKeyBodyInit);
         setTimeout(() => {
           setAlert(null);
         }, 5000);
@@ -187,10 +205,11 @@ function ProjectDetailAPIKey() {
             subtitle={common['projectDetailAPIKey.subtitle']}
           />
           <CreateAPIKeyDialog
-            apiKeyNameValue={apiKeyNameValue}
             dialogOpen={dialogOpen}
             setDialogOpen={setDialogOpen}
             onClickConfirmCreateAPIKey={onClickConfirmCreateAPIKey}
+            createAPIKeyBody={createAPIKeyBody}
+            setCreateAPIKeyBody={setCreateAPIKeyBody}
           />
           <UpdateAPIKeyDialog
             apiKeyNameValue={apiKeyNameValue}

@@ -21,18 +21,22 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
 type ProjectCreateDialogProps = {
-  apiKeyNameValue: RefObject<HTMLInputElement>;
   dialogOpen: boolean;
   setDialogOpen: (dialogOpen: boolean) => void;
   onClickConfirmCreateAPIKey: (e: any) => void;
+  createAPIKeyBody: API.NewProjectAPIKeyUsingPostBody;
+  setCreateAPIKeyBody: (
+    createAPIKeyBody: API.NewProjectAPIKeyUsingPostBody
+  ) => void;
 };
 
 function CreateAPIKeyDialog(props: ProjectCreateDialogProps) {
   const {
-    apiKeyNameValue,
     dialogOpen,
     setDialogOpen,
     onClickConfirmCreateAPIKey,
+    createAPIKeyBody,
+    setCreateAPIKeyBody,
   } = props;
 
   return (
@@ -60,14 +64,26 @@ function CreateAPIKeyDialog(props: ProjectCreateDialogProps) {
               id="name"
               placeholder="My Test Key"
               className="col-span-4"
-              ref={apiKeyNameValue}
+              onChange={(e) => {
+                setCreateAPIKeyBody({
+                  ...createAPIKeyBody,
+                  name: e.target.value,
+                });
+              }}
             />
           </div>
           <div className="grid grid-cols-5 items-center gap-4">
             <Label htmlFor="type" className="text-right">
               Type
             </Label>
-            <Select>
+            <Select
+              onValueChange={(value) => {
+                setCreateAPIKeyBody({
+                  ...createAPIKeyBody,
+                  apikey_type: value,
+                });
+              }}
+            >
               <SelectTrigger className="col-span-4">
                 <SelectValue placeholder="Select a type" />
               </SelectTrigger>
