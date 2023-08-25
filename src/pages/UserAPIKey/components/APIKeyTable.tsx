@@ -1,7 +1,14 @@
 import moment from 'moment';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
+import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
+import IconButton from '@mui/material/IconButton';
+import VisibilityOffRoundedIcon from '@mui/icons-material/VisibilityOffRounded';
 import { Button } from '@/components/ui/button';
+import { useState } from 'react';
+import useCopyToClipboard from '@/hooks/useCopyToClipboard';
+import ContentCopyRoundedIcon from '@mui/icons-material/ContentCopyRounded';
+import { AlertDefault } from '@/components/Alert/AlertDefault';
 
 type APIKeyTableProps = {
   apiKeyData: API.UserAPIKey[];
@@ -20,9 +27,23 @@ function APIKeyTable(props: APIKeyTableProps) {
     onClickOpenDeleteAPIKeyDialog,
     onClickOpenUpdateAPIKeyDialog,
   } = props;
+  const [copyToClipboard, { success }] = useCopyToClipboard();
+
+  const [visibleKeys, setVisibleKeys] = useState<string[]>([]);
+
+  const toggleVisibility = (apiKeyId: string) => {
+    if (visibleKeys.includes(apiKeyId)) {
+      setVisibleKeys((prev) => prev.filter((id) => id !== apiKeyId));
+    } else {
+      setVisibleKeys((prev) => [...prev, apiKeyId]);
+    }
+  };
 
   return (
     <>
+      {success ? (
+        <AlertDefault description="API Key copied to clipboard!" />
+      ) : null}
       <div className="mt-8 flow-root">
         <div className="-my-2 overflow-x-auto">
           <div className="inline-block min-w-full py-2 align-middle">
@@ -62,7 +83,38 @@ function APIKeyTable(props: APIKeyTableProps) {
                       {apiKey.name}
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      {apiKey.api_key}
+                      <div className="flex items-center gap-1 ">
+                        <div>
+                          {visibleKeys.includes(apiKey._id as string)
+                            ? apiKey.api_key
+                            : `**********${apiKey.api_key.slice(-5)}`}
+                        </div>
+
+                        <IconButton
+                          aria-label="visibility eye"
+                          size="small"
+                          onClick={() => toggleVisibility(apiKey._id as string)}
+                        >
+                          {visibleKeys.includes(apiKey._id as string) ? (
+                            <VisibilityOffRoundedIcon
+                              sx={{ width: 16, height: 16 }}
+                            />
+                          ) : (
+                            <VisibilityRoundedIcon
+                              sx={{ width: 16, height: 16 }}
+                            />
+                          )}
+                        </IconButton>
+                        <IconButton
+                          aria-label="visibility eye"
+                          size="small"
+                          onClick={() => copyToClipboard(apiKey.api_key)}
+                        >
+                          <ContentCopyRoundedIcon
+                            sx={{ width: 16, height: 16 }}
+                          />
+                        </IconButton>
+                      </div>
                     </td>
                     <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                       {moment(apiKey.create_time).format('YYYY-MM-DD')}

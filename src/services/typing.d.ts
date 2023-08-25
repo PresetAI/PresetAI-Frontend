@@ -13,7 +13,7 @@ declare namespace API {
   type UserAPIKey = {
     _id?: string;
     name?: string;
-    api_key?: string;
+    api_key: string;
     create_time?: string;
   };
 
