@@ -88,4 +88,17 @@ declare namespace API {
   type DoChaClientSideUsingPostBody = {
     question: string;
   };
+
+  // Subscription
+  type Subscription = {
+    _id: string;
+    user_id: string;
+    subscription_plan_id: string;
+    subscription_message_tracking_id: string;
+    start_date: string;
+    end_date: string;
+    year_month: string;
+    message_count: number;
+    message_limit: number;
+  };
 }

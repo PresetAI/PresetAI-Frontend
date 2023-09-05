@@ -197,7 +197,6 @@ function UserAPIKey() {
           />
         </>
       }
-      projectId="123"
     />
   );
 }

@@ -76,7 +76,7 @@ function HeaderLight() {
               Log in <span aria-hidden="true">&rarr;</span>
             </span>
           )}
-          <ModeToggle />
+          {/*<ModeToggle />*/}
         </div>
       </nav>
       <Dialog
@@ -138,9 +138,9 @@ function HeaderLight() {
               </div>
             </div>
           </div>
-          <div className="absolute bottom-4">
-            <ModeToggle />
-          </div>
+          {/*<div className="absolute bottom-4">*/}
+          {/*  <ModeToggle />*/}
+          {/*</div>*/}
         </Dialog.Panel>
       </Dialog>
     </header>

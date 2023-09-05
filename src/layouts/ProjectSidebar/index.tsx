@@ -8,6 +8,7 @@ import {
 } from '@heroicons/react/24/outline';
 import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
 import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
+import BookRoundedIcon from '@mui/icons-material/BookRounded';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
 import SkeletonComponent from '@/components/Skeleton';
@@ -61,7 +62,7 @@ function classNames(...classes: any[]) {
 
 type Props = {
   component: any;
-  projectId: string | undefined;
+  projectId?: string | undefined;
 };
 
 function ProjectSidebar(props: Props) {
@@ -71,14 +72,20 @@ function ProjectSidebar(props: Props) {
   const [navigation, setNavigation] = useState([
     {
       name: 'Project',
-      href: `/projects`,
+      href: '/projects',
       icon: FormatListBulletedOutlinedIcon,
       current: true,
     },
     {
       name: 'API Keys',
-      href: `/user/api-keys`,
+      href: '/user/api-keys',
       icon: KeyOutlinedIcon,
+      current: false,
+    },
+    {
+      name: 'Subscription Plan',
+      href: '/user/subscription-plan',
+      icon: BookRoundedIcon,
       current: false,
     },
   ]);
