@@ -3,6 +3,7 @@ import { Dialog } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import logo from '@/assets/logo.svg';
+import logo_white from '@/assets/logo_white.svg';
 import { AuthContext } from '@/contexts/auth_context';
 import ModeToggle from '@/components/ModeToggle';
 
@@ -15,7 +16,7 @@ const navigation = [
 
 function HeaderLight() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { isAuthenticated, login, signout } = useContext(AuthContext);
+  const { isAuthenticated, login, signout, mode } = useContext(AuthContext);
 
   return (
     <header className="fixed backdrop-blur-lg bg-white/30 dark:bg-primary-foreground/30 inset-x-0 top-0 z-50">
@@ -28,7 +29,11 @@ function HeaderLight() {
             to="/"
             className="flex items-center text-2xl font-semibold tracking-widest xl:text-4xl"
           >
-            <img className="h-8" src={logo} alt="logo" />
+            {mode === 'light' ? (
+              <img className="h-8" src={logo} alt="logo" />
+            ) : (
+              <img className="h-8" src={logo_white} alt="logo white" />
+            )}
           </Link>
         </div>
         <div className="flex lg:hidden">
@@ -88,7 +93,11 @@ function HeaderLight() {
         <div className="fixed inset-0 z-50" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-primary-foreground px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <img className="h-8" src={logo} alt="logo" />
+            {mode === 'light' ? (
+              <img className="h-8" src={logo} alt="logo" />
+            ) : (
+              <img className="h-8" src={logo_white} alt="logo white" />
+            )}
             <button
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-gray-700 dark:text-gray-300"

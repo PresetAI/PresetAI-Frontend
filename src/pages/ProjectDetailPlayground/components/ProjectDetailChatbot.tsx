@@ -14,6 +14,7 @@ import logo from '@/assets/logo.svg';
 import { Card } from '@/components/ui/card';
 import { doChaClientSideUsingPost } from '@/services/ProjectController';
 import useCopyToClipboard from '@/hooks/useCopyToClipboard';
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 
 type Message = {
   message: string;
@@ -37,6 +38,11 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
     {
       message: '👋 Hello, How I can help you today?',
       sender: 'ChatGPT',
+      suggestion: null,
+    },
+    {
+      message: '👋 Hello, How I can help you today?',
+      sender: 'user',
       suggestion: null,
     },
   ]);
@@ -130,60 +136,45 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
                 <div key={message.message}>
                   {message.sender === 'ChatGPT' ||
                   message.sender === 'assistant' ? (
-                    <div className="flex p-4 gap-2 backdrop-blur-lg bg-slate-200/50 rounded-2xl shadow-lg shadow-slate-100/40">
+                    <div className="flex p-4 gap-2 backdrop-blur-lg rounded-md">
                       <img
-                        className="rounded-full w-12 h-12 bg-amber-50"
+                        className="rounded-xl w-10 h-10 bg-amber-50"
                         src={logo}
                         alt="bot"
                       />
-                      <div className="flex flex-col w-full">
-                        <div className="__chat_box pt-3 text-gray-600 animate__animated animate__fadeInDown">
+                      <div className="flex items-center w-full">
+                        <div className="text-gray-600 animate__animated animate__fadeInDown">
                           <ReactMarkdown
                             remarkPlugins={[
                               [remarkGfm, { singleTilde: false }],
                             ]}
-                            className="prose prose-slate"
+                            className="prose prose-slate dark:text-gray-50"
                           >
                             {message.message}
                           </ReactMarkdown>
                         </div>
-                        <div className="flex items-center mt-4">
-                          <div>
-                            <div className="flex gap-2">
-                              <div className="bg-white rounded-full p-2">
-                                <HandThumbUpIcon className="h-4 w-4" />
-                              </div>
-                              <div className="bg-white rounded-full p-2">
-                                <HandThumbDownIcon className="h-4 w-4" />
-                              </div>
-                            </div>
-                          </div>
-                          <button
-                            type="button"
-                            className="ml-auto bg-white text-gray-500 p-2 rounded-xl text-sm cursor-pointer hover:bg-slate-200 transition duration-100"
-                            onClick={() => copyToClipboard(message.message)}
-                          >
-                            <ClipboardIcon className="inline-block h-4 w-4" />
-                            copy
-                          </button>
-                        </div>
+                        {/*<div className="flex items-center mt-4">*/}
+                        {/*  <button*/}
+                        {/*    type="button"*/}
+                        {/*    className="ml-auto bg-white text-gray-500 p-2 rounded-xl text-sm cursor-pointer hover:bg-slate-200 transition duration-100"*/}
+                        {/*    onClick={() => copyToClipboard(message.message)}*/}
+                        {/*  >*/}
+                        {/*    <ClipboardIcon className="inline-block h-4 w-4" />*/}
+                        {/*    copy*/}
+                        {/*  </button>*/}
+                        {/*</div>*/}
                       </div>
                     </div>
                   ) : (
-                    <div className="flex gap-2 mb-2">
+                    <div className="flex items-center gap-2 my-6">
                       <div className="ml-auto flex flex-col">
-                        <p className="text-gray-900 font-semibold tracking-wide ml-auto">
-                          You
-                        </p>
-                        <div className="__chat_box bg-sky-300 p-3 rounded-xl">
+                        <div className="bg-primary/90 text-primary-foreground shadow-lg p-3 rounded-xl">
                           {message.message}
                         </div>
                       </div>
-                      <img
-                        className="rounded-full w-12 h-12"
-                        src={avatar_right}
-                        alt="user"
-                      />
+                      <div className="flex items-center justify-center border-2 border-primary w-10 h-10 rounded-md">
+                        <PersonRoundedIcon />
+                      </div>
                     </div>
                   )}
                 </div>
@@ -221,7 +212,7 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
               <input
                 type="text"
                 id="simple-search"
-                className="bg-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 py-3 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="text-muted-foreground text-sm bg-slate-200/20 rounded-lg focus:ring-black focus:border-black block w-full pl-10 p-2.5 py-3 dark:placeholder-gray-400"
                 placeholder="Chat here..."
                 value={userMessage}
                 autoComplete="off"
@@ -232,7 +223,7 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
             {isTyping || userMessage.length === 0 ? (
               <button
                 type="submit"
-                className="p-2.5 ml-2 text-sm font-medium text-white bg-gray-600 rounded-lg border border-blue-700 "
+                className="p-2.5 ml-2 text-sm font-medium text-white bg-gray-600 rounded-lg"
                 disabled
               >
                 <SendRoundedIcon />
@@ -241,7 +232,7 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
             ) : (
               <button
                 type="submit"
-                className="p-2.5 ml-2 text-sm font-medium text-white bg-gray-900 rounded-lg border hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="p-2.5 ml-2 text-sm font-medium text-primary-foreground bg-primary/90 shadow-xl rounded-lg"
                 onClick={(e) => handleSend(e)}
               >
                 <SendRoundedIcon />
@@ -249,9 +240,9 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
               </button>
             )}
           </form>
-          <h3 className="flex mt-2 ml-auto text-sm text-gray-500">
+          <h3 className="flex mt-2 ml-auto text-sm text-muted-foreground">
             Power by &nbsp;
-            <p className="font-medium text-gray-700">PresetAI</p>
+            <p className="font-medium text-primary">PresetAI</p>
           </h3>
         </div>
       </Card>

@@ -16,6 +16,8 @@ type AuthContextType = {
   setProjectName: React.Dispatch<React.SetStateAction<string>>;
   login: () => void;
   signout: () => void;
+  mode: 'light' | 'dark';
+  setMode: React.Dispatch<React.SetStateAction<'light' | 'dark'>>;
 };
 
 const AuthContext = createContext<AuthContextType>({
@@ -28,6 +30,8 @@ const AuthContext = createContext<AuthContextType>({
   setProjectName: () => {},
   login: () => {},
   signout: () => {},
+  mode: 'light',
+  setMode: () => {},
 });
 
 function AuthProvider({ children }: AuthContextProviderProps) {
@@ -36,6 +40,7 @@ function AuthProvider({ children }: AuthContextProviderProps) {
   const [loading, setLoading] = useState<boolean>(true); // add this line
   const [fetchLoading, setFetchLoading] = useState<boolean>(false);
   const [projectName, setProjectName] = useState<string>('');
+  const [mode, setMode] = useState<'light' | 'dark'>('light');
 
   const login = () => {
     window.location.href = `${BASE_URL}/user/login`;
@@ -74,6 +79,8 @@ function AuthProvider({ children }: AuthContextProviderProps) {
         setProjectName,
         login,
         signout,
+        mode,
+        setMode,
       }}
     >
       {loading ? <div> </div> : children}

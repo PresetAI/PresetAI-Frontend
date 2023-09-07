@@ -2,6 +2,7 @@ import Home from './Home';
 import Dashboard from './Dashboard';
 import Project from './Project';
 import UserAPIKey from './UserAPIKey';
+import UserSubscriptionPlan from './UserSubscriptionPlan';
 import Pricing from './Pricing';
 import ProjectDetailPlayground from './ProjectDetailPlayground';
 import ProjectDetailFileManagement from './ProjectDetailFileManagement';
@@ -16,6 +17,7 @@ export {
   Dashboard,
   Project,
   UserAPIKey,
+  UserSubscriptionPlan,
   Pricing,
   ProjectDetailPlayground,
   ProjectDetailFileManagement,

@@ -11,16 +11,22 @@ type Props = {
 export default function BreadcrumbsComponent(props: Props) {
   const { path } = props;
   const breadcrumbs = [
-    <Link to="/">PresetAI</Link>,
-    <Link to="/projects">Projects</Link>,
-    <Typography key="3" color="text.primary">
+    <Link to="/" className="text-muted-foreground">
+      PresetAI
+    </Link>,
+    <Link to="/projects" className="text-muted-foreground">
+      Projects
+    </Link>,
+    <Typography key="3" className="text-primary">
       {path}
     </Typography>,
   ];
 
   return (
     <Breadcrumbs
-      separator={<NavigateNextIcon fontSize="large" />}
+      separator={
+        <NavigateNextIcon fontSize="large" className="text-muted-foreground" />
+      }
       aria-label="breadcrumb"
     >
       {breadcrumbs}

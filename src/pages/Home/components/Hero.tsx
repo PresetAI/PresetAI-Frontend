@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '@/components/ui/button';
 
 function Hero() {
   return (
@@ -10,9 +11,10 @@ function Hero() {
               <a
                 href="https://www.npmjs.com/package/@presetai/search"
                 target="_blank"
-                className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-50 ring-1 ring-white/10 hover:ring-white/20 bg-indigo-500 hover:bg-indigo-400 transition duration-150 flex gap-2 cursor-pointer"
               >
-                npm install @presetai/search
+                <Button className="text-sm shadow-xl rounded-full">
+                  npm install @presetai/search
+                </Button>
               </a>
             </div>
             <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
@@ -23,12 +25,9 @@ function Hero() {
               knowledge Base search. Easy setup with just one line of code.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a
-                href="#"
-                className="rounded-xl bg-indigo-600/90 px-4 py-4 text-sm font-semibold text-white shadow-xl transition duration-300 hover:bg-indigo-500/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
+              <Button className="text-sm font-semibold shadow-xl transition duration-300 py-6">
                 Get started
-              </a>
+              </Button>
               <a href="#" className="text-sm font-semibold leading-6">
                 Learn more <span aria-hidden="true">→</span>
               </a>

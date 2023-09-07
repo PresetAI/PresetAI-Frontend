@@ -49,22 +49,22 @@ function APIKeyTable(props: APIKeyTableProps) {
           <div className="inline-block min-w-full py-2 align-middle">
             <table className="min-w-full divide-y divide-gray-300">
               <thead>
-                <tr>
+                <tr className="text-primary">
                   <th
                     scope="col"
-                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                    className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-6 lg:pl-8"
                   >
                     NAME
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    className="px-3 py-3.5 text-left text-sm font-semibold"
                   >
                     KEY
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                    className="px-3 py-3.5 text-left text-sm font-semibold"
                   >
                     Created
                   </th>
@@ -79,11 +79,11 @@ function APIKeyTable(props: APIKeyTableProps) {
               <tbody className="divide-y divide-gray-200">
                 {apiKeyData.map((apiKey) => (
                   <tr key={apiKey._id}>
-                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
+                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-primary sm:pl-6 lg:pl-8">
                       {apiKey.name}
                     </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                      <div className="flex items-center gap-1 ">
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-muted-foreground">
+                      <div className="flex items-center gap-1">
                         <div>
                           {visibleKeys.includes(apiKey._id as string)
                             ? apiKey.api_key
@@ -96,13 +96,17 @@ function APIKeyTable(props: APIKeyTableProps) {
                           onClick={() => toggleVisibility(apiKey._id as string)}
                         >
                           {visibleKeys.includes(apiKey._id as string) ? (
-                            <VisibilityOffRoundedIcon
-                              sx={{ width: 16, height: 16 }}
-                            />
+                            <div className="text-muted-foreground">
+                              <VisibilityOffRoundedIcon
+                                sx={{ width: 16, height: 16 }}
+                              />
+                            </div>
                           ) : (
-                            <VisibilityRoundedIcon
-                              sx={{ width: 16, height: 16 }}
-                            />
+                            <div className="text-muted-foreground">
+                              <VisibilityRoundedIcon
+                                sx={{ width: 16, height: 16 }}
+                              />
+                            </div>
                           )}
                         </IconButton>
                         <IconButton
@@ -110,13 +114,15 @@ function APIKeyTable(props: APIKeyTableProps) {
                           size="small"
                           onClick={() => copyToClipboard(apiKey.api_key)}
                         >
-                          <ContentCopyRoundedIcon
-                            sx={{ width: 16, height: 16 }}
-                          />
+                          <div className="text-muted-foreground">
+                            <ContentCopyRoundedIcon
+                              sx={{ width: 16, height: 16 }}
+                            />
+                          </div>
                         </IconButton>
                       </div>
                     </td>
-                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                    <td className="whitespace-nowrap px-3 py-4 text-sm text-muted-foreground">
                       {moment(apiKey.create_time).format('YYYY-MM-DD')}
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">

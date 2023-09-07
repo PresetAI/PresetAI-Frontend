@@ -25,7 +25,7 @@ function ProjectDetailForm(props: ProjectDetailFormProps) {
   const { projectDetailData } = props;
   return (
     <div className="sm:col-span-3 rounded-3xl">
-      <Card className="rounded-3xl bg-gray-50">
+      <Card className="rounded-3xl">
         <CardHeader className="border-b-2 drop-shadow-md">
           <CardTitle>Customize</CardTitle>
         </CardHeader>
