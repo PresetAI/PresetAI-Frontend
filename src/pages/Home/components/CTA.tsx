@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from '@/components/ui/button';
 
 function CTA() {
   return (
@@ -28,12 +29,9 @@ function CTA() {
           developer requirements.
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
-          <a
-            href="#"
-            className="rounded-xl bg-indigo-600/90 px-4 py-4 text-sm font-semibold text-white shadow-xl transition duration-300 hover:bg-indigo-500/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
+          <Button className="text-sm font-semibold shadow-xl transition duration-300 py-6">
             Get started
-          </a>
+          </Button>
           <a href="#" className="text-sm font-semibold leading-6">
             Learn more <span aria-hidden="true">→</span>
           </a>

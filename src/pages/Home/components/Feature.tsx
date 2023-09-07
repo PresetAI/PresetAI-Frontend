@@ -58,9 +58,9 @@ function Feature() {
           {features.map((feature) => (
             <div key={feature.name} className="relative pl-16">
               <dt className="text-base font-semibold leading-7 text-skin-black">
-                <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600/90 shadow-lg">
+                <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/90 drop-shadow-md dark:shadow-white">
                   <feature.icon
-                    className="h-6 w-6 text-white"
+                    className="h-6 w-6 text-primary-foreground"
                     aria-hidden="true"
                   />
                 </div>

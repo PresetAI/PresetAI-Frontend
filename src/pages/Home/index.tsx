@@ -11,7 +11,7 @@ import Testimonial from '@/pages/Home/components/Testimonial';
 
 function Home() {
   return (
-    <div className="bg-skin-main block bg-gradient-to-b from-white from-10% via-slate-100 via-30% to-slate-200 to-100% dark:from-slate-900 dark:via-slate-900 dark:to-slate-900">
+    <div className="bg-background block">
       <HeaderLight />
       <main className="isolate block">
         <Hero />

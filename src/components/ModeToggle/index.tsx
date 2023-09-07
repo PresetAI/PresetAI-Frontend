@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -8,9 +8,11 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import useThemeDetector from '@/hooks/useThemeDetector';
+import { AuthContext } from '@/contexts/auth_context';
 
 export default function ModeToggle() {
   const isDarkTheme = useThemeDetector();
+  const { setMode } = useContext(AuthContext);
 
   const [isUsingDeviceMode, setIsUsingDeviceMode] = useState(
     () => !('theme' in localStorage)
@@ -20,17 +22,29 @@ export default function ModeToggle() {
     localStorage.theme = 'dark';
     document.documentElement.classList.add('dark');
     setIsUsingDeviceMode(false);
+    setMode('dark');
   }
 
   function setLightMode() {
     localStorage.theme = 'light';
     document.documentElement.classList.remove('dark');
     setIsUsingDeviceMode(false);
+    setMode('light');
   }
 
   function setModeByDevice() {
     localStorage.removeItem('theme');
     setIsUsingDeviceMode(true);
+    if (isDarkTheme) {
+      document.documentElement.classList.add('dark');
+      setMode('dark');
+      return;
+    }
+
+    if (!isDarkTheme) {
+      document.documentElement.classList.remove('dark');
+      setMode('light');
+    }
   }
 
   useEffect(() => {
@@ -40,8 +54,10 @@ export default function ModeToggle() {
         window.matchMedia('(prefers-color-scheme: dark)').matches)
     ) {
       document.documentElement.classList.add('dark');
+      setMode('dark');
     } else {
       document.documentElement.classList.remove('dark');
+      setMode('light');
     }
   }, []);
 
@@ -50,11 +66,13 @@ export default function ModeToggle() {
 
     if (isDarkTheme) {
       document.documentElement.classList.add('dark');
+      setMode('dark');
       return;
     }
 
     if (!isDarkTheme) {
       document.documentElement.classList.remove('dark');
+      setMode('light');
     }
   }, [isUsingDeviceMode, isDarkTheme]);
 

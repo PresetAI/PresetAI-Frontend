@@ -25,7 +25,7 @@ function FAQ() {
         Reach out to our support team by{' '}
         <a
           href="#"
-          className="font-semibold text-indigo-600 hover:text-indigo-500"
+          className="font-semibold text-primary hover:text-primary/70"
         >
           sending us an email
         </a>{' '}

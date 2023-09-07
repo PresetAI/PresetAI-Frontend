@@ -172,7 +172,8 @@ function EnhancedTableHead(props: EnhancedTableProps) {
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
             >
-              {headCell.label}
+              <span className="text-primary">{headCell.label}</span>
+
               {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden}>
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
@@ -223,7 +224,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
           id="tableTitle"
           component="div"
         >
-          Data Sources
+          <span className="text-primary">Data Sources</span>
         </Typography>
       )}
       {numSelected > 0 ? (
@@ -388,20 +389,26 @@ function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
                           }}
                         />
                       </TableCell>
-                      <TableCell align="left">{row.filename}</TableCell>
+                      <TableCell align="left">
+                        <span className="text-primary">{row.filename}</span>
+                      </TableCell>
                       <TableCell align="left">
                         <a
                           href={row.source_link}
                           target="_blank"
                           rel="noreferrer"
-                          className="transition duration-150 hover:text-gray-400"
+                          className=" transition duration-150 hover:text-gray-400"
                         >
-                          <Button variant="secondary">Link</Button>
+                          <Button>Link</Button>
                         </a>
                       </TableCell>
-                      <TableCell align="left">{row.provider}</TableCell>
                       <TableCell align="left">
-                        {moment(row.create_time).format('YYYY-MM-DD hh:mm a')}
+                        <span className="text-primary">{row.provider}</span>
+                      </TableCell>
+                      <TableCell align="left">
+                        <span className="text-primary">
+                          {moment(row.create_time).format('YYYY-MM-DD hh:mm a')}
+                        </span>
                       </TableCell>
                     </TableRow>
                   );
