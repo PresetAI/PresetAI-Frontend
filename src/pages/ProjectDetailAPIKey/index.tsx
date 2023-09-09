@@ -16,6 +16,7 @@ import {
 import CreateAPIKeyDialog from '@/pages/ProjectDetailAPIKey/components/CreateAPIKeyDialog';
 import UpdateAPIKeyDialog from '@/pages/ProjectDetailAPIKey/components/UpdateAPIKeyDialog';
 import APIKeyTable from '@/pages/ProjectDetailAPIKey/components/APIKeyTable';
+import Loader from '@/components/Loader';
 
 const CreateAPIKeyBodyInit = {
   name: '',

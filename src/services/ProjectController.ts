@@ -82,10 +82,10 @@ export async function doChaClientSideUsingPost(
   });
 }
 
-export async function ingestDataClientUsingPost(
+export async function ingestDataUrlClientUsingPost(
   body: API.IngestDataClientUsingPostBody
 ) {
-  return axios.post(`${BASE_URL}/project/ingest_data/client`, body, {
+  return axios.post(`${BASE_URL}/project/ingest_data/url/client`, body, {
     withCredentials: true,
   });
 }
@@ -94,4 +94,17 @@ export async function getTasksUsingGet(projectId: string | undefined) {
   return axios.get(`${BASE_URL}/project/get_tasks/${projectId}`, {
     withCredentials: true,
   });
+}
+
+export async function deleteMultipleFilesUsingDelete(
+  projectId: string,
+  body: API.DeleteMultipleFilesUsingDeleteBody | undefined
+) {
+  return axios.delete(
+    `${BASE_URL}/project/delete_multiple_files/${projectId}`,
+    {
+      data: body,
+      withCredentials: true,
+    }
+  );
 }

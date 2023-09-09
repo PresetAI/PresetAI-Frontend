@@ -8,9 +8,15 @@ import ProjectSidebar from '@/layouts/ProjectSidebar';
 import common from '@/config/common';
 import Title from '@/components/Title';
 import { AuthContext } from '@/contexts/auth_context';
+import Loader from '@/components/Loader';
 
 function Project() {
-  const { setFetchLoading } = useContext(AuthContext);
+  const {
+    setFetchLoading,
+    setLocalizationAndLoadingFunction,
+    localization,
+    fetchProcessLoading,
+  } = useContext(AuthContext);
   const [dialogOpen, setDialogOpen] = useState<boolean>(false); // dialog open or not
   const [alert, setAlert] = useState<null | 'default' | 'destructive'>(null);
   const [description, setDescription] = useState<string>('');
@@ -37,6 +43,7 @@ function Project() {
     <ProjectSidebar
       component={
         <>
+          <Loader open={fetchProcessLoading} title={localization} />
           {alert === 'destructive' && (
             <AlertDestructive description={description} />
           )}
@@ -46,6 +53,9 @@ function Project() {
             subtitle={common['projects.subtitle']}
           />
           <ProjectCreateDialog
+            setLocalizationAndLoadingFunction={
+              setLocalizationAndLoadingFunction
+            }
             dialogOpen={dialogOpen}
             setDialogOpen={setDialogOpen}
             setAlert={setAlert}

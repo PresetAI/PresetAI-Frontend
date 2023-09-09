@@ -12,8 +12,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useRef, useState } from 'react';
 import { newProjectUsingPost } from '@/services/ProjectController';
+import localization from '@/config/localization';
 
 type ProjectCreateDialogProps = {
+  setLocalizationAndLoadingFunction: (text: string, open: boolean) => void;
   dialogOpen: boolean;
   setDialogOpen: (dialogOpen: boolean) => void;
   setAlert: (alert: null | 'default' | 'destructive') => void;
@@ -23,6 +25,7 @@ type ProjectCreateDialogProps = {
 
 function ProjectCreateDialog(props: ProjectCreateDialogProps) {
   const {
+    setLocalizationAndLoadingFunction,
     dialogOpen,
     setDialogOpen,
     setAlert,
@@ -31,7 +34,6 @@ function ProjectCreateDialog(props: ProjectCreateDialogProps) {
   } = props;
   // useref to get the input value
   const projectNameRef = useRef<HTMLInputElement>(null);
-  const [projectForm, setProjectForm] = useState<API.NewProjectUsingPostBody>();
 
   const createProject = async (e: any) => {
     e.preventDefault();
@@ -44,13 +46,14 @@ function ProjectCreateDialog(props: ProjectCreateDialogProps) {
       }, 5000);
       return;
     }
-    // setProjectForm();
     try {
+      setLocalizationAndLoadingFunction(localization.creating, true);
       const body: API.NewProjectUsingPostBody = {
         project_name: projectName,
       };
       const res = await newProjectUsingPost(body);
       if (res.data.code === 200) {
+        setLocalizationAndLoadingFunction(localization.empty, false);
         setDescription('Project create successfully');
         setAlert('default');
         setDialogOpen(false);
@@ -61,6 +64,7 @@ function ProjectCreateDialog(props: ProjectCreateDialogProps) {
         getProjectsList();
       }
     } catch (err: any) {
+      setLocalizationAndLoadingFunction(localization.empty, false);
       setDescription(err.response.data.message);
       setAlert('destructive');
       setTimeout(() => {

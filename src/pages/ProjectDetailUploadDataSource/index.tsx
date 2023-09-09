@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Sidebar } from '@/layouts';
 import Title from '@/components/Title';
 import { TabList } from '@/pages/ProjectDetailUploadDataSource/components/TabList';
-import { ingestDataClientUsingPost } from '@/services/ProjectController';
+import { ingestDataUrlClientUsingPost } from '@/services/ProjectController';
 import { useToast } from '@/components/ui/use-toast';
 import { Toaster } from '@/components/ui/toaster';
 import GithubIcon from '@/assets/icons/github.png';
@@ -17,8 +17,8 @@ import { Button } from '@/components/ui/button';
 
 const ingestDataInit: API.IngestDataClientUsingPostBody = {
   project_id: '',
-  provider: '',
   url: '',
+  provider: 'github',
 };
 
 function ProjectDetailUploadDataSource() {
@@ -27,11 +27,14 @@ function ProjectDetailUploadDataSource() {
   const { projectId } = useParams<{ projectId: string | undefined }>();
   const [type, setType] = useState<string>('');
   const [ingestData, setIngestData] =
-    useState<API.IngestDataClientUsingPostBody>(ingestDataInit);
+    useState<API.IngestDataClientUsingPostBody>({
+      project_id: projectId,
+      url: '',
+      provider: 'github',
+    });
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIngestData({ ...ingestData, url: e.target.value });
-    console.log(ingestData);
   };
 
   const codeDocsProviderInit = [
@@ -96,7 +99,8 @@ function ProjectDetailUploadDataSource() {
 
   const onClickIngestData = async () => {
     try {
-      // const res = await ingestDataClientUsingPost(ingestData);
+      console.log('ingestData:', ingestData);
+      const res = await ingestDataUrlClientUsingPost(ingestData);
     } catch (e: any) {
       toast({
         variant: 'destructive',

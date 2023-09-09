@@ -22,6 +22,9 @@ import { useEffect, useMemo, useState } from 'react';
 import moment from 'moment';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { grey } from '@mui/material/colors';
+import { deleteMultipleFilesUsingDelete } from '@/services/ProjectController';
+import localization from '@/config/localization';
 
 interface Data {
   id: string;
@@ -151,12 +154,18 @@ function EnhancedTableHead(props: EnhancedTableProps) {
       <TableRow>
         <TableCell padding="checkbox">
           <Checkbox
-            color="primary"
+            color="default"
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{
               'aria-label': 'select all files',
+            }}
+            sx={{
+              color: grey[700],
+              '&.Mui-checked': {
+                color: grey[900],
+              },
             }}
           />
         </TableCell>
@@ -188,11 +197,28 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 }
 
 interface EnhancedTableToolbarProps {
+  setLocalizationAndLoadingFunction: (text: string, open: boolean) => void;
+  projectId: string | undefined;
+  getProjectFileByProjectId: () => void;
   numSelected: number;
+  selectedDeleteIds: API.DeleteMultipleFilesUsingDeleteBody | undefined;
 }
 
 function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
-  const { numSelected } = props;
+  const {
+    setLocalizationAndLoadingFunction,
+    projectId,
+    getProjectFileByProjectId,
+    numSelected,
+    selectedDeleteIds,
+  } = props;
+
+  const onClickDeleteSelected = async () => {
+    setLocalizationAndLoading(localization.deleting, true);
+    await deleteMultipleFilesUsingDelete(projectId || '', selectedDeleteIds);
+    setLocalizationAndLoading(localization.empty, false);
+    getProjectFileByProjectId();
+  };
 
   return (
     <Toolbar
@@ -229,7 +255,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
       )}
       {numSelected > 0 ? (
         <Tooltip title="Delete">
-          <IconButton>
+          <IconButton onClick={onClickDeleteSelected}>
             <DeleteIcon />
           </IconButton>
         </Tooltip>
@@ -245,16 +271,28 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
 }
 
 interface ProjectFileManagementTableProps {
+  setLocalizationAndLoadingFunction: (text: string, open: boolean) => void;
+  projectId: string | undefined;
+  getProjectFileByProjectId: () => void;
   filteredFileList: API.ProjectFileList[];
   filterText: string;
   setFilterText: React.Dispatch<React.SetStateAction<string>>;
 }
 
 function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
-  const { filteredFileList, filterText, setFilterText } = props;
+  const {
+    setLocalizationAndLoadingFunction,
+    projectId,
+    getProjectFileByProjectId,
+    filteredFileList,
+    filterText,
+    setFilterText,
+  } = props;
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<keyof Data>('filename');
   const [selected, setSelected] = useState<readonly string[]>([]);
+  const [selectedDeleteIds, setSelectedDeleteIds] =
+    useState<API.DeleteMultipleFilesUsingDeleteBody>(); // Add selectedDeleteIds here
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
@@ -286,30 +324,40 @@ function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.filename);
+      const newSelected = rows.map((n) => n.id);
       setSelected(newSelected);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event: React.MouseEvent<unknown>, id: string) => {
+    const selectedIndex = selected.indexOf(id);
     let newSelected: readonly string[] = [];
+    let newSelectedDeleteIds: string[] = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, id);
+      newSelectedDeleteIds = newSelected.concat(selected, id);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
+      newSelectedDeleteIds = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
       newSelected = newSelected.concat(selected.slice(0, -1));
+      newSelectedDeleteIds = newSelected.concat(selected.slice(0, -1));
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
         selected.slice(selectedIndex + 1)
       );
+      newSelectedDeleteIds = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1)
+      );
     }
-
+    setSelectedDeleteIds({
+      file_ids: newSelectedDeleteIds,
+    });
     setSelected(newSelected);
   };
 
@@ -353,7 +401,15 @@ function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
         <Paper
           sx={{ width: '100%', mb: 2, bgcolor: 'transparent', borderRadius: 4 }}
         >
-          <EnhancedTableToolbar numSelected={selected.length} />
+          <EnhancedTableToolbar
+            setLocalizationAndLoadingFunction={
+              setLocalizationAndLoadingFunction
+            }
+            projectId={projectId}
+            getProjectFileByProjectId={getProjectFileByProjectId}
+            numSelected={selected.length}
+            selectedDeleteIds={selectedDeleteIds}
+          />
           <TableContainer>
             <Table sx={{ minWidth: 750 }} aria-labelledby="tableTitle">
               <EnhancedTableHead
@@ -366,14 +422,14 @@ function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
               />
               <TableBody>
                 {visibleRows.map((row: any, index) => {
-                  const isItemSelected = isSelected(row.filename);
+                  const isItemSelected = isSelected(row.id);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
                     <TableRow
                       hover
                       role="checkbox"
-                      onClick={(event) => handleClick(event, row.filename)}
+                      onClick={(event) => handleClick(event, row.id)}
                       aria-checked={isItemSelected}
                       selected={isItemSelected}
                       tabIndex={-1}
@@ -382,10 +438,15 @@ function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
                     >
                       <TableCell padding="checkbox">
                         <Checkbox
-                          color="primary"
                           checked={isItemSelected}
                           inputProps={{
                             'aria-labelledby': labelId,
+                          }}
+                          sx={{
+                            color: grey[700],
+                            '&.Mui-checked': {
+                              color: grey[900],
+                            },
                           }}
                         />
                       </TableCell>

@@ -26,7 +26,7 @@ declare namespace API {
   };
 
   type IngestDataClientUsingPostBody = {
-    project_id: string;
+    project_id: string | undefined;
     url: string;
     provider: string;
   };
@@ -77,6 +77,10 @@ declare namespace API {
 
   type UpdateAPIKeyByProjectIdAPIKeyIdUsingPutBody = {
     name: string;
+  };
+
+  type DeleteMultipleFilesUsingDeleteBody = {
+    file_ids: string[];
   };
 
   // Product

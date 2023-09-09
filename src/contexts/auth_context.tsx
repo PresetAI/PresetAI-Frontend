@@ -12,6 +12,11 @@ type AuthContextType = {
   userInfo: API.User;
   fetchLoading: boolean;
   setFetchLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  fetchProcessLoading: boolean;
+  setFetchProcessLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  localization: string;
+  setLocalization: React.Dispatch<React.SetStateAction<string>>;
+  setLocalizationAndLoadingFunction: (text: string, open: boolean) => void;
   projectName: string;
   setProjectName: React.Dispatch<React.SetStateAction<string>>;
   login: () => void;
@@ -26,6 +31,11 @@ const AuthContext = createContext<AuthContextType>({
   setIsAuthenticated: () => {},
   fetchLoading: false,
   setFetchLoading: () => {},
+  fetchProcessLoading: false,
+  setFetchProcessLoading: () => {},
+  setLocalizationAndLoadingFunction: () => {},
+  localization: '',
+  setLocalization: () => {},
   projectName: '',
   setProjectName: () => {},
   login: () => {},
@@ -38,7 +48,10 @@ function AuthProvider({ children }: AuthContextProviderProps) {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userInfo, setUserInfo] = useState<API.User>({});
   const [loading, setLoading] = useState<boolean>(true); // add this line
-  const [fetchLoading, setFetchLoading] = useState<boolean>(false);
+  const [fetchLoading, setFetchLoading] = useState<boolean>(false); // loading for fetch data for GET request
+  const [fetchProcessLoading, setFetchProcessLoading] =
+    useState<boolean>(false); // loading for fetch data for POST, PUT, DELETE request
+  const [localization, setLocalization] = useState<string>('');
   const [projectName, setProjectName] = useState<string>('');
   const [mode, setMode] = useState<'light' | 'dark'>('light');
 
@@ -48,6 +61,11 @@ function AuthProvider({ children }: AuthContextProviderProps) {
 
   const signout = () => {
     window.location.href = `${BASE_URL}/user/logout`;
+  };
+
+  const setLocalizationAndLoadingFunction = (text: string, open: boolean) => {
+    setLocalization(text);
+    setFetchProcessLoading(open);
   };
 
   const getCurrentUser = async () => {
@@ -75,6 +93,11 @@ function AuthProvider({ children }: AuthContextProviderProps) {
         userInfo,
         fetchLoading,
         setFetchLoading,
+        fetchProcessLoading,
+        setFetchProcessLoading,
+        localization,
+        setLocalization,
+        setLocalizationAndLoadingFunction,
         projectName,
         setProjectName,
         login,
