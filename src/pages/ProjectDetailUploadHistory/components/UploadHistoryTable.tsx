@@ -76,7 +76,7 @@ const headCells: readonly HeadCell[] = [
     id: 'is_deleted',
     numeric: false,
     disablePadding: false,
-    label: 'is Deleted',
+    label: 'Deleted',
   },
 ];
 

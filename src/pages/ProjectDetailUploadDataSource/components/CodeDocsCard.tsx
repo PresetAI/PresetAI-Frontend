@@ -32,11 +32,12 @@ function CodeDocsCard(props: CodeDocsCardProps) {
     // set codeDocsProvider selected to true
     const newCodeDocsProvider = codeDocsProvider.map((item: any) => {
       if (item.id === id) {
+        setIngestData({ ...ingestData, provider: item.provider });
         return { ...item, selected: true };
       }
       return { ...item, selected: false };
     });
-    console.log(newCodeDocsProvider);
+
     setCodeDocsProvider(newCodeDocsProvider);
   };
 

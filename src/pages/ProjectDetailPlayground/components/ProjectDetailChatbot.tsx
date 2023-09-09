@@ -40,11 +40,6 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
       sender: 'ChatGPT',
       suggestion: null,
     },
-    {
-      message: '👋 Hello, How I can help you today?',
-      sender: 'user',
-      suggestion: null,
-    },
   ]);
 
   /*
@@ -76,17 +71,17 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
    * Handle send message / ask question
    * */
   const handleSend = async (e: any) => {
-    // setIsTyping(true);
     e.preventDefault();
-    // const newMessage = {
-    //   message: userMessage,
-    //   sender: 'user',
-    //   suggestion: null,
-    // };
-    //
-    // setMessages((prevMessages) => [...prevMessages, newMessage]);
-    // // Initial system message
-    // await processMessage(userMessage);
+    setIsTyping(true);
+    const newMessage = {
+      message: userMessage,
+      sender: 'user',
+      suggestion: null,
+    };
+
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
+    // Initial system message
+    await processMessage(userMessage);
   };
 
   /*

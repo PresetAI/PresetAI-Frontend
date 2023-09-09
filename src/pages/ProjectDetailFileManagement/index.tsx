@@ -48,6 +48,8 @@ function ProjectDetailFileManagement() {
             subtitle={common['projectDetailFileManagement.subtitle']}
           />
           <ProjectFileManagementTable
+            projectId={projectId}
+            getProjectFileByProjectId={getProjectFileByProjectId}
             filterText={filterText}
             setFilterText={setFilterText}
             filteredFileList={filteredFileList}
