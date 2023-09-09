@@ -214,9 +214,9 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
   } = props;
 
   const onClickDeleteSelected = async () => {
-    setLocalizationAndLoading(localization.deleting, true);
+    setLocalizationAndLoadingFunction(localization.deleting, true);
     await deleteMultipleFilesUsingDelete(projectId || '', selectedDeleteIds);
-    setLocalizationAndLoading(localization.empty, false);
+    setLocalizationAndLoadingFunction(localization.empty, false);
     getProjectFileByProjectId();
   };
 
