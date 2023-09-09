@@ -24,6 +24,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { grey } from '@mui/material/colors';
 import { deleteMultipleFilesUsingDelete } from '@/services/ProjectController';
+import localization from '@/config/localization';
 
 interface Data {
   id: string;
@@ -196,6 +197,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
 }
 
 interface EnhancedTableToolbarProps {
+  setLocalizationAndLoadingFunction: (text: string, open: boolean) => void;
   projectId: string | undefined;
   getProjectFileByProjectId: () => void;
   numSelected: number;
@@ -204,6 +206,7 @@ interface EnhancedTableToolbarProps {
 
 function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
   const {
+    setLocalizationAndLoadingFunction,
     projectId,
     getProjectFileByProjectId,
     numSelected,
@@ -211,7 +214,9 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
   } = props;
 
   const onClickDeleteSelected = async () => {
+    setLocalizationAndLoading(localization.deleting, true);
     await deleteMultipleFilesUsingDelete(projectId || '', selectedDeleteIds);
+    setLocalizationAndLoading(localization.empty, false);
     getProjectFileByProjectId();
   };
 
@@ -266,6 +271,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
 }
 
 interface ProjectFileManagementTableProps {
+  setLocalizationAndLoadingFunction: (text: string, open: boolean) => void;
   projectId: string | undefined;
   getProjectFileByProjectId: () => void;
   filteredFileList: API.ProjectFileList[];
@@ -275,6 +281,7 @@ interface ProjectFileManagementTableProps {
 
 function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
   const {
+    setLocalizationAndLoadingFunction,
     projectId,
     getProjectFileByProjectId,
     filteredFileList,
@@ -395,6 +402,9 @@ function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
           sx={{ width: '100%', mb: 2, bgcolor: 'transparent', borderRadius: 4 }}
         >
           <EnhancedTableToolbar
+            setLocalizationAndLoadingFunction={
+              setLocalizationAndLoadingFunction
+            }
             projectId={projectId}
             getProjectFileByProjectId={getProjectFileByProjectId}
             numSelected={selected.length}

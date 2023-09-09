@@ -6,9 +6,15 @@ import { getProjectFileByProjectIdUsingGet } from '@/services/ProjectController'
 import common from '@/config/common';
 import Title from '@/components/Title';
 import { AuthContext } from '@/contexts/auth_context';
+import Loader from '@/components/Loader';
 
 function ProjectDetailFileManagement() {
-  const { setFetchLoading } = useContext(AuthContext);
+  const {
+    setFetchLoading,
+    fetchProcessLoading,
+    localization,
+    setLocalizationAndLoadingFunction,
+  } = useContext(AuthContext);
   // get params from url
   const { projectId } = useParams<{ projectId: string | undefined }>();
   const [projectFileList, setProjectFileList] = useState<API.ProjectFileList[]>(
@@ -40,14 +46,16 @@ function ProjectDetailFileManagement() {
     <Sidebar
       projectId={projectId}
       component={
-        // <section className="grid grid-cols-2 gap-20">
-        // <section className="grid grid-cols-1 sm:grid-cols-9 justify-items-start place-items-start mx-auto px-8 sm:px-12 lg:px-16">
         <>
+          <Loader open={fetchProcessLoading} title={localization} />
           <Title
             title={common['projectDetailFileManagement.title']}
             subtitle={common['projectDetailFileManagement.subtitle']}
           />
           <ProjectFileManagementTable
+            setLocalizationAndLoadingFunction={
+              setLocalizationAndLoadingFunction
+            }
             projectId={projectId}
             getProjectFileByProjectId={getProjectFileByProjectId}
             filterText={filterText}
