@@ -1,21 +1,33 @@
-import { useParams } from 'react-router-dom';
+// React and React Router Imports
 import { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
+// Layouts, Components, and Services Imports
 import { Sidebar } from '@/layouts';
 import ProjectDetailChatbot from './components/ProjectDetailChatbot';
 import ProjectDetailForm from './components/ProjectDetailForm';
-import { getProjectByProjectIdUsingGet } from '@/services/ProjectController';
 import Title from '@/components/Title';
+import { getProjectByProjectIdUsingGet } from '@/services/ProjectController';
+
+// Config and Context Imports
 import common from '@/config/common';
 import { AuthContext } from '@/contexts/auth_context';
 
 function ProjectDetailPlayground() {
-  const { setProjectName, setFetchLoading } = useContext(AuthContext);
-  const { projectId } = useParams<{ projectId: string | undefined }>(); // get params from url
-  const [projectDetailData, setProjectDetailData] = useState<API.Project>({}); // project detail
+  // Extracting context values
+  const { setProjectName, setFetchLoading, setErrorDescription } =
+    useContext(AuthContext);
 
-  /*
-   * Get project detail by project id
-   * */
+  // Retrieving the project ID from the URL parameters
+  const { projectId } = useParams<{ projectId: string | undefined }>();
+
+  // State management for project details
+  const [projectDetailData, setProjectDetailData] = useState<API.Project>({});
+
+  /**
+   * Fetch project details based on the project ID.
+   * On successful fetch, set the project details and project name in the context.
+   */
   const getProjectDetail = async () => {
     try {
       setFetchLoading(true);
@@ -24,12 +36,14 @@ function ProjectDetailPlayground() {
         setProjectDetailData(res.data.data);
         setProjectName(res.data.data.name);
       }
-    } catch (e: any) {
-      console.log(e);
+    } catch (error: any) {
+      setErrorDescription(error.response.data.message);
+    } finally {
+      setFetchLoading(false);
     }
-    setFetchLoading(false);
   };
 
+  // Effect hook to fetch project details when the component mounts
   useEffect(() => {
     getProjectDetail();
   }, []);

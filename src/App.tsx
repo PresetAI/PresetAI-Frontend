@@ -1,6 +1,9 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Error, Home, Pricing, PrivateRoute } from './pages';
+import AlertDestructive from '@/components/Alert/AlertDestructive';
+import { AuthContext } from '@/contexts/auth_context';
+import { AlertDefault } from '@/components/Alert/AlertDefault';
 
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Project = lazy(() => import('./pages/Project'));
@@ -60,8 +63,11 @@ const routes = [
 ];
 
 function App() {
+  const { successDescription, errorDescription } = useContext(AuthContext);
   return (
     <Suspense fallback="">
+      {successDescription && <AlertDefault description={successDescription} />}
+      {errorDescription && <AlertDestructive description={errorDescription} />}
       <Routes>
         {routes.map((route) => {
           return (

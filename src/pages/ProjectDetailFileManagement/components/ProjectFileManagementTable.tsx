@@ -275,8 +275,11 @@ interface ProjectFileManagementTableProps {
   projectId: string | undefined;
   getProjectFileByProjectId: () => void;
   filteredFileList: API.ProjectFileList[];
-  filterText: string;
-  setFilterText: React.Dispatch<React.SetStateAction<string>>;
+  filename: string;
+  setFilterText: (
+    prev: any,
+    options?: { replace: boolean }
+  ) => void | Promise<void>;
 }
 
 function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
@@ -285,7 +288,7 @@ function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
     projectId,
     getProjectFileByProjectId,
     filteredFileList,
-    filterText,
+    filename,
     setFilterText,
   } = props;
   const [order, setOrder] = useState<Order>('asc');
@@ -392,8 +395,16 @@ function ProjectFileManagementTable(props: ProjectFileManagementTableProps) {
           className="w-96"
           type="text"
           placeholder="Search by Filename"
-          value={filterText}
-          onChange={(e) => setFilterText(e.target.value)}
+          value={filename}
+          onChange={(e) =>
+            setFilterText(
+              (prev: any) => {
+                prev.set('filename', e.target.value);
+                return prev;
+              },
+              { replace: true }
+            )
+          }
         />
         <Button className="text-sm font-semibold">Add New Data Sources</Button>
       </div>

@@ -1,13 +1,25 @@
+import React, { useContext, useEffect, useState } from 'react';
+
+// Components
 import ProjectList from './components/ProjectList';
 import ProjectCreateDialog from '@/pages/Project/components/ProjectCreateDialog';
-import { useContext, useEffect, useState } from 'react';
 import AlertDestructive from '@/components/Alert/AlertDestructive';
 import { AlertDefault } from '@/components/Alert/AlertDefault';
-import { getProjectsUsingGet } from '@/services/ProjectController';
-import ProjectSidebar from '@/layouts/ProjectSidebar';
-import common from '@/config/common';
 import Title from '@/components/Title';
+
+// Services
+import { getProjectsUsingGet } from '@/services/ProjectController';
+
+// Layouts
+import ProjectSidebar from '@/layouts/ProjectSidebar';
+
+// Configuration
+import common from '@/config/common';
+
+// Context
 import { AuthContext } from '@/contexts/auth_context';
+
+// Components (nested)
 import Loader from '@/components/Loader';
 
 function Project() {
@@ -16,11 +28,11 @@ function Project() {
     setLocalizationAndLoadingFunction,
     localization,
     fetchProcessLoading,
+    setErrorDescription,
   } = useContext(AuthContext);
-  const [dialogOpen, setDialogOpen] = useState<boolean>(false); // dialog open or not
-  const [alert, setAlert] = useState<null | 'default' | 'destructive'>(null);
-  const [description, setDescription] = useState<string>('');
-  const [projectsListData, setProjectsListData] = useState<API.Project[]>([]); // project list
+
+  const [dialogOpen, setDialogOpen] = useState<boolean>(false); // Indicates if the dialog is open or not
+  const [projectsListData, setProjectsListData] = useState<API.Project[]>([]); // List of projects
 
   const getProjectsList = async () => {
     setFetchLoading(true);
@@ -29,14 +41,15 @@ function Project() {
       if (res.data.code === 200) {
         setProjectsListData(res.data.data);
       }
-    } catch (e: any) {
-      console.log(e);
+    } catch (error: any) {
+      setErrorDescription(error.response.data.message);
+    } finally {
+      setFetchLoading(false);
     }
-    setFetchLoading(false);
   };
 
   useEffect(() => {
-    getProjectsList();
+    getProjectsList(); // Fetch the list of projects when the component mounts
   }, []);
 
   return (
@@ -44,22 +57,13 @@ function Project() {
       component={
         <>
           <Loader open={fetchProcessLoading} title={localization} />
-          {alert === 'destructive' && (
-            <AlertDestructive description={description} />
-          )}
-          {alert === 'default' && <AlertDefault description={description} />}
           <Title
             title={common['projects.title']}
             subtitle={common['projects.subtitle']}
           />
           <ProjectCreateDialog
-            setLocalizationAndLoadingFunction={
-              setLocalizationAndLoadingFunction
-            }
             dialogOpen={dialogOpen}
             setDialogOpen={setDialogOpen}
-            setAlert={setAlert}
-            setDescription={setDescription}
             getProjectsList={getProjectsList}
           />
           <ProjectList projectsListData={projectsListData} />
