@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import UseAnimations from 'react-useanimations';
 import loading from 'react-useanimations/lib/loading';
@@ -14,7 +15,6 @@ import logo from '@/assets/logo.svg';
 import { Card } from '@/components/ui/card';
 import { doChaClientSideUsingPost } from '@/services/ProjectController';
 import useCopyToClipboard from '@/hooks/useCopyToClipboard';
-import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 
 type Message = {
   message: string;
@@ -34,7 +34,7 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
   const [userMessage, setUserMessage] = useState<string>(''); // user input
   const [suggestions, setSuggestions] = useState<any[]>([]); // suggestions items get from backend
   const [isTyping, setIsTyping] = useState<boolean>(false); // is typing]
-  const [messages, setMessages] = useState<any[]>([
+  const [messages, setMessages] = useState<Message[]>([
     {
       message: '👋 Hello, How I can help you today?',
       sender: 'ChatGPT',
@@ -45,25 +45,43 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
   /*
    * Send message to backend and get response
    * */
-  const [mess, setMess] = useState<any[]>([]);
+  const [mess, setMess] = useState<string>('');
   const processMessage = async (chatMessages: any) => {
     setUserMessage('');
     const body: API.DoChaClientSideUsingPostBody = {
       question: chatMessages,
     };
     const response = await doChaClientSideUsingPost(projectId, body);
-    if (response.data.code === 200) {
+    if (response.body) {
+      const reader = response.body
+        .pipeThrough(new TextDecoderStream())
+        .getReader();
       const newMessage = {
-        message: response.data.data,
+        message: '',
         sender: 'ChatGPT',
         suggestion: null,
       };
       setMessages((prevMessages) => [...prevMessages, newMessage]);
-      setSuggestions((prevSuggestions) => [
-        ...prevSuggestions,
-        [...response.data.data],
-      ]);
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) {
+          break;
+        }
+        // setMess((prevMessages) => prevMessages + value);
+        // add prevMessages + value to last message in messages
+        setMessages((prevMessages) => {
+          // Create a copy of the last message and update its message field
+          const updatedLastMessage = {
+            ...prevMessages[prevMessages.length - 1],
+            message: prevMessages[prevMessages.length - 1].message + value,
+          };
+
+          // Replace the last message in the array with the updated version
+          return [...prevMessages.slice(0, -1), updatedLastMessage];
+        });
+      }
     }
+
     setIsTyping(false);
   };
 
@@ -138,12 +156,12 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
                         alt="bot"
                       />
                       <div className="flex items-center w-full">
-                        <div className="text-gray-600 animate__animated animate__fadeInDown">
+                        <div className="text-gray-600">
                           <ReactMarkdown
                             remarkPlugins={[
                               [remarkGfm, { singleTilde: false }],
                             ]}
-                            className="prose prose-slate dark:text-gray-50"
+                            className="prose prose-stone dark:text-gray-50"
                           >
                             {message.message}
                           </ReactMarkdown>

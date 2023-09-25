@@ -1,8 +1,5 @@
-import ProjectSidebar from '@/layouts/ProjectSidebar';
-import APIKeyTable from '@/pages/UserAPIKey/components/APIKeyTable';
+// Import React and necessary hooks and components
 import { useContext, useEffect, useRef, useState } from 'react';
-import AlertDestructive from '@/components/Alert/AlertDestructive';
-import { AlertDefault } from '@/components/Alert/AlertDefault';
 import {
   deleteAPIKeyUsingDelete,
   getAPIKeyUsingPost,
@@ -16,32 +13,40 @@ import Title from '@/components/Title';
 import common from '@/config/common';
 import { AuthContext } from '@/contexts/auth_context';
 
+// Import necessary components and layouts
+import ProjectSidebar from '@/layouts/ProjectSidebar';
+import APIKeyTable from '@/pages/UserAPIKey/components/APIKeyTable';
+import localization from '@/config/localization';
+
+// Define the UserAPIKey component
 function UserAPIKey() {
-  const { setFetchLoading } = useContext(AuthContext);
-  const [dialogOpen, setDialogOpen] = useState<boolean>(false); // dialog open or not
+  const {
+    setFetchLoading,
+    setSuccessDescription,
+    setErrorDescription,
+    setLocalizationAndLoadingFunction,
+  } = useContext(AuthContext);
+  const [dialogOpen, setDialogOpen] = useState<boolean>(false); // Indicates if the dialog is open
   const apiKeyNameValue = useRef<HTMLInputElement>(null);
-  const [selectedId, setSelectedId] = useState<string>(''); // selected id
+  const [selectedId, setSelectedId] = useState<string>(''); // Stores the selected ID
 
   // For update dialog
-  const [updateDialogOpen, setUpdateDialogOpen] = useState<boolean>(false); // update dialog open or not
+  const [updateDialogOpen, setUpdateDialogOpen] = useState<boolean>(false); // Indicates if the update dialog is open
   const [updateAPIKeyNameValue, setUpdateAPIKeyNameValue] = useState<
     string | undefined
   >('');
 
   // For alert confirm dialog
   const [alertConfirmDialogOpen, setAlertConfirmDialogOpen] =
-    useState<boolean>(false); // alert confirm dialog open or not
+    useState<boolean>(false); // Indicates if the alert confirm dialog is open
   const [alertConfirmDialogTitle, setAlertConfirmDialogTitle] =
-    useState<string>(''); // alert confirm dialog title
+    useState<string>(''); // Title of the alert confirm dialog
   const [alertConfirmDialogDescription, setAlertConfirmDialogDescription] =
-    useState<string>(''); // alert confirm dialog description
+    useState<string>(''); // Description of the alert confirm dialog
 
-  const [alert, setAlert] = useState<null | 'default' | 'destructive'>(null);
-  const [description, setDescription] = useState<string>('');
-  const [projectsListData, setProjectsListData] = useState<API.Project[]>([]); // project list
+  const [apiKeyData, setApiKeyData] = useState<API.UserAPIKey[]>([]); // List of API keys
 
-  const [apiKeyData, setApiKeyData] = useState<API.UserAPIKey[]>([]); // API KEY LIST
-
+  // Function to fetch the list of API keys
   const getApiKeyList = async () => {
     setFetchLoading(true);
     const res = await getAPIKeyUsingPost();
@@ -49,51 +54,43 @@ function UserAPIKey() {
       if (res.data.code === 200) {
         setApiKeyData(res.data.data);
       }
-    } catch (e: any) {
-      console.log(e);
+    } catch (error: any) {
+      setErrorDescription(error.response.data.message);
+    } finally {
+      setFetchLoading(false);
     }
-    setFetchLoading(false);
   };
 
   // For Create API Key
-  // confirm create API Key
+  // Function to confirm creation of API Key
   const onClickConfirmCreateAPIKey = async (e: any) => {
     e.preventDefault();
     const apiKeyName = apiKeyNameValue.current?.value;
     if (!apiKeyName) {
-      setDescription('Name cannot be empty');
-      setAlert('destructive');
-      setTimeout(() => {
-        setAlert(null);
-      }, 5000);
+      setErrorDescription('Name cannot be empty');
       return;
     }
     try {
+      setLocalizationAndLoadingFunction(localization.creating, true);
       const body: API.NewAPIKeyUsingPostBody = {
         name: apiKeyName,
       };
       const res = await newAPIKeyUsingPost(body);
       if (res.data.code === 200) {
-        setDescription('API Key create successfully');
-        setAlert('default');
+        setLocalizationAndLoadingFunction(localization.empty, false);
         setDialogOpen(false);
-        apiKeyNameValue.current.value = ''; // clear the input
-        setTimeout(() => {
-          setAlert(null);
-        }, 5000);
-        getApiKeyList();
+        setSuccessDescription('API Key created successfully');
+        apiKeyNameValue.current.value = ''; // Clear the input
+        await getApiKeyList();
       }
     } catch (err: any) {
-      setDescription(err.response.data.message);
-      setAlert('destructive');
-      setTimeout(() => {
-        setAlert(null);
-      }, 5000);
+      setLocalizationAndLoadingFunction(localization.empty, false);
+      setErrorDescription(err.response.data.message);
     }
   };
 
   // For Update API Key
-  // open alert confirm dialog
+  // Function to open the alert confirm dialog for updating API Key
   const onClickOpenUpdateAPIKeyDialog = (
     id: string,
     value: string | undefined
@@ -102,16 +99,13 @@ function UserAPIKey() {
     setSelectedId(id);
     setUpdateAPIKeyNameValue(value);
   };
-  // confirm update API Key
+
+  // Function to confirm the update of API Key
   const onClickConfirmUpdateAPIKey = async (e: any) => {
     e.preventDefault();
     const apiKeyName = apiKeyNameValue.current?.value;
     if (!apiKeyName) {
-      setDescription('Name cannot be empty');
-      setAlert('destructive');
-      setTimeout(() => {
-        setAlert(null);
-      }, 5000);
+      setErrorDescription('Name cannot be empty');
       return;
     }
     const body: API.UpdateAPIKeyUsingPutBody = {
@@ -119,19 +113,15 @@ function UserAPIKey() {
     };
     const res = await updateAPIKeyUsingPut(selectedId, body);
     if (res.data.code === 200) {
-      setDescription('API Key update successfully');
-      setAlert('default');
       setUpdateDialogOpen(false);
-      apiKeyNameValue.current.value = ''; // clear the input
-      setTimeout(() => {
-        setAlert(null);
-      }, 5000);
-      getApiKeyList();
+      apiKeyNameValue.current.value = ''; // Clear the input
+      setSuccessDescription('API Key updated successfully');
+      await getApiKeyList();
     }
   };
 
   // For Delete API Key
-  // open alert confirm dialog
+  // Function to open the alert confirm dialog for deleting API Key
   const onClickOpenDeleteAPIKeyDialog = (id: string) => {
     setAlertConfirmDialogTitle('Delete API Key');
     setAlertConfirmDialogDescription(
@@ -140,14 +130,16 @@ function UserAPIKey() {
     setAlertConfirmDialogOpen(true);
     setSelectedId(id);
   };
-  // confirm delete API Key
+
+  // Function to confirm the deletion of API Key
   const onClickConfirmDeleteAPIKey = async () => {
     try {
       await deleteAPIKeyUsingDelete(selectedId);
       setUpdateDialogOpen(false);
-      getApiKeyList();
-    } catch (e: any) {
-      console.log(e);
+      setSuccessDescription('API Key deleted successfully');
+      await getApiKeyList();
+    } catch (error: any) {
+      setErrorDescription(error.response.data.message);
     }
   };
 
@@ -159,10 +151,6 @@ function UserAPIKey() {
     <ProjectSidebar
       component={
         <>
-          {alert === 'destructive' && (
-            <AlertDestructive description={description} />
-          )}
-          {alert === 'default' && <AlertDefault description={description} />}
           {alertConfirmDialogOpen && (
             <AlertConfirmDialog
               dialogOpen={alertConfirmDialogOpen}

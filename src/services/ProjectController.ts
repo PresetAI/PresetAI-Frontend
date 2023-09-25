@@ -77,8 +77,16 @@ export async function doChaClientSideUsingPost(
   project_id: string | undefined,
   body: API.DoChaClientSideUsingPostBody
 ) {
-  return axios.post(`${BASE_URL}/project/do_chat_client/${project_id}`, body, {
-    withCredentials: true,
+  // return axios.post(`${BASE_URL}/project/do_chat_client/${project_id}`, body, {
+  //   withCredentials: true,
+  // });
+  return fetch(`${BASE_URL}/project/do_chat_client/${project_id}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+    credentials: 'include',
   });
 }
 

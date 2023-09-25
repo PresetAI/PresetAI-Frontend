@@ -23,6 +23,10 @@ type AuthContextType = {
   signout: () => void;
   mode: 'light' | 'dark';
   setMode: React.Dispatch<React.SetStateAction<'light' | 'dark'>>;
+  errorDescription: string;
+  setErrorDescription: React.Dispatch<React.SetStateAction<string>>;
+  successDescription: string;
+  setSuccessDescription: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const AuthContext = createContext<AuthContextType>({
@@ -42,9 +46,15 @@ const AuthContext = createContext<AuthContextType>({
   signout: () => {},
   mode: 'light',
   setMode: () => {},
+  errorDescription: '',
+  setErrorDescription: () => {},
+  successDescription: '',
+  setSuccessDescription: () => {},
 });
 
 function AuthProvider({ children }: AuthContextProviderProps) {
+  const [successDescription, setSuccessDescription] = useState<string>('');
+  const [errorDescription, setErrorDescription] = useState<string>('');
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [userInfo, setUserInfo] = useState<API.User>({});
   const [loading, setLoading] = useState<boolean>(true); // add this line
@@ -104,6 +114,10 @@ function AuthProvider({ children }: AuthContextProviderProps) {
         signout,
         mode,
         setMode,
+        errorDescription,
+        setErrorDescription,
+        successDescription,
+        setSuccessDescription,
       }}
     >
       {loading ? <div> </div> : children}
