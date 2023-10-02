@@ -91,8 +91,7 @@ function SubscriptionAnalysis(props: SubscriptionAnalysisProps) {
         </form>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant="outline">Upgrade</Button>
-        <Button>Deploy</Button>
+        {/*<Button>Upgrade</Button>*/}
       </CardFooter>
     </Card>
   );

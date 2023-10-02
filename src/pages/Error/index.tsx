@@ -1,3 +1,5 @@
+import { PresetAISearchBar } from '@presetai/search';
+import '@presetai/search/dist/index.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -40,6 +42,10 @@ function Error() {
         <p className="mt-6 text-base leading-7 text-gray-600">
           Sorry, we couldn’t find the page you’re looking for.
         </p>
+        <PresetAISearchBar
+          user_api_key="76a58cba331ab5de7fe526d4fd3705eb"
+          project_api_key="c639c01b2589d8db90e9da4ece374165"
+        />
         <div className="mt-10">
           <Link
             to="/"

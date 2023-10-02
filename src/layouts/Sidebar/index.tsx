@@ -11,6 +11,8 @@ import FolderCopyOutlinedIcon from '@mui/icons-material/FolderCopyOutlined';
 import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
 import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined';
 import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
+import LiveHelpOutlinedIcon from '@mui/icons-material/LiveHelpOutlined';
+import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
 import { AuthContext } from '@/contexts/auth_context';
@@ -258,15 +260,25 @@ function Sidebar(props: Props) {
                           </ul>
                         </li>
                         <li className="mt-auto">
+                          {/*<Link*/}
+                          {/*  to="#"*/}
+                          {/*  className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary"*/}
+                          {/*>*/}
+                          {/*  <LiveHelpOutlinedIcon*/}
+                          {/*    className="h-6 w-6 shrink-0 text-secondary-foreground"*/}
+                          {/*    aria-hidden="true"*/}
+                          {/*  />*/}
+                          {/*  Tutorial*/}
+                          {/*</Link>*/}
                           <Link
                             to="#"
                             className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary"
                           >
-                            <Cog6ToothIcon
+                            <AssignmentOutlinedIcon
                               className="h-6 w-6 shrink-0 text-secondary-foreground"
                               aria-hidden="true"
                             />
-                            Settings
+                            Docs(Cooming Soon)
                           </Link>
                           <span
                             onClick={signout}
@@ -388,15 +400,25 @@ function Sidebar(props: Props) {
                 </ul>
               </li>
               <li className="mt-auto">
+                {/*<Link*/}
+                {/*  to="#"*/}
+                {/*  className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary"*/}
+                {/*>*/}
+                {/*  <LiveHelpOutlinedIcon*/}
+                {/*    className="h-6 w-6 shrink-0 text-secondary-foreground"*/}
+                {/*    aria-hidden="true"*/}
+                {/*  />*/}
+                {/*  Tutorial*/}
+                {/*</Link>*/}
                 <Link
                   to="#"
                   className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary"
                 >
-                  <Cog6ToothIcon
+                  <AssignmentOutlinedIcon
                     className="h-6 w-6 shrink-0 text-secondary-foreground"
                     aria-hidden="true"
                   />
-                  Settings
+                  Docs(Cooming Soon)
                 </Link>
                 <span
                   onClick={signout}
