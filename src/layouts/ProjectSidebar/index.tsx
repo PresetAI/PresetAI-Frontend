@@ -9,6 +9,7 @@ import {
 import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
 import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
 import BookRoundedIcon from '@mui/icons-material/BookRounded';
+import LiveHelpOutlinedIcon from '@mui/icons-material/LiveHelpOutlined';
 import { Link } from 'react-router-dom';
 import logo from '@/assets/logo.svg';
 import logo_white from '@/assets/logo_white.svg';
@@ -17,6 +18,7 @@ import { AuthContext } from '@/contexts/auth_context';
 import Avatar from '@mui/material/Avatar';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
+import { Tutorial } from '@/components/Tutorial';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -243,16 +245,16 @@ function ProjectSidebar(props: Props) {
                             </ul>
                           </li>
                           <li className="mt-auto">
-                            <Link
-                              to="#"
-                              className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary"
-                            >
-                              <Cog6ToothIcon
-                                className="h-6 w-6 shrink-0 text-secondary-foreground"
-                                aria-hidden="true"
-                              />
-                              Settings
-                            </Link>
+                            {/*<Link*/}
+                            {/*  to="#"*/}
+                            {/*  className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary"*/}
+                            {/*>*/}
+                            {/*  <LiveHelpOutlinedIcon*/}
+                            {/*    className="h-6 w-6 shrink-0 text-secondary-foreground"*/}
+                            {/*    aria-hidden="true"*/}
+                            {/*  />*/}
+                            {/*  Tutorial*/}
+                            {/*</Link>*/}
                             <span
                               onClick={signout}
                               className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary cursor-pointer"
@@ -370,16 +372,17 @@ function ProjectSidebar(props: Props) {
                   </ul>
                 </li>
                 <li className="mt-auto">
-                  <Link
-                    to="#"
-                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary"
-                  >
-                    <Cog6ToothIcon
-                      className="h-6 w-6 shrink-0 text-secondary-foreground"
-                      aria-hidden="true"
-                    />
-                    Settings
-                  </Link>
+                  {/*<Tutorial />*/}
+                  {/*<Link*/}
+                  {/*  to="#"*/}
+                  {/*  className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary"*/}
+                  {/*>*/}
+                  {/*  <LiveHelpOutlinedIcon*/}
+                  {/*    className="h-6 w-6 shrink-0 text-secondary-foreground"*/}
+                  {/*    aria-hidden="true"*/}
+                  {/*  />*/}
+                  {/*  Tutorial*/}
+                  {/*</Link>*/}
                   <span
                     onClick={signout}
                     className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary cursor-pointer"

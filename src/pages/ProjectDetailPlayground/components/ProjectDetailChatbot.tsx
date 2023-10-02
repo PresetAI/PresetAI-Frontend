@@ -254,7 +254,7 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
             )}
           </form>
           <h3 className="flex mt-2 ml-auto text-sm text-muted-foreground">
-            Power by &nbsp;
+            Powered by &nbsp;
             <p className="font-medium text-primary">PresetAI</p>
           </h3>
         </div>
