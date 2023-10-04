@@ -22,6 +22,8 @@ import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
 import BreadcrumbsComponent from '@/components/Breadcrumbs';
 import logo_white from '@/assets/logo_white.svg';
+import { ProjectTutorial } from '@/components/Tutorial/ProjectTutorial';
+import { ProjectDetailTutorial } from '@/components/Tutorial/ProjectDetailTutorial';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -73,6 +75,7 @@ function Sidebar(props: Props) {
   const { userInfo, projectName, fetchLoading, signout, mode } =
     useContext(AuthContext);
   const { component, projectId } = props;
+  const [tutorialOpen, setTutorialOpen] = useState<boolean>(false);
   const [chatbotOpen, setChatbotOpen] = useState<boolean>(false);
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
   const [currentPath, setCurrentPath] = useState<string>('');
@@ -260,16 +263,22 @@ function Sidebar(props: Props) {
                           </ul>
                         </li>
                         <li className="mt-auto">
-                          {/*<Link*/}
-                          {/*  to="#"*/}
-                          {/*  className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary"*/}
-                          {/*>*/}
-                          {/*  <LiveHelpOutlinedIcon*/}
-                          {/*    className="h-6 w-6 shrink-0 text-secondary-foreground"*/}
-                          {/*    aria-hidden="true"*/}
-                          {/*  />*/}
-                          {/*  Tutorial*/}
-                          {/*</Link>*/}
+                          {tutorialOpen ? (
+                            <ProjectDetailTutorial
+                              open={tutorialOpen}
+                              setOpen={setTutorialOpen}
+                            />
+                          ) : null}
+                          <div
+                            className="group cursor-pointer -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary"
+                            onClick={() => setTutorialOpen(true)}
+                          >
+                            <LiveHelpOutlinedIcon
+                              className="h-6 w-6 shrink-0 text-secondary-foreground"
+                              aria-hidden="true"
+                            />
+                            Tutorial
+                          </div>
                           <Link
                             to="#"
                             className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary"
@@ -400,16 +409,22 @@ function Sidebar(props: Props) {
                 </ul>
               </li>
               <li className="mt-auto">
-                {/*<Link*/}
-                {/*  to="#"*/}
-                {/*  className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary"*/}
-                {/*>*/}
-                {/*  <LiveHelpOutlinedIcon*/}
-                {/*    className="h-6 w-6 shrink-0 text-secondary-foreground"*/}
-                {/*    aria-hidden="true"*/}
-                {/*  />*/}
-                {/*  Tutorial*/}
-                {/*</Link>*/}
+                {tutorialOpen ? (
+                  <ProjectDetailTutorial
+                    open={tutorialOpen}
+                    setOpen={setTutorialOpen}
+                  />
+                ) : null}
+                <div
+                  className="group cursor-pointer -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary"
+                  onClick={() => setTutorialOpen(true)}
+                >
+                  <LiveHelpOutlinedIcon
+                    className="h-6 w-6 shrink-0 text-secondary-foreground"
+                    aria-hidden="true"
+                  />
+                  Tutorial
+                </div>
                 <Link
                   to="#"
                   className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary"

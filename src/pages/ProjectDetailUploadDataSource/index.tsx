@@ -14,6 +14,7 @@ import common from '@/config/common';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import Process from '@/pages/ProjectDetailUploadDataSource/components/Process';
 
 const ingestDataInit: API.IngestDataClientUsingPostBody = {
   project_id: '',
@@ -26,6 +27,7 @@ function ProjectDetailUploadDataSource() {
 
   const { projectId } = useParams<{ projectId: string | undefined }>();
   const [type, setType] = useState<string>('');
+  const [processing, setProcessing] = useState<boolean>(false);
   const [ingestData, setIngestData] =
     useState<API.IngestDataClientUsingPostBody>({
       project_id: projectId,
@@ -99,7 +101,7 @@ function ProjectDetailUploadDataSource() {
 
   const onClickIngestData = async () => {
     try {
-      console.log('ingestData:', ingestData);
+      setProcessing(true);
       const res = await ingestDataUrlClientUsingPost(ingestData);
     } catch (e: any) {
       toast({
@@ -107,6 +109,8 @@ function ProjectDetailUploadDataSource() {
         title: 'Uh oh! Something went wrong.',
         description: e.response.data.message,
       });
+    } finally {
+      setProcessing(false);
     }
   };
 
@@ -124,16 +128,20 @@ function ProjectDetailUploadDataSource() {
             subtitle={common['projectDetailUploadDataSource.subtitle']}
           />
           <div className="flex justify-center py-4">
-            <TabList
-              setType={setType}
-              ingestData={ingestData}
-              setIngestData={setIngestData}
-              onClickIngestData={onClickIngestData}
-              codeDocsProvider={codeDocsProvider}
-              setCodeDocsProvider={setCodeDocsProvider}
-              websiteProvider={websiteProvider}
-              setWebsiteProvider={setWebsiteProvider}
-            />
+            {processing ? (
+              <Process projectId={projectId} />
+            ) : (
+              <TabList
+                setType={setType}
+                ingestData={ingestData}
+                setIngestData={setIngestData}
+                onClickIngestData={onClickIngestData}
+                codeDocsProvider={codeDocsProvider}
+                setCodeDocsProvider={setCodeDocsProvider}
+                websiteProvider={websiteProvider}
+                setWebsiteProvider={setWebsiteProvider}
+              />
+            )}
           </div>
           <Toaster />
         </>
