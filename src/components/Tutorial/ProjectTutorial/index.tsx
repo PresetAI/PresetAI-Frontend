@@ -13,6 +13,8 @@ import { Label } from '@/components/ui/label';
 import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeftOutlined';
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 import DownloadDoneOutlinedIcon from '@mui/icons-material/DownloadDoneOutlined';
+import create_project from '@/assets/gif/create_project.gif';
+import create_user_apikey from '@/assets/gif/create_user_apikey.gif';
 
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -22,9 +24,16 @@ import StepButton from '@mui/material/StepButton';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-const steps = ['Create the project', 'Create a user API Key', 'Create an ad'];
+const steps = ['Create the project', 'Create a user API Key'];
+const imagesStep = [create_project, create_user_apikey];
 
-export function Tutorial() {
+type Props = {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+};
+
+export function ProjectTutorial(props: Props) {
+  const { open, setOpen } = props;
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState<{
     [k: number]: boolean;
@@ -77,15 +86,12 @@ export function Tutorial() {
   };
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <ButtonShadcn variant="outline">Edit Profile</ButtonShadcn>
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="sm:max-w-[1000px]">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
+          <DialogTitle>Tutorial</DialogTitle>
           <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
+            Follow the steps below to create a project and a user API key.
           </DialogDescription>
         </DialogHeader>
         <Box sx={{ width: '100%' }}>
@@ -112,7 +118,14 @@ export function Tutorial() {
             ) : (
               <React.Fragment>
                 <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
-                  Step {activeStep + 1}
+                  {/*Step {activeStep + 1}*/}
+                  <div className="border-2 border-primary rounded-2xl p-2">
+                    <img
+                      className="rounded-2xl"
+                      src={imagesStep[activeStep]}
+                      alt="step"
+                    />
+                  </div>
                 </Typography>
                 <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                   <ButtonShadcn
@@ -136,6 +149,7 @@ export function Tutorial() {
             )}
           </div>
         </Box>
+
         {/*<DialogFooter>*/}
         {/*  <div>*/}
         {/*    {activeStep !== steps.length &&*/}

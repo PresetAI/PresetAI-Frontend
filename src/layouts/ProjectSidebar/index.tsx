@@ -18,7 +18,8 @@ import { AuthContext } from '@/contexts/auth_context';
 import Avatar from '@mui/material/Avatar';
 import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
-import { Tutorial } from '@/components/Tutorial';
+import { ProjectTutorial } from '@/components/Tutorial/ProjectTutorial';
+import ProjectSteps from '@/components/Steps/ProjectSteps';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -72,6 +73,7 @@ function ProjectSidebar(props: Props) {
   const { userInfo, fetchLoading, signout, mode } = useContext(AuthContext);
   const { component, projectId } = props;
   const [sidebarOpen, setSidebarOpen] = useState<boolean>(false);
+  const [tutorialOpen, setTutorialOpen] = useState<boolean>(false);
   const [navigation, setNavigation] = useState([
     {
       name: 'Project',
@@ -245,16 +247,22 @@ function ProjectSidebar(props: Props) {
                             </ul>
                           </li>
                           <li className="mt-auto">
-                            {/*<Link*/}
-                            {/*  to="#"*/}
-                            {/*  className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary"*/}
-                            {/*>*/}
-                            {/*  <LiveHelpOutlinedIcon*/}
-                            {/*    className="h-6 w-6 shrink-0 text-secondary-foreground"*/}
-                            {/*    aria-hidden="true"*/}
-                            {/*  />*/}
-                            {/*  Tutorial*/}
-                            {/*</Link>*/}
+                            {tutorialOpen ? (
+                              <ProjectTutorial
+                                open={tutorialOpen}
+                                setOpen={setTutorialOpen}
+                              />
+                            ) : null}
+                            <div
+                              className="group cursor-pointer -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary"
+                              onClick={() => setTutorialOpen(true)}
+                            >
+                              <LiveHelpOutlinedIcon
+                                className="h-6 w-6 shrink-0 text-secondary-foreground"
+                                aria-hidden="true"
+                              />
+                              Tutorial
+                            </div>
                             <span
                               onClick={signout}
                               className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary cursor-pointer"
@@ -372,17 +380,22 @@ function ProjectSidebar(props: Props) {
                   </ul>
                 </li>
                 <li className="mt-auto">
-                  {/*<Tutorial />*/}
-                  {/*<Link*/}
-                  {/*  to="#"*/}
-                  {/*  className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary"*/}
-                  {/*>*/}
-                  {/*  <LiveHelpOutlinedIcon*/}
-                  {/*    className="h-6 w-6 shrink-0 text-secondary-foreground"*/}
-                  {/*    aria-hidden="true"*/}
-                  {/*  />*/}
-                  {/*  Tutorial*/}
-                  {/*</Link>*/}
+                  {tutorialOpen ? (
+                    <ProjectTutorial
+                      open={tutorialOpen}
+                      setOpen={setTutorialOpen}
+                    />
+                  ) : null}
+                  <div
+                    className="group cursor-pointer -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary"
+                    onClick={() => setTutorialOpen(true)}
+                  >
+                    <LiveHelpOutlinedIcon
+                      className="h-6 w-6 shrink-0 text-secondary-foreground"
+                      aria-hidden="true"
+                    />
+                    Tutorial
+                  </div>
                   <span
                     onClick={signout}
                     className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-secondary-foreground hover:bg-secondary cursor-pointer"
