@@ -21,6 +21,7 @@ import { visuallyHidden } from '@mui/utils';
 import { useEffect, useMemo, useState } from 'react';
 import moment from 'moment';
 import { getComparator, stableSort, Order } from '@/utils/sortTable';
+import { grey } from '@mui/material/colors';
 
 interface Data {
   id: string;
@@ -111,12 +112,17 @@ function EnhancedTableHead(props: EnhancedTableProps) {
       <TableRow>
         <TableCell padding="checkbox">
           <Checkbox
-            color="primary"
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
             inputProps={{
               'aria-label': 'select all files',
+            }}
+            sx={{
+              color: grey[500],
+              '&.Mui-checked': {
+                color: grey[800],
+              },
             }}
           />
         </TableCell>
@@ -132,7 +138,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
             >
-              {headCell.label}
+              <span className="text-primary">{headCell.label}</span>
               {orderBy === headCell.id ? (
                 <Box component="span" sx={visuallyHidden}>
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
@@ -174,7 +180,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
           variant="subtitle1"
           component="div"
         >
-          {numSelected} selected
+          <span className="text-primary">{numSelected} selected</span>
         </Typography>
       ) : (
         <Typography
@@ -248,23 +254,33 @@ function UploadHistoryTable(props: UploadHistoryTableProps) {
     setSelected([]);
   };
 
-  const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event: React.MouseEvent<unknown>, id: string) => {
+    const selectedIndex = selected.indexOf(id);
     let newSelected: readonly string[] = [];
+    let newSelectedDeleteIds: string[] = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, id);
+      newSelectedDeleteIds = newSelected.concat(selected, id);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
+      newSelectedDeleteIds = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
       newSelected = newSelected.concat(selected.slice(0, -1));
+      newSelectedDeleteIds = newSelected.concat(selected.slice(0, -1));
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
         selected.slice(selectedIndex + 1)
       );
+      newSelectedDeleteIds = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1)
+      );
     }
-
+    // setSelectedDeleteIds({
+    //   file_ids: newSelectedDeleteIds,
+    // });
     setSelected(newSelected);
   };
 
@@ -310,30 +326,37 @@ function UploadHistoryTable(props: UploadHistoryTableProps) {
             />
             <TableBody>
               {visibleRows.map((row: any, index) => {
-                const isItemSelected = isSelected(row.filename);
+                const isItemSelected = isSelected(row.id);
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
                   <TableRow
                     hover
                     role="checkbox"
-                    onClick={(event) => handleClick(event, row.filename)}
+                    onClick={(event) => handleClick(event, row.id)}
                     aria-checked={isItemSelected}
                     selected={isItemSelected}
                     tabIndex={-1}
-                    key={row._id}
+                    key={row.id}
                     sx={{ cursor: 'pointer' }}
                   >
                     <TableCell padding="checkbox">
                       <Checkbox
-                        color="primary"
                         checked={isItemSelected}
                         inputProps={{
                           'aria-labelledby': labelId,
                         }}
+                        sx={{
+                          color: grey[500],
+                          '&.Mui-checked': {
+                            color: grey[800],
+                          },
+                        }}
                       />
                     </TableCell>
-                    <TableCell align="left">{row.provider}</TableCell>
+                    <TableCell align="left">
+                      <span className="text-primary">{row.provider}</span>
+                    </TableCell>
                     <TableCell
                       sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}
                       align="left"
@@ -349,12 +372,18 @@ function UploadHistoryTable(props: UploadHistoryTableProps) {
                             : 'bg-gray-500'
                         } w-2 h-2 rounded-full`}
                       />
-                      <p>{row.status}</p>
+                      <p>
+                        <span className="text-primary">{row.status}</span>
+                      </p>
                     </TableCell>
                     <TableCell align="left">
-                      {moment(row.create_time).format('YYYY-MM-DD hh:mm a')}
+                      <span className="text-primary">
+                        {moment(row.create_time).format('YYYY-MM-DD hh:mm a')}
+                      </span>
                     </TableCell>
-                    <TableCell align="left">{row.is_deleted}</TableCell>
+                    <TableCell align="left">
+                      <span className="text-primary">{row.is_deleted}</span>
+                    </TableCell>
                   </TableRow>
                 );
               })}

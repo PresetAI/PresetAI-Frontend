@@ -1,18 +1,39 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button } from '@/components/ui/button';
+import { AuthContext } from '@/contexts/auth_context';
+import { Link } from 'react-router-dom';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
 function Hero() {
+  const { isAuthenticated, login } = useContext(AuthContext);
   return (
     <div className="relative pt-14">
       <div className="py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <div className="hidden sm:mb-8 sm:flex sm:justify-center">
+            <div className="mb-8 flex justify-center gap-2">
+              <a
+                href="https://www.producthunt.com/posts/presetai?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-presetai"
+                target="_blank"
+              >
+                <img
+                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=417600&theme=light"
+                  alt="PresetAI - B2B&#0032;AI&#0032;powered&#0032;private&#0032;knowledge&#0032;base&#0032;chatbot | Product Hunt"
+                />
+              </a>
               <a
                 href="https://www.npmjs.com/package/@presetai/search"
                 target="_blank"
               >
-                <Button className="text-sm shadow-xl rounded-full">
+                <Button className="text-sm font-bold shadow-xl rounded-xl h-full">
                   npm install @presetai/search
                 </Button>
               </a>
@@ -25,25 +46,44 @@ function Hero() {
               knowledge Base search. Easy setup with just one line of code.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <Button className="text-sm font-semibold shadow-xl transition duration-300 py-6">
-                Get started
-              </Button>
-              <a href="#" className="text-sm font-semibold leading-6">
-                Learn more <span aria-hidden="true">→</span>
-              </a>
+              {isAuthenticated ? (
+                <Link to="/projects">
+                  <Button className="text-sm font-semibold shadow-xl transition duration-300 py-6">
+                    Get started
+                  </Button>
+                </Link>
+              ) : (
+                <Button
+                  className="text-sm font-semibold shadow-xl transition duration-300 py-6"
+                  onClick={login}
+                >
+                  Get started
+                </Button>
+              )}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="text-sm font-semibold py-6"
+                  >
+                    Contact
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-40">
+                  <DropdownMenuGroup>
+                    <a href="mailto:thepresetai@gmail.com" target="_blank">
+                      <DropdownMenuItem>
+                        Email
+                        <DropdownMenuShortcut>
+                          <EmailOutlinedIcon />
+                        </DropdownMenuShortcut>
+                      </DropdownMenuItem>
+                    </a>
+                  </DropdownMenuGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
-          {/*<div className="mt-16 flow-root sm:mt-24">*/}
-          {/*  <div className="-m-2 rounded-xl bg-gray-900/5 p-2 ring-1 ring-inset ring-gray-900/10 lg:-m-4 lg:rounded-2xl lg:p-4">*/}
-          {/*    <img*/}
-          {/*      src={dashboard}*/}
-          {/*      alt="App screenshot"*/}
-          {/*      width={2432}*/}
-          {/*      height={1442}*/}
-          {/*      className="rounded-2xl shadow-2xl ring-1 ring-gray-900/10"*/}
-          {/*    />*/}
-          {/*  </div>*/}
-          {/*</div>*/}
         </div>
       </div>
       <div
