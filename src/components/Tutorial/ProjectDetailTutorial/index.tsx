@@ -9,10 +9,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeftOutlined';
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
 import PrivacyTipOutlinedIcon from '@mui/icons-material/PrivacyTipOutlined';
-import data_sources from '@/assets/gif/data_sources.png';
-import upload_history from '@/assets/gif/upload_history.png';
-import ingest_data from '@/assets/gif/ingest_data.gif';
-import playground from '@/assets/gif/playground.png';
 
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -34,7 +30,12 @@ const informationStep = [
   "Navigate to 'Data Sources' to view all your data sources. You can also delete the data source from here.",
   "Navigate to 'Playground' to start asking question for your data source.",
 ];
-const imagesStep = [ingest_data, upload_history, data_sources, playground];
+const imagesStep = [
+  'https://cs410032002121be004.blob.core.windows.net/preset/ingest_data.gif',
+  'https://cs410032002121be004.blob.core.windows.net/preset/upload_history.png',
+  'https://cs410032002121be004.blob.core.windows.net/preset/data_sources.png',
+  'https://cs410032002121be004.blob.core.windows.net/preset/playground.png',
+];
 
 type Props = {
   open: boolean;

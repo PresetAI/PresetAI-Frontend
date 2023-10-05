@@ -3,18 +3,11 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeftOutlined';
 import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
-import DownloadDoneOutlinedIcon from '@mui/icons-material/DownloadDoneOutlined';
-import create_project from '@/assets/gif/create_project.gif';
-import create_user_apikey from '@/assets/gif/create_user_apikey.gif';
 
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -25,7 +18,10 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 const steps = ['Create the project', 'Create a user API Key'];
-const imagesStep = [create_project, create_user_apikey];
+const imagesStep = [
+  'https://cs410032002121be004.blob.core.windows.net/preset/create_project.gif',
+  'https://cs410032002121be004.blob.core.windows.net/preset/create_user_apikey.gif',
+];
 
 type Props = {
   open: boolean;
