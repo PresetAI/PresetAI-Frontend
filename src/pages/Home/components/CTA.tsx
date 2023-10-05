@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import { AuthContext } from '@/contexts/auth_context';
 
 function CTA() {
+  const { isAuthenticated, login } = useContext(AuthContext);
   return (
     <div className="relative -z-10 mt-32 px-6 lg:px-8">
       <div
@@ -29,12 +41,39 @@ function CTA() {
           developer requirements.
         </p>
         <div className="mt-10 flex items-center justify-center gap-x-6">
-          <Button className="text-sm font-semibold shadow-xl transition duration-300 py-6">
-            Get started
-          </Button>
-          <a href="#" className="text-sm font-semibold leading-6">
-            Learn more <span aria-hidden="true">→</span>
-          </a>
+          {isAuthenticated ? (
+            <Link to="/projects">
+              <Button className="text-sm font-semibold shadow-xl transition duration-300 py-6">
+                Get started
+              </Button>
+            </Link>
+          ) : (
+            <Button
+              className="text-sm font-semibold shadow-xl transition duration-300 py-6"
+              onClick={login}
+            >
+              Get started
+            </Button>
+          )}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="text-sm font-semibold py-6">
+                Contact
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-40">
+              <DropdownMenuGroup>
+                <a href="mailto:thepresetai@gmail.com" target="_blank">
+                  <DropdownMenuItem>
+                    Email
+                    <DropdownMenuShortcut>
+                      <EmailOutlinedIcon />
+                    </DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                </a>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </div>

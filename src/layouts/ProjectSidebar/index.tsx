@@ -20,6 +20,7 @@ import { styled } from '@mui/material/styles';
 import Badge from '@mui/material/Badge';
 import { ProjectTutorial } from '@/components/Tutorial/ProjectTutorial';
 import ProjectSteps from '@/components/Steps/ProjectSteps';
+import ModeToggle from '@/components/ModeToggle';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -164,7 +165,7 @@ function ProjectSidebar(props: Props) {
                   {/* Sidebar component, swap this element with another sidebar if you like */}
                   <div className="flex flex-col w-full">
                     <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-popover px-6 pb-4">
-                      <div className="flex h-16 shrink-0 items-center">
+                      <div className="flex justify-between h-16 shrink-0 items-center">
                         {mode === 'light' ? (
                           <img
                             className="h-8 w-auto"
@@ -178,6 +179,7 @@ function ProjectSidebar(props: Props) {
                             alt="logo white"
                           />
                         )}
+                        <ModeToggle />
                       </div>
                       <nav className="flex flex-1 flex-col">
                         <ul
@@ -310,12 +312,13 @@ function ProjectSidebar(props: Props) {
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="bg-popover flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 px-6 pb-4">
-            <div className="flex h-16 shrink-0 items-center">
+            <div className="flex justify-between h-16 shrink-0 items-center">
               {mode === 'light' ? (
                 <img className="h-8 w-auto" src={logo} alt="Your Company" />
               ) : (
                 <img className="h-8 w-auto" src={logo_white} alt="logo white" />
               )}
+              <ModeToggle />
             </div>
             <nav className="flex flex-1 flex-col">
               <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -451,7 +454,7 @@ function ProjectSidebar(props: Props) {
 
           <main className="">
             <div className="pt-4 px-10 md:pt-4 md:px-20 lg:pt-16 lg:px-30 xl:px-52">
-              {fetchLoading ? <SkeletonComponent /> : component}
+              {fetchLoading ? <SkeletonComponent mode={mode} /> : component}
             </div>
           </main>
         </div>

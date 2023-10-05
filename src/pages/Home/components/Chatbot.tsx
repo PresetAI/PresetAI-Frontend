@@ -68,16 +68,10 @@ function Chatbot() {
                 </div>
               );
             })}
-            {isTyping && (
-              <div className="text-primary mt-2 flex gap-2">
-                <UseAnimations animation={loading} />
-                <div>Thinking...</div>
-              </div>
-            )}
           </div>
         </div>
         <div className="mt-auto px-6">
-          <form className="flex items-center">
+          <div className="flex items-center">
             <label htmlFor="simple-search" className="sr-only">
               Chat here...
             </label>
@@ -124,7 +118,7 @@ function Chatbot() {
                 <span className="sr-only">Search</span>
               </button>
             )}
-          </form>
+          </div>
         </div>
       </div>
     </section>

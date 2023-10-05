@@ -18,12 +18,14 @@ import logo from '../../assets/logo.svg';
 import { AuthContext } from '@/contexts/auth_context';
 import SkeletonComponent from '@/components/Skeleton';
 import { styled } from '@mui/material/styles';
+import { Badge as BadgeShadcn } from '@/components/ui/badge';
 import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
 import BreadcrumbsComponent from '@/components/Breadcrumbs';
 import logo_white from '@/assets/logo_white.svg';
 import { ProjectTutorial } from '@/components/Tutorial/ProjectTutorial';
 import { ProjectDetailTutorial } from '@/components/Tutorial/ProjectDetailTutorial';
+import ModeToggle from '@/components/ModeToggle';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -181,7 +183,7 @@ function Sidebar(props: Props) {
                 {/* Sidebar component, swap this element with another sidebar if you like */}
                 <div className="flex flex-col w-full">
                   <div className="bg-popover flex grow flex-col gap-y-4 overflow-y-auto border-r border-gray-200 px-6 pb-4">
-                    <div className="flex h-16 shrink-0 items-center">
+                    <div className="flex justify-between h-16 shrink-0 items-center">
                       {mode === 'light' ? (
                         <img
                           className="h-8 w-auto"
@@ -195,10 +197,14 @@ function Sidebar(props: Props) {
                           alt="logo white"
                         />
                       )}
+                      <ModeToggle />
                     </div>
                     <div>
                       <span>Project: </span>
-                      <span className="font-medium">{projectName}</span>
+                      <BadgeShadcn variant="outline" className="text-sm">
+                        {projectName}
+                      </BadgeShadcn>
+                      {/*<span className="font-bold">{projectName}</span>*/}
                     </div>
                     <nav className="flex flex-1 flex-col">
                       <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -337,16 +343,20 @@ function Sidebar(props: Props) {
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <div></div>
         <div className="bg-popover flex grow flex-col gap-y-4 overflow-y-auto border-r border-gray-200 px-6 pb-4">
-          <div className="flex h-16 shrink-0 items-center">
+          <div className="flex justify-between h-16 shrink-0 items-center">
             {mode === 'light' ? (
               <img className="h-8 w-auto" src={logo} alt="Your Company" />
             ) : (
               <img className="h-8 w-auto" src={logo_white} alt="logo white" />
             )}
+            <ModeToggle />
           </div>
           <div>
             <span>Project: </span>
-            <span className="font-medium">{projectName}</span>
+            <BadgeShadcn variant="outline" className="text-sm">
+              {projectName}
+            </BadgeShadcn>
+            {/*<span className="font-bold">{projectName}</span>*/}
           </div>
           <nav className="flex flex-1 flex-col">
             <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -489,7 +499,7 @@ function Sidebar(props: Props) {
           <BreadcrumbsComponent path={currentPath} />
         </div>
         <main className="px-4 py-4 sm:px-8 lg:px-12 pt-4 md:pt-4 lg:pt-8">
-          {fetchLoading ? <SkeletonComponent /> : component}
+          {fetchLoading ? <SkeletonComponent mode={mode} /> : component}
         </main>
       </div>
     </main>
