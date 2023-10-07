@@ -11,7 +11,7 @@ const navigation = [
   { name: 'Docs', href: '#' },
   { name: 'Pricing', href: '#' },
   { name: 'Use Cases', href: '#' },
-  { name: 'Blog', href: '#' },
+  { name: 'Blog', href: '/blog' },
 ];
 
 function HeaderLight() {
