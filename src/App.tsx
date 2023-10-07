@@ -5,6 +5,8 @@ import AlertDestructive from '@/components/Alert/AlertDestructive';
 import { AuthContext } from '@/contexts/auth_context';
 import { AlertDefault } from '@/components/Alert/AlertDefault';
 
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogDetail = lazy(() => import('./pages/BlogDetail'));
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Project = lazy(() => import('./pages/Project'));
 const UserAPIKey = lazy(() => import('./pages/UserAPIKey'));
@@ -25,6 +27,8 @@ const ProjectDetailAPIKey = lazy(() => import('./pages/ProjectDetailAPIKey'));
 
 const routes = [
   { path: '/', element: <Home />, auth: false },
+  { path: '/blog', element: <Blog />, auth: false },
+  { path: '/blog/:title', element: <BlogDetail />, auth: false },
   { path: '/pricing', element: <Pricing />, auth: false },
   { path: '/dashboard', element: <Dashboard />, auth: true },
   { path: '/projects', element: <Project />, auth: true },

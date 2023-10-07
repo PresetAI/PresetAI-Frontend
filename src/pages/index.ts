@@ -1,4 +1,6 @@
 import Home from './Home';
+import Blog from './Blog';
+import BlogDetail from './BlogDetail';
 import Dashboard from './Dashboard';
 import Project from './Project';
 import UserAPIKey from './UserAPIKey';
@@ -14,6 +16,8 @@ import PrivateRoute from './PrivateRoute';
 
 export {
   Home,
+  Blog,
+  BlogDetail,
   Dashboard,
   Project,
   UserAPIKey,
