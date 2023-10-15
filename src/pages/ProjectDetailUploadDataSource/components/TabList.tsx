@@ -9,9 +9,9 @@ export function TabList(props: TabListProps) {
   const { projectId } = props;
   return (
     <Tabs defaultValue="codeDocs" className="w-[500px]">
-      <TabsList className="grid w-full grid-cols-2">
+      <TabsList className="grid w-full grid-cols-1">
         <TabsTrigger value="codeDocs">Code & Docs</TabsTrigger>
-        <TabsTrigger value="website">Website</TabsTrigger>
+        {/*<TabsTrigger value="website">Website</TabsTrigger>*/}
       </TabsList>
       <CodeDocsCard projectId={projectId} />
       {/*<WebsiteCard*/}

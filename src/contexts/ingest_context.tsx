@@ -71,7 +71,7 @@ function IngestProvider({ children }: IngestContextProviderProps) {
           url: githubInput,
           provider: 'github',
         };
-        const res = await ingestDataUrlClientUsingPost(ingestData);
+        await ingestDataUrlClientUsingPost(ingestData);
       } else if (activeProvider === 'files') {
         const formData = new FormData();
         formData.append('project_id', projectId || '');
@@ -88,7 +88,17 @@ function IngestProvider({ children }: IngestContextProviderProps) {
           url: youtubeInput,
           provider: 'youtube',
         };
-        const res = await ingestDataUrlClientUsingPost(ingestData);
+        await ingestDataUrlClientUsingPost(ingestData);
+      } else if (activeProvider === 'table') {
+        const formData = new FormData();
+        formData.append('project_id', projectId || '');
+        formData.append('provider', 'table');
+        if (ingestDataFiles) {
+          ingestDataFiles.forEach((file) => {
+            formData.append('files', file);
+          });
+        }
+        await ingestDataFileClientUsingPost(formData);
       }
     } catch (e: any) {
       toast({
@@ -97,6 +107,7 @@ function IngestProvider({ children }: IngestContextProviderProps) {
         description: e.response.data.message,
       });
     } finally {
+      setIngestDataFiles(null);
       setProcessing(false);
     }
   };

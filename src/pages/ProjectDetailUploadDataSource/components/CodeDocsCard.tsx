@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import {
   Card,
   CardContent,
@@ -12,6 +12,7 @@ import { TabsContent } from '@/components/ui/tabs';
 import GithubIcon from '@/assets/icons/github.png';
 import FileIcon from '@/assets/icons/file.png';
 import YoutubeIcon from '@/assets/icons/youtube.png';
+import TableIcon from '@/assets/icons/table.png';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { IngestContext } from '@/contexts/ingest_context';
@@ -63,6 +64,13 @@ function CodeDocsCard(props: CodeDocsCardProps) {
             <img src={YoutubeIcon} alt="files" className="w-4 h-4 mr-2" />
             Youtube
           </Button>
+          <Button
+            variant={activeProvider === 'table' ? 'secondary' : 'outline'}
+            onClick={() => onClickProvider('table')}
+          >
+            <img src={TableIcon} alt="files" className="w-4 h-4 mr-2" />
+            CVS/Excel
+          </Button>
         </CardContent>
         <CardContent className="space-y-2">
           {activeProvider === 'github' ? (
@@ -111,6 +119,30 @@ function CodeDocsCard(props: CodeDocsCardProps) {
                 placeholder="https://www.youtube.com/watch?v=..."
                 onChange={(e) => setYoutubeInput(e.target.value)}
               />
+            </div>
+          ) : null}
+          {activeProvider === 'table' ? (
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="new">Upload your CSV, xlsx or xls files</Label>
+              <Label
+                htmlFor="file-upload"
+                className="relative h-10 px-4 py-2 flex items-center justify-center cursor-pointer rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground font-normal text-primary focus-within:outline-none"
+              >
+                <span>Choose Files</span>
+                <input
+                  id="file-upload"
+                  name="file-upload"
+                  type="file"
+                  className="sr-only"
+                  onChange={(e) => handleFilesProviderChange(e)}
+                  multiple
+                />
+              </Label>
+              {ingestDataFiles !== null ? (
+                <p className="text-center text-sm">
+                  Total files: {ingestDataFiles.length}
+                </p>
+              ) : null}
             </div>
           ) : null}
         </CardContent>
