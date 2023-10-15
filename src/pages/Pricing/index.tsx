@@ -4,8 +4,8 @@ import {
   CheckIcon,
   XMarkIcon as XMarkIconMini,
 } from '@heroicons/react/20/solid';
-import HeaderDark from '@/layouts/Header/HeaderDark';
 import Footer from '@/layouts/Footer';
+import HeaderLight from '@/layouts/Header/HeaderLight';
 
 const pricing: any = {
   frequencies: [
@@ -145,47 +145,20 @@ function Pricing() {
 
   return (
     <div className="bg-white dark:bg-primary-foreground">
-      <HeaderDark />
+      <HeaderLight />
 
       <main className="block">
         {/* Pricing section */}
         <div className="isolate overflow-hidden">
-          <div className="flow-root bg-gray-900 py-16 sm:pt-32 lg:pb-0">
+          <div className="flow-root py-16 sm:pt-32 lg:pb-0">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
-              <div className="relative z-10">
-                <h1 className="mx-auto max-w-4xl text-center text-5xl font-bold tracking-tight text-white">
-                  Simple pricing, no commitment
+              <div className="mx-auto max-w-4xl text-center">
+                <h1 className="text-base font-semibold leading-7 text-indigo-400">
+                  Pricing
                 </h1>
-                <p className="mx-auto mt-4 max-w-2xl text-center text-lg leading-8 text-white/60">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Velit numquam eligendi quos odit doloribus molestiae
-                  voluptatum quos odit doloribus.
+                <p className="mt-2 text-4xl font-bold tracking-tight text-primary sm:text-5xl">
+                  Pricing plans for teams of&nbsp;all&nbsp;sizes
                 </p>
-                <div className="mt-16 flex justify-center">
-                  <RadioGroup
-                    value={frequency}
-                    onChange={setFrequency}
-                    className="grid grid-cols-2 gap-x-1 rounded-full bg-white/5 p-1 text-center text-xs font-semibold leading-5 text-white"
-                  >
-                    <RadioGroup.Label className="sr-only">
-                      Payment frequency
-                    </RadioGroup.Label>
-                    {pricing.frequencies.map((option: any) => (
-                      <RadioGroup.Option
-                        key={option.value}
-                        value={option}
-                        className={({ checked }) =>
-                          classNames(
-                            checked ? 'bg-indigo-500' : '',
-                            'cursor-pointer rounded-full px-2.5 py-1'
-                          )
-                        }
-                      >
-                        <span>{option.label}</span>
-                      </RadioGroup.Option>
-                    ))}
-                  </RadioGroup>
-                </div>
               </div>
               <div className="relative mx-auto mt-10 grid max-w-md grid-cols-1 gap-y-8 lg:mx-0 lg:-mb-14 lg:max-w-none lg:grid-cols-3">
                 <svg
@@ -303,7 +276,7 @@ function Pricing() {
               </div>
             </div>
           </div>
-          <div className="relative bg-gray-50 dark:bg-primary-foreground lg:pt-14">
+          <div className="relative lg:pt-14">
             <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
               {/* Feature comparison (up to lg) */}
               <section
