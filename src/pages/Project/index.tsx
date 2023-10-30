@@ -61,6 +61,7 @@ function Project() {
           <ProjectCreateDialog
             dialogOpen={dialogOpen}
             setDialogOpen={setDialogOpen}
+            projectsListData={projectsListData}
             getProjectsList={getProjectsList}
           />
           <ProjectList projectsListData={projectsListData} />
