@@ -34,6 +34,7 @@ module.exports = {
             { "allow": ["_id"] }
         ],
         "import/extensions": "off",
+        "react/no-array-index-key": "off",
         // 'import/extensions': ['error', 'always', {
         //     'js': 'never',
         //     'ts': 'never',

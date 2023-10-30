@@ -1,12 +1,14 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { getCurrentUserUsingGet } from '../services/UserController';
 import { BASE_URL } from '@/config/domain';
 import { useParams, useSearchParams } from 'react-router-dom';
 import {
+  getTasksUsingGet,
   ingestDataFileClientUsingPost,
   ingestDataUrlClientUsingPost,
 } from '@/services/ProjectController';
 import { useToast } from '@/components/ui/use-toast';
+import { AuthContext } from '@/contexts/auth_context';
 
 type IngestContextProviderProps = {
   children: React.ReactNode;

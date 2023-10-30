@@ -35,6 +35,7 @@ function ProjectCreateDialog(props: ProjectCreateDialogProps) {
   const { dialogOpen, setDialogOpen, getProjectsList } = props;
 
   const {
+    userInfo,
     setSuccessDescription,
     setErrorDescription,
     setLocalizationAndLoadingFunction,
@@ -79,14 +80,22 @@ function ProjectCreateDialog(props: ProjectCreateDialogProps) {
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <div className="flex justify-end">
-        <DialogTrigger asChild>
-          <Button
-            className="text-sm font-semibold mt-4"
-            onClick={() => setDialogOpen(true)}
-          >
-            Create the Project
-          </Button>
-        </DialogTrigger>
+        {userInfo.role === 'subscribe' ? (
+          <DialogTrigger asChild>
+            <Button
+              className="text-sm font-semibold mt-4"
+              onClick={() => setDialogOpen(true)}
+            >
+              Create the Project
+            </Button>
+          </DialogTrigger>
+        ) : (
+          <DialogTrigger asChild>
+            <Button className="text-sm font-semibold mt-4">
+              Upgrade to Create More Projects
+            </Button>
+          </DialogTrigger>
+        )}
       </div>
 
       <DialogContent className="sm:max-w-[460px]">

@@ -125,7 +125,7 @@ export function ProjectDetailTutorial(props: Props) {
             ) : (
               <React.Fragment>
                 <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
-                  <Card className="bg-primary text-white">
+                  <Card className="bg-primary text-primary-foreground">
                     <CardHeader className="p-4">
                       <CardTitle className="text-lg">
                         <PrivacyTipOutlinedIcon />

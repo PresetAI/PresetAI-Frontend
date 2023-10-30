@@ -6,7 +6,7 @@ declare namespace API {
     username?: string;
     email?: string;
     APIKey?: string;
-    role?: string;
+    role?: 'subscribe' | 'admin' | 'free';
     avatar?: string;
   };
 

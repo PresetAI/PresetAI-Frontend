@@ -16,6 +16,8 @@ import Step from '@mui/material/Step';
 import StepButton from '@mui/material/StepButton';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { useContext } from 'react';
+import { AuthContext } from '@/contexts/auth_context';
 
 const steps = ['Create the project', 'Create a user API Key'];
 const imagesStep = [
@@ -30,6 +32,7 @@ type Props = {
 
 export function ProjectTutorial(props: Props) {
   const { open, setOpen } = props;
+  const { mode } = useContext(AuthContext);
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState<{
     [k: number]: boolean;
