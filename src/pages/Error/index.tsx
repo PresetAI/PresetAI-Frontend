@@ -1,5 +1,5 @@
-import { PresetAISearchBar } from '@presetai/search';
-import '@presetai/search/dist/index.css';
+// import { PresetAISearchBar } from '@presetai/search';
+// import '@presetai/search/dist/index.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
