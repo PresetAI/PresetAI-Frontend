@@ -3,8 +3,6 @@ import React, { useContext, useEffect, useState } from 'react';
 // Components
 import ProjectList from './components/ProjectList';
 import ProjectCreateDialog from '@/pages/Project/components/ProjectCreateDialog';
-import AlertDestructive from '@/components/Alert/AlertDestructive';
-import { AlertDefault } from '@/components/Alert/AlertDefault';
 import Title from '@/components/Title';
 
 // Services
@@ -25,7 +23,6 @@ import Loader from '@/components/Loader';
 function Project() {
   const {
     setFetchLoading,
-    setLocalizationAndLoadingFunction,
     localization,
     fetchProcessLoading,
     setErrorDescription,
@@ -64,6 +61,7 @@ function Project() {
           <ProjectCreateDialog
             dialogOpen={dialogOpen}
             setDialogOpen={setDialogOpen}
+            projectsListData={projectsListData}
             getProjectsList={getProjectsList}
           />
           <ProjectList projectsListData={projectsListData} />

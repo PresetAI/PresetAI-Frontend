@@ -6,6 +6,7 @@ import Project from './Project';
 import UserAPIKey from './UserAPIKey';
 import UserSubscriptionPlan from './UserSubscriptionPlan';
 import Pricing from './Pricing';
+import ProjectDetailQuickStart from './ProjectDetailQuickStart';
 import ProjectDetailPlayground from './ProjectDetailPlayground';
 import ProjectDetailFileManagement from './ProjectDetailFileManagement';
 import ProjectDetailUploadDataSource from './ProjectDetailUploadDataSource';
@@ -23,6 +24,7 @@ export {
   UserAPIKey,
   UserSubscriptionPlan,
   Pricing,
+  ProjectDetailQuickStart,
   ProjectDetailPlayground,
   ProjectDetailFileManagement,
   ProjectDetailUploadDataSource,

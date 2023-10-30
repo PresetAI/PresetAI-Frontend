@@ -100,6 +100,19 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
     setMessages((prevMessages) => [...prevMessages, newMessage]);
     // Initial system message
     await processMessage(userMessage);
+
+    //   get step in local storage
+    const steps = localStorage.getItem(`steps-${projectId}`);
+    if (steps) {
+      const stepsObject = JSON.parse(steps);
+      for (const step of stepsObject) {
+        if (step.id === 'start-to-chat') {
+          step.status = 'complete';
+        }
+      }
+      localStorage.setItem(`steps-${projectId}`, JSON.stringify(stepsObject));
+      return;
+    }
   };
 
   /*
@@ -144,9 +157,9 @@ function ProjectDetailChatbot(props: ProjectDetailChatbotProps) {
       <Card className="flex flex-col rounded-3xl w-full max-h-[40rem] overflow-y-auto">
         <div ref={messagesEndRef} className="flex flex-col overflow-auto p-4">
           <div>
-            {messages.map((message) => {
+            {messages.map((message, index) => {
               return (
-                <div key={message.message}>
+                <div key={index}>
                   {message.sender === 'ChatGPT' ||
                   message.sender === 'assistant' ? (
                     <div className="flex p-4 gap-2 backdrop-blur-lg rounded-md">

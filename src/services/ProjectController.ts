@@ -98,6 +98,12 @@ export async function ingestDataUrlClientUsingPost(
   });
 }
 
+export async function ingestDataFileClientUsingPost(body: any) {
+  return axios.post(`${BASE_URL}/project/ingest_data/file/client`, body, {
+    withCredentials: true,
+  });
+}
+
 export async function getTasksUsingGet(projectId: string | undefined) {
   return axios.get(`${BASE_URL}/project/get_tasks/${projectId}`, {
     withCredentials: true,

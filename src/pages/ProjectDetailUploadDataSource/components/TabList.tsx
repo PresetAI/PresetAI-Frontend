@@ -3,49 +3,25 @@ import CodeDocsCard from '@/pages/ProjectDetailUploadDataSource/components/CodeD
 import WebsiteCard from '@/pages/ProjectDetailUploadDataSource/components/WebsiteCard';
 
 type TabListProps = {
-  setType: (type: string) => void;
-  ingestData: API.IngestDataClientUsingPostBody;
-  setIngestData: (ingestData: API.IngestDataClientUsingPostBody) => void;
-  onClickIngestData: () => void;
-  codeDocsProvider: any;
-  setCodeDocsProvider: any;
-  websiteProvider: any;
-  setWebsiteProvider: any;
+  projectId: string | undefined;
 };
-
 export function TabList(props: TabListProps) {
-  const {
-    setType,
-    ingestData,
-    setIngestData,
-    onClickIngestData,
-    codeDocsProvider,
-    setCodeDocsProvider,
-    websiteProvider,
-    setWebsiteProvider,
-  } = props;
+  const { projectId } = props;
   return (
     <Tabs defaultValue="codeDocs" className="w-[500px]">
-      <TabsList className="grid w-full grid-cols-2">
+      <TabsList className="grid w-full grid-cols-1">
         <TabsTrigger value="codeDocs">Code & Docs</TabsTrigger>
-        <TabsTrigger value="website">Website</TabsTrigger>
+        {/*<TabsTrigger value="website">Website</TabsTrigger>*/}
       </TabsList>
-      <CodeDocsCard
-        setType={setType}
-        ingestData={ingestData}
-        setIngestData={setIngestData}
-        onClickIngestData={onClickIngestData}
-        codeDocsProvider={codeDocsProvider}
-        setCodeDocsProvider={setCodeDocsProvider}
-      />
-      <WebsiteCard
-        setType={setType}
-        ingestData={ingestData}
-        setIngestData={setIngestData}
-        onClickIngestData={onClickIngestData}
-        websiteProvider={websiteProvider}
-        setWebsiteProvider={setWebsiteProvider}
-      />
+      <CodeDocsCard projectId={projectId} />
+      {/*<WebsiteCard*/}
+      {/*  setType={setType}*/}
+      {/*  ingestData={ingestData}*/}
+      {/*  setIngestData={setIngestData}*/}
+      {/*  onClickIngestData={onClickIngestData}*/}
+      {/*  websiteProvider={websiteProvider}*/}
+      {/*  setWebsiteProvider={setWebsiteProvider}*/}
+      {/*/>*/}
     </Tabs>
   );
 }

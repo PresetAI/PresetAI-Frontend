@@ -29,12 +29,15 @@ type ProjectCreateDialogProps = {
   setDialogOpen: (dialogOpen: boolean) => void;
   // Function to fetch the list of projects
   getProjectsList: () => void;
+  projectsListData: API.Project[];
 };
 
 function ProjectCreateDialog(props: ProjectCreateDialogProps) {
-  const { dialogOpen, setDialogOpen, getProjectsList } = props;
+  const { dialogOpen, setDialogOpen, getProjectsList, projectsListData } =
+    props;
 
   const {
+    userInfo,
     setSuccessDescription,
     setErrorDescription,
     setLocalizationAndLoadingFunction,
@@ -79,14 +82,29 @@ function ProjectCreateDialog(props: ProjectCreateDialogProps) {
   return (
     <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
       <div className="flex justify-end">
-        <DialogTrigger asChild>
-          <Button
-            className="text-sm font-semibold mt-4"
-            onClick={() => setDialogOpen(true)}
-          >
-            Create the Project
+        {userInfo.role === 'subscribe' ? (
+          <DialogTrigger asChild>
+            <Button
+              className="text-sm font-semibold mt-4"
+              onClick={() => setDialogOpen(true)}
+            >
+              Create the Project
+            </Button>
+          </DialogTrigger>
+        ) : projectsListData.length >= 1 ? (
+          <Button className="text-sm font-semibold mt-4">
+            Upgrade to Create More Projects
           </Button>
-        </DialogTrigger>
+        ) : (
+          <DialogTrigger asChild>
+            <Button
+              className="text-sm font-semibold mt-4"
+              onClick={() => setDialogOpen(true)}
+            >
+              Create the Project
+            </Button>
+          </DialogTrigger>
+        )}
       </div>
 
       <DialogContent className="sm:max-w-[460px]">

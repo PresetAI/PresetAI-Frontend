@@ -50,7 +50,25 @@
   }
 }
 
- 
+/*Material UI*/
+.dark .css-1hv8oq8-MuiStepLabel-label{
+  color: #a7a7a7;
+}
+.dark .Mui-active.css-1hv8oq8-MuiStepLabel-label,
+.dark .MuiTablePagination-selectLabel,
+.dark .css-16c50h-MuiInputBase-root-MuiTablePagination-select .MuiTablePagination-select,
+.dark .css-pqjvzy-MuiSvgIcon-root-MuiSelect-icon,
+.dark .MuiSelect-iconOpen,
+.dark .css-levciy-MuiTablePagination-displayedRows{
+  color: white;
+}
+.dark .css-i4bv87-MuiSvgIcon-root{
+  color: #a7a7a7;
+}
+.dark .css-swcep9-MuiPaper-root{
+  box-shadow: 0px 2px 1px -1px rgba(255,255,255,0.2), 0px 1px 1px 0px rgba(255,255,255,0.14), 0px 1px 3px 0px rgba(255,255,255,0.12);
+}
+
 @layer base {
   * {
     @apply border-border;

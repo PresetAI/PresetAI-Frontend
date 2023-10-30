@@ -1,18 +1,18 @@
 import { Fragment, useContext, useEffect, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import {
-  Bars3Icon,
-  Cog6ToothIcon,
-  XMarkIcon,
   ArrowLeftOnRectangleIcon,
+  Bars3Icon,
+  XMarkIcon,
 } from '@heroicons/react/24/outline';
-import PlayCircleFilledRoundedIcon from '@mui/icons-material/PlayCircleFilledRounded';
+import PlayCircleFilledWhiteOutlinedIcon from '@mui/icons-material/PlayCircleFilledWhiteOutlined';
 import FolderCopyOutlinedIcon from '@mui/icons-material/FolderCopyOutlined';
 import KeyOutlinedIcon from '@mui/icons-material/KeyOutlined';
 import BackupOutlinedIcon from '@mui/icons-material/BackupOutlined';
 import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
 import LiveHelpOutlinedIcon from '@mui/icons-material/LiveHelpOutlined';
 import AssignmentOutlinedIcon from '@mui/icons-material/AssignmentOutlined';
+import SmartToyOutlinedIcon from '@mui/icons-material/SmartToyOutlined';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
 import { AuthContext } from '@/contexts/auth_context';
@@ -23,7 +23,6 @@ import Badge from '@mui/material/Badge';
 import Avatar from '@mui/material/Avatar';
 import BreadcrumbsComponent from '@/components/Breadcrumbs';
 import logo_white from '@/assets/logo_white.svg';
-import { ProjectTutorial } from '@/components/Tutorial/ProjectTutorial';
 import { ProjectDetailTutorial } from '@/components/Tutorial/ProjectDetailTutorial';
 import ModeToggle from '@/components/ModeToggle';
 
@@ -76,6 +75,7 @@ type Props = {
 function Sidebar(props: Props) {
   const { userInfo, projectName, fetchLoading, signout, mode } =
     useContext(AuthContext);
+
   const { component, projectId } = props;
   const [tutorialOpen, setTutorialOpen] = useState<boolean>(false);
   const [chatbotOpen, setChatbotOpen] = useState<boolean>(false);
@@ -83,9 +83,15 @@ function Sidebar(props: Props) {
   const [currentPath, setCurrentPath] = useState<string>('');
   const [navigation, setNavigation] = useState([
     {
+      name: 'Quick Start',
+      href: `/project/quick-start/${projectId}`,
+      icon: PlayCircleFilledWhiteOutlinedIcon,
+      current: true,
+    },
+    {
       name: 'Playground',
       href: `/project/playground/${projectId}`,
-      icon: PlayCircleFilledRoundedIcon,
+      icon: SmartToyOutlinedIcon,
       current: true,
     },
     {

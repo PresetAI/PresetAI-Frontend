@@ -1,18 +1,18 @@
-// Import necessary React hooks and components
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Sidebar } from '../../layouts';
-import { getTasksUsingGet } from '@/services/ProjectController';
 import Title from '@/components/Title';
 import UploadHistoryTable from '@/pages/ProjectDetailUploadHistory/components/UploadHistoryTable';
 import common from '@/config/common';
 import { AuthContext } from '@/contexts/auth_context';
+import { getTasksUsingGet } from '@/services/ProjectController';
 
 // Define the ProjectDetailUploadHistory component
 function ProjectDetailUploadHistory() {
   const { setFetchLoading } = useContext(AuthContext);
   // Get the project ID from the URL params
   const { projectId } = useParams<{ projectId: string | undefined }>();
+
   const [data, setData] = useState<API.ProjectTask[]>([]);
 
   // Function to fetch project tasks by project ID
@@ -24,7 +24,6 @@ function ProjectDetailUploadHistory() {
     }
     setFetchLoading(false);
   };
-
   useEffect(() => {
     // Fetch project tasks when the component mounts
     getTasksByProjectId();

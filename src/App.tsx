@@ -11,6 +11,9 @@ const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Project = lazy(() => import('./pages/Project'));
 const UserAPIKey = lazy(() => import('./pages/UserAPIKey'));
 const UserSubscriptionPlan = lazy(() => import('./pages/UserSubscriptionPlan'));
+const ProjectDetailQuickStart = lazy(
+  () => import('./pages/ProjectDetailQuickStart')
+);
 const ProjectDetailPlayground = lazy(
   () => import('./pages/ProjectDetailPlayground')
 );
@@ -36,6 +39,11 @@ const routes = [
   {
     path: '/user/subscription-plan',
     element: <UserSubscriptionPlan />,
+    auth: true,
+  },
+  {
+    path: '/project/quick-start/:projectId',
+    element: <ProjectDetailQuickStart />,
     auth: true,
   },
   {
