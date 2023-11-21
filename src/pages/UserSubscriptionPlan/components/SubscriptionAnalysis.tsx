@@ -1,5 +1,5 @@
 import moment from 'moment/moment';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Progress } from '@/components/ui/progress';
+import { AuthContext } from '@/contexts/auth_context';
 
 type SubscriptionAnalysisProps = {
   SubscriptionPlanDetail: API.Subscription | undefined;
@@ -25,6 +26,7 @@ type SubscriptionAnalysisProps = {
 
 function SubscriptionAnalysis(props: SubscriptionAnalysisProps) {
   const { SubscriptionPlanDetail } = props;
+  const { mode } = useContext(AuthContext);
   const [progress, setProgress] = useState<number>(0);
   const [progressBarPercentage, setProgressBarPercentage] = useState<number>(0);
 
@@ -78,6 +80,7 @@ function SubscriptionAnalysis(props: SubscriptionAnalysisProps) {
               <Label htmlFor="name">Usage this month</Label>
               <div className="flex gap-8 items-center">
                 <Progress
+                  className="text-primary-foreground"
                   value={progress}
                   progressBarPercentage={progressBarPercentage}
                 />

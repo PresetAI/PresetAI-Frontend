@@ -34,6 +34,13 @@ function Error() {
         </div>
       </div>
 
+      {/*<div className="mx-auto flex items-center w-full max-w-7xl flex-auto flex-col justify-center px-6 py-24 sm:py-64 lg:px-8 z-50">*/}
+      {/*  <PresetAISearchBar*/}
+      {/*    user_api_key="e6afb2729c46581308b1280fd3f042e4"*/}
+      {/*    project_api_key="43120fe2a6b3a4694519ccd5b76ee727"*/}
+      {/*  />*/}
+      {/*</div>*/}
+
       <main className="mx-auto flex items-center w-full max-w-7xl flex-auto flex-col justify-center px-6 py-24 sm:py-64 lg:px-8">
         <p className="text-base font-semibold leading-8 text-indigo-600">404</p>
         <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
@@ -42,12 +49,6 @@ function Error() {
         <p className="mt-6 text-base leading-7 text-gray-600">
           Sorry, we couldn’t find the page you’re looking for.
         </p>
-        {/*<div className="mt-20">*/}
-        {/*  <PresetAISearchBar*/}
-        {/*    user_api_key="029498908365f2b162b67010695c03c3"*/}
-        {/*    project_api_key="c228d280f48e4705d7077fb6737c0a34"*/}
-        {/*  />*/}
-        {/*</div>*/}
         <div className="mt-10">
           <Link
             to="/"

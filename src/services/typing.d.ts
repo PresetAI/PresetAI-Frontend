@@ -105,4 +105,9 @@ declare namespace API {
     message_count: number;
     message_limit: number;
   };
+
+  type SubscriptionCheckoutItem = {
+    price_id: string;
+    quantity: number;
+  };
 }
