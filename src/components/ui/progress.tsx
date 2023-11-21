@@ -31,7 +31,6 @@ const Progress = React.forwardRef<
           top: '50%',
           left: '1%',
           transform: 'translate(0%, -50%)',
-          color: '#fff',
           zIndex: 1,
         }}
       >

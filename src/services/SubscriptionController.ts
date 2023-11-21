@@ -6,3 +6,11 @@ export async function getUserSubscriptionUsingGet() {
     withCredentials: true,
   });
 }
+
+export async function createCheckoutSession(
+  body: API.SubscriptionCheckoutItem
+) {
+  return axios.post(`${BASE_URL}/subscription/create_checkout_session`, body, {
+    withCredentials: true,
+  });
+}

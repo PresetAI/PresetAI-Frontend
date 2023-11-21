@@ -6,6 +6,7 @@ import {
 } from '@heroicons/react/20/solid';
 import Footer from '@/layouts/Footer';
 import HeaderLight from '@/layouts/Header/HeaderLight';
+import { createCheckoutSession } from '@/services/SubscriptionController';
 
 const pricing: any = {
   frequencies: [
@@ -25,6 +26,7 @@ const pricing: any = {
         'Easy to use accounting',
         'Mutli-accounts',
       ],
+      price_id: 'price_1NkG3ZBZZZHZeef10R7Acvxs',
     },
     {
       name: 'Scale',
@@ -41,6 +43,7 @@ const pricing: any = {
         'VAT & VATMOSS filing',
         'Free bank transfers',
       ],
+      price_id: 'price_1NkG3ZBZZZHZeef10R7Acvxs',
     },
     {
       name: 'Growth',
@@ -56,6 +59,7 @@ const pricing: any = {
         'Mutli-accounts',
         'Tax planning toolkit',
       ],
+      price_id: 'price_1NkG3ZBZZZHZeef10R7Acvxs',
     },
   ],
   sections: [
@@ -142,6 +146,17 @@ function classNames(...classes: any[]) {
 
 function Pricing() {
   const [frequency, setFrequency] = useState(pricing.frequencies[0]);
+
+  const onClickBuy = async (price_id: string) => {
+    const body: API.SubscriptionCheckoutItem = {
+      price_id,
+      quantity: 1,
+    };
+    const res = await createCheckoutSession(body);
+    if (res.data.code === 200 && res.data.data.url) {
+      window.location.href = res.data.data.url;
+    }
+  };
 
   return (
     <div className="bg-white dark:bg-primary-foreground">
@@ -231,8 +246,8 @@ function Pricing() {
                             >{`Billed ${frequency.value}`}</p>
                           </div>
                         </div>
-                        <a
-                          href={tier.href}
+                        <button
+                          onClick={() => onClickBuy(tier.price_id)}
                           aria-describedby={tier.id}
                           className={classNames(
                             tier.featured
@@ -242,7 +257,7 @@ function Pricing() {
                           )}
                         >
                           Buy this plan
-                        </a>
+                        </button>
                       </div>
                       <div className="mt-8 flow-root sm:mt-10">
                         <ul
